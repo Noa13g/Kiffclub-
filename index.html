@@ -1,0 +1,1513 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kiffclub® — We are rich in memories. Streetwear français.</title>
+<meta name="description" content="Kiffclub, le streetwear français qui collectionne les souvenirs. Coton lourd, coupes oversize, séries limitées.">
+<meta property="og:title" content="Kiffclub® — We are rich in memories.">
+<meta property="og:description" content="Le streetwear français qui collectionne les souvenirs. Coton lourd, coupes oversize, pièces pensées pour durer.">
+<meta property="og:image" content="/assets/hero-hanging.jpg">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='white'/><text x='50%' y='73%' text-anchor='middle' font-family='Arial Black,sans-serif' font-weight='900' font-size='22' fill='%231b2bd6'>K</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;700;800;900&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ===== DESIGN TOKENS ===== */
+:root {
+  --bg: #f7f6f3;
+  --bg-pure: #ffffff;
+  --bg-dark: #0b0b0c;
+  --bg-mute: #ecebe6;
+  --ink: #111111;
+  --ink-soft: #6b6b6b;
+  --ink-invert: #f7f6f3;
+  --brand-blue: #1b2bd6;
+  --brand-rose: #e8a6c6;
+  --brand-olive: #5c5f3a;
+  --brand-charcoal: #2b2b2d;
+  --line: #dcdbd5;
+  --shadow: 0 18px 50px rgba(0,0,0,.08);
+  --font-display: "Archivo", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, sans-serif;
+  --fs-hero: clamp(2.5rem, 8vw, 7rem);
+  --fs-h1: clamp(2rem, 5vw, 4rem);
+  --fs-h2: clamp(1.5rem, 3vw, 2.5rem);
+  --fs-cat: clamp(2rem, 6vw, 5rem);
+  --fs-body: 1rem;
+  --fs-small: .8rem;
+  --fs-label: .72rem;
+  --radius: 2px;
+  --container: 1320px;
+  --pad: clamp(1.25rem, 5vw, 4rem);
+  --section-pad: clamp(4rem, 10vw, 9rem);
+}
+
+/* ===== RESET ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--font-body); font-size: var(--fs-body); background: var(--bg); color: var(--ink); line-height: 1.6; overflow-x: hidden; }
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+button { cursor: pointer; font-family: inherit; border: none; background: none; }
+ul { list-style: none; }
+input, textarea { font-family: inherit; }
+
+/* ===== LAYOUT ===== */
+.container { max-width: var(--container); margin: 0 auto; padding: 0 var(--pad); }
+
+/* ===== TYPOGRAPHY ===== */
+.label { font-family: var(--font-display); font-size: var(--fs-label); letter-spacing: .18em; text-transform: uppercase; color: var(--ink-soft); }
+.eyebrow { font-family: var(--font-display); font-size: var(--fs-label); letter-spacing: .2em; text-transform: uppercase; color: var(--brand-blue); margin-bottom: .75rem; }
+
+/* ===== BUTTONS ===== */
+.btn { display: inline-block; font-family: var(--font-display); font-size: var(--fs-label); font-weight: 700; letter-spacing: .18em; text-transform: uppercase; padding: 1rem 2.25rem; border-radius: var(--radius); transition: background .2s, color .2s, border-color .2s; cursor: pointer; }
+.btn-primary { background: var(--ink); color: var(--ink-invert); border: 1.5px solid var(--ink); }
+.btn-primary:hover { background: transparent; color: var(--ink); }
+.btn-primary:focus-visible { outline: 2px solid var(--brand-blue); outline-offset: 3px; }
+.btn-secondary { background: transparent; color: var(--ink); border: 1.5px solid var(--ink); }
+.btn-secondary:hover { background: var(--ink); color: var(--ink-invert); }
+.btn-dark { background: var(--bg-dark); color: var(--ink-invert); border: 1.5px solid var(--bg-dark); }
+.btn-dark:hover { background: transparent; color: var(--ink-invert); border-color: var(--ink-invert); }
+.btn:disabled { opacity: .45; cursor: not-allowed; pointer-events: none; }
+
+/* ===== TOP BAR ===== */
+#topbar { background: var(--bg-dark); color: var(--ink-invert); text-align: center; padding: .6rem var(--pad); font-family: var(--font-display); font-size: var(--fs-label); letter-spacing: .15em; text-transform: uppercase; }
+
+/* ===== HEADER ===== */
+#header { position: sticky; top: 0; z-index: 100; background: rgba(247,246,243,.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid transparent; transition: border-color .3s, background .3s; }
+#header.scrolled { border-bottom-color: var(--line); background: rgba(247,246,243,.97); }
+.header-inner { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; padding: 1.1rem var(--pad); gap: 1rem; }
+.nav-left { display: flex; gap: 2rem; align-items: center; }
+.nav-left a { font-family: var(--font-display); font-size: var(--fs-label); font-weight: 700; letter-spacing: .14em; text-transform: uppercase; position: relative; }
+.nav-left a::after { content:''; position:absolute; bottom:-2px; left:0; width:0; height:1.5px; background:var(--brand-blue); transition:width .25s; }
+.nav-left a:hover::after, .nav-left a.active::after { width:100%; }
+.logo { font-family: var(--font-display); font-size: 1.5rem; font-weight: 900; letter-spacing: -.02em; color: var(--brand-blue); text-align: center; user-select: none; cursor: pointer; }
+.logo sup { font-size: .55em; vertical-align: super; }
+.nav-right { display: flex; align-items: center; gap: 1.25rem; justify-content: flex-end; }
+.nav-icon { display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; transition: background .2s; position: relative; }
+.nav-icon:hover { background: var(--bg-mute); }
+.nav-icon svg { width: 20px; height: 20px; }
+#cart-badge { position: absolute; top: 4px; right: 4px; background: var(--brand-blue); color: #fff; font-size: 9px; font-weight: 700; min-width: 16px; height: 16px; border-radius: 50%; display: flex; align-items: center; justify-content: center; padding: 0 3px; display: none; }
+#cart-badge.show { display: flex; }
+.burger { display: none; flex-direction: column; gap: 5px; width: 40px; height: 40px; align-items: center; justify-content: center; }
+.burger span { display: block; width: 22px; height: 1.5px; background: var(--ink); transition: transform .3s, opacity .3s; }
+
+/* Mobile nav */
+#mobile-nav { position: fixed; inset: 0; z-index: 200; background: var(--bg); display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 2.5rem; transform: translateX(100%); transition: transform .35s cubic-bezier(.4,0,.2,1); }
+#mobile-nav.open { transform: none; }
+#mobile-nav a { font-family: var(--font-display); font-size: clamp(2rem, 8vw, 3.5rem); font-weight: 900; letter-spacing: -.01em; text-transform: uppercase; }
+#mobile-nav a:hover { color: var(--brand-blue); }
+.mobile-close { position: absolute; top: 1.5rem; right: 1.5rem; font-size: 1.5rem; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; }
+
+@media (max-width: 768px) {
+  .nav-left { display: none; }
+  .burger { display: flex; }
+  .logo { font-size: 1.25rem; }
+}
+
+/* ===== VIEWS ===== */
+.view { display: none; }
+.view.active { display: block; }
+
+/* ===== HERO ===== */
+#hero { min-height: 92vh; display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 4rem; padding: var(--section-pad) var(--pad); padding-top: clamp(3rem, 8vw, 7rem); }
+.hero-content { }
+.hero-title { font-family: var(--font-display); font-size: var(--fs-hero); font-weight: 900; line-height: .93; letter-spacing: -.03em; text-transform: uppercase; }
+.hero-title .word { display: inline-block; overflow: hidden; }
+.hero-title .word span { display: inline-block; transform: translateY(110%); opacity: 0; transition: transform .7s cubic-bezier(.16,1,.3,1), opacity .5s; }
+.hero-title .word span.visible { transform: none; opacity: 1; }
+.hero-evid { font-family: var(--font-display); font-size: clamp(1.25rem, 3vw, 2.25rem); font-weight: 800; letter-spacing: .05em; color: var(--brand-blue); margin-top: .5rem; opacity: 0; transform: translateY(20px); transition: opacity .7s .6s, transform .7s .6s cubic-bezier(.16,1,.3,1); }
+.hero-evid.visible { opacity: 1; transform: none; }
+.hero-text { margin-top: 2rem; max-width: 38ch; color: var(--ink-soft); line-height: 1.7; opacity: 0; transform: translateY(16px); transition: opacity .7s .8s, transform .7s .8s cubic-bezier(.16,1,.3,1); }
+.hero-text.visible { opacity: 1; transform: none; }
+.hero-cta { margin-top: 2.5rem; opacity: 0; transition: opacity .5s 1s; }
+.hero-cta.visible { opacity: 1; }
+.hero-visual { display: flex; align-items: center; justify-content: center; }
+.hero-visual svg { max-width: 100%; height: auto; }
+
+@media (max-width: 768px) {
+  #hero { grid-template-columns: 1fr; gap: 2.5rem; min-height: auto; padding-top: 3rem; }
+  .hero-visual { order: -1; }
+  .hero-visual svg { max-height: 280px; }
+}
+
+/* ===== CAROUSEL ===== */
+#carousel-section { padding: var(--section-pad) 0; background: var(--bg); overflow: hidden; }
+.section-header { text-align: center; margin-bottom: 4rem; padding: 0 var(--pad); }
+.carousel-wrap { position: relative; }
+.carousel-stage { perspective: 1200px; height: 420px; display: flex; align-items: center; justify-content: center; overflow: visible; }
+.ring { transform-style: preserve-3d; position: relative; width: 0; height: 0; transition: none; }
+.cell { transform-style: preserve-3d; position: absolute; width: 200px; height: 280px; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; border: none; background: none; padding: 0; transition: filter .1s; }
+.cell svg, .cell img { width: 180px; height: 250px; object-fit: contain; display: block; filter: drop-shadow(0 12px 24px rgba(0,0,0,.15)); pointer-events: none; }
+.carousel-caption { text-align: center; margin-top: 2rem; min-height: 3rem; padding: 0 var(--pad); }
+.carousel-caption-name { font-family: var(--font-display); font-size: 1.25rem; font-weight: 800; letter-spacing: -.01em; text-transform: uppercase; }
+.carousel-caption-price { font-family: var(--font-display); font-size: var(--fs-label); letter-spacing: .15em; color: var(--ink-soft); margin-top: .25rem; }
+.carousel-arrows { display: flex; justify-content: center; gap: 1rem; margin-top: 1.5rem; }
+.carousel-arrow { width: 48px; height: 48px; border: 1.5px solid var(--ink); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; transition: background .2s, color .2s; }
+.carousel-arrow:hover { background: var(--ink); color: var(--ink-invert); }
+.carousel-hint { text-align: center; margin-top: 1rem; font-size: var(--fs-small); color: var(--ink-soft); }
+
+@media (max-width: 767px) {
+  .carousel-stage { height: 300px; }
+  .cell { width: 150px; height: 210px; }
+  .cell svg, .cell img { width: 130px; height: 185px; }
+}
+
+/* ===== MARQUEE ===== */
+.marquee-section { overflow: hidden; padding: 1.5rem 0; background: var(--bg-dark); }
+.marquee-track { display: flex; width: max-content; animation: marquee 28s linear infinite; }
+.marquee-track:hover { animation-play-state: paused; }
+.marquee-item { font-family: var(--font-display); font-size: clamp(1rem, 2.5vw, 1.5rem); font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-invert); white-space: nowrap; padding: 0 2.5rem; }
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) { .marquee-track { animation-play-state: paused; } }
+
+/* ===== CATEGORIES ===== */
+#categories { padding: var(--section-pad) var(--pad); }
+.cat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+.cat-list { display: flex; flex-direction: column; gap: .5rem; }
+.cat-item { font-family: var(--font-display); font-size: var(--fs-cat); font-weight: 900; letter-spacing: -.02em; text-transform: uppercase; color: var(--line); transition: color .2s; cursor: default; padding: .2rem 0; border-bottom: 1px solid var(--line); line-height: 1.1; }
+.cat-item.active, .cat-item:hover:not(.soon) { color: var(--ink); }
+.cat-item.soon { position: relative; }
+.cat-item.soon::after { content: 'Bientôt'; font-size: var(--fs-label); font-weight: 500; letter-spacing: .15em; color: var(--ink-soft); margin-left: 1rem; vertical-align: middle; }
+.cat-visual { position: sticky; top: 8rem; }
+.cat-visual-inner { aspect-ratio: 4/5; background: var(--bg-mute); border-radius: var(--radius); overflow: hidden; display: flex; align-items: center; justify-content: center; }
+.cat-visual-inner svg { width: 65%; height: auto; }
+.cat-desc { margin-top: 1.25rem; font-size: var(--fs-small); color: var(--ink-soft); max-width: 32ch; }
+@media (max-width: 768px) {
+  .cat-grid { grid-template-columns: 1fr; }
+  .cat-visual { position: static; }
+  .cat-item { font-size: clamp(2.5rem, 10vw, 4rem); }
+}
+
+/* ===== LIFESTYLE BAND ===== */
+#lifestyle { position: relative; overflow: hidden; background: var(--bg-mute); padding: clamp(5rem, 12vw, 10rem) 0; }
+.lifestyle-bg { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+.lifestyle-bg svg { width: 100%; height: 100%; object-fit: cover; opacity: .25; }
+.lifestyle-content { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 2rem; }
+.lifestyle-marquee-track { display: flex; width: max-content; animation: marquee 22s linear infinite reverse; }
+.lifestyle-marquee-track:hover { animation-play-state: paused; }
+.lifestyle-marquee-item { font-family: var(--font-display); font-size: clamp(1.25rem, 3vw, 2rem); font-weight: 900; letter-spacing: .06em; text-transform: uppercase; color: var(--ink); white-space: nowrap; padding: 0 3rem; }
+
+/* ===== LOOKBOOK PREVIEW ===== */
+#lookbook-preview { padding: var(--section-pad) var(--pad); }
+.lookbook-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2.5rem; }
+.lookbook-card { position: relative; overflow: hidden; aspect-ratio: 4/5; background: var(--bg-mute); border-radius: var(--radius); }
+.lookbook-card-img { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
+.lookbook-card-overlay { position: absolute; inset: 0; background: rgba(11,11,12,.55); opacity: 0; transition: opacity .3s; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .75rem; padding: 1.5rem; text-align: center; }
+.lookbook-card:hover .lookbook-card-overlay { opacity: 1; }
+.lookbook-card-label { font-family: var(--font-display); font-size: var(--fs-small); font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: #fff; }
+@media (max-width: 768px) { .lookbook-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 480px) { .lookbook-grid { grid-template-columns: 1fr; } }
+
+/* ===== ABOUT TEASER ===== */
+#about-teaser { padding: var(--section-pad) var(--pad); background: var(--bg-dark); color: var(--ink-invert); display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+.about-teaser-visual { aspect-ratio: 1; background: #1a1a1a; border-radius: var(--radius); display: flex; align-items: center; justify-content: center; }
+.about-teaser-text h2 { font-family: var(--font-display); font-size: var(--fs-h1); font-weight: 900; text-transform: uppercase; letter-spacing: -.02em; line-height: 1.05; }
+.about-teaser-text p { margin-top: 1.5rem; color: rgba(247,246,243,.65); line-height: 1.75; }
+.about-teaser-text a { display: inline-block; margin-top: 2rem; font-family: var(--font-display); font-size: var(--fs-label); font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: var(--ink-invert); border-bottom: 1.5px solid var(--brand-blue); padding-bottom: 2px; }
+@media (max-width: 768px) { #about-teaser { grid-template-columns: 1fr; } }
+
+/* ===== NEWSLETTER ===== */
+#newsletter { padding: var(--section-pad) var(--pad); text-align: center; }
+#newsletter h2 { font-family: var(--font-display); font-size: var(--fs-h1); font-weight: 900; text-transform: uppercase; letter-spacing: -.02em; }
+#newsletter p { color: var(--ink-soft); margin-top: 1rem; }
+.newsletter-form { display: flex; gap: .75rem; max-width: 460px; margin: 2rem auto 0; flex-wrap: wrap; justify-content: center; }
+.newsletter-form input { flex: 1; min-width: 200px; border: none; border-bottom: 1.5px solid var(--ink); background: transparent; padding: .75rem .25rem; font-size: var(--fs-body); outline: none; color: var(--ink); }
+.newsletter-form input:focus { border-bottom-color: var(--brand-blue); }
+.newsletter-confirm { display: none; font-family: var(--font-display); font-weight: 700; color: var(--brand-blue); margin-top: 1rem; letter-spacing: .05em; }
+
+/* ===== FOOTER ===== */
+#footer { background: var(--bg-dark); color: var(--ink-invert); padding: clamp(4rem, 8vw, 7rem) var(--pad) 0; overflow: hidden; }
+.footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 3rem; padding-bottom: 4rem; border-bottom: 1px solid rgba(255,255,255,.08); }
+.footer-brand .logo { color: var(--brand-blue); font-size: 1.3rem; margin-bottom: 1rem; display: block; }
+.footer-brand p { font-size: var(--fs-small); color: rgba(247,246,243,.5); line-height: 1.7; max-width: 28ch; }
+.footer-col h4 { font-family: var(--font-display); font-size: var(--fs-label); font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: rgba(247,246,243,.4); margin-bottom: 1.25rem; }
+.footer-col a { display: block; font-size: var(--fs-small); color: rgba(247,246,243,.65); margin-bottom: .65rem; transition: color .2s; }
+.footer-col a:hover { color: var(--ink-invert); }
+.footer-bottom { padding: 1.5rem 0; font-size: var(--fs-label); letter-spacing: .1em; color: rgba(247,246,243,.3); text-transform: uppercase; }
+.footer-wordmark { font-family: var(--font-display); font-size: clamp(4rem, 15vw, 11rem); font-weight: 900; letter-spacing: -.04em; text-transform: uppercase; color: rgba(255,255,255,.04); line-height: 1; margin-top: 2rem; white-space: nowrap; }
+@media (max-width: 900px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 480px) { .footer-grid { grid-template-columns: 1fr; } }
+
+/* ===== SHOP PAGE ===== */
+#shop-view { padding: var(--section-pad) var(--pad); }
+.shop-filters { display: flex; gap: .75rem; flex-wrap: wrap; margin-bottom: 3rem; align-items: center; }
+.filter-btn { font-family: var(--font-display); font-size: var(--fs-label); font-weight: 700; letter-spacing: .12em; text-transform: uppercase; padding: .5rem 1.25rem; border: 1.5px solid var(--line); border-radius: var(--radius); background: transparent; color: var(--ink-soft); transition: all .2s; }
+.filter-btn:hover, .filter-btn.active { border-color: var(--ink); color: var(--ink); background: var(--ink); color: var(--ink-invert); }
+.shop-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; }
+.product-card { cursor: pointer; }
+.product-card-img { aspect-ratio: 4/5; background: var(--bg-mute); border-radius: var(--radius); overflow: hidden; display: flex; align-items: center; justify-content: center; transition: transform .3s cubic-bezier(.16,1,.3,1), box-shadow .3s; }
+.product-card:hover .product-card-img { transform: translateY(-6px); box-shadow: var(--shadow); }
+.product-card-img svg, .product-card-img img { width: 70%; height: auto; transition: transform .3s; }
+.product-card-info { padding: 1rem 0 .5rem; }
+.product-card-name { font-family: var(--font-display); font-weight: 800; font-size: .95rem; letter-spacing: -.01em; text-transform: uppercase; }
+.product-card-price { font-family: var(--font-display); font-size: var(--fs-label); letter-spacing: .1em; color: var(--ink-soft); margin-top: .25rem; }
+.product-card-dots { display: flex; gap: .35rem; margin-top: .5rem; }
+.dot { width: 14px; height: 14px; border-radius: 50%; border: 1.5px solid var(--line); }
+.dot.white { background: #fff; }
+.coming-soon-tag { display: inline-block; font-family: var(--font-display); font-size: var(--fs-label); letter-spacing: .12em; text-transform: uppercase; background: var(--bg-mute); color: var(--ink-soft); padding: .25rem .6rem; border-radius: var(--radius); margin-top: .5rem; }
+@media (max-width: 1024px) { .shop-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 768px) { .shop-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 480px) { .shop-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; } }
+
+/* ===== PRODUCT PAGE ===== */
+#product-view { padding: var(--section-pad) var(--pad); }
+.product-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+.product-gallery-main { aspect-ratio: 4/5; background: var(--bg-mute); border-radius: var(--radius); display: flex; align-items: center; justify-content: center; }
+.product-gallery-main svg, .product-gallery-main img { width: 75%; height: auto; }
+.product-gallery-thumbs { display: flex; gap: .75rem; margin-top: .75rem; }
+.thumb { width: 72px; height: 90px; background: var(--bg-mute); border-radius: var(--radius); display: flex; align-items: center; justify-content: center; cursor: pointer; border: 1.5px solid transparent; transition: border-color .2s; }
+.thumb.active { border-color: var(--ink); }
+.thumb svg, .thumb img { width: 70%; height: auto; }
+.breadcrumb { font-size: var(--fs-label); letter-spacing: .1em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 1.5rem; }
+.breadcrumb span { margin: 0 .5rem; }
+.product-name { font-family: var(--font-display); font-size: var(--fs-h1); font-weight: 900; text-transform: uppercase; letter-spacing: -.02em; line-height: 1.05; }
+.product-price { font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; letter-spacing: .04em; margin-top: .75rem; }
+.product-desc { margin-top: 1.25rem; color: var(--ink-soft); line-height: 1.75; max-width: 42ch; }
+.size-label { font-family: var(--font-display); font-size: var(--fs-label); font-weight: 700; letter-spacing: .15em; text-transform: uppercase; margin-top: 2rem; margin-bottom: .75rem; }
+.size-grid { display: flex; gap: .5rem; flex-wrap: wrap; }
+.size-btn { width: 52px; height: 52px; border: 1.5px solid var(--line); border-radius: var(--radius); font-family: var(--font-display); font-size: .85rem; font-weight: 700; letter-spacing: .05em; transition: all .2s; }
+.size-btn:hover { border-color: var(--ink); }
+.size-btn.selected { background: var(--ink); color: var(--ink-invert); border-color: var(--ink); }
+.add-to-cart { width: 100%; margin-top: 1.5rem; padding: 1.25rem; font-size: .85rem; }
+.size-hint { font-size: var(--fs-small); color: var(--brand-blue); margin-top: .5rem; display: none; }
+.size-hint.show { display: block; }
+.accordion { margin-top: 2rem; border-top: 1px solid var(--line); }
+.accordion-item { border-bottom: 1px solid var(--line); }
+.accordion-trigger { display: flex; justify-content: space-between; align-items: center; width: 100%; padding: 1rem 0; font-family: var(--font-display); font-size: var(--fs-small); font-weight: 700; letter-spacing: .1em; text-transform: uppercase; background: none; border: none; cursor: pointer; }
+.accordion-trigger svg { transition: transform .25s; flex-shrink: 0; }
+.accordion-trigger.open svg { transform: rotate(180deg); }
+.accordion-body { max-height: 0; overflow: hidden; transition: max-height .3s ease; font-size: var(--fs-small); color: var(--ink-soft); line-height: 1.7; }
+.accordion-body-inner { padding: 0 0 1rem; }
+.product-perks { display: flex; gap: 1.5rem; margin-top: 1.5rem; flex-wrap: wrap; }
+.perk { display: flex; align-items: center; gap: .4rem; font-size: var(--fs-label); color: var(--ink-soft); letter-spacing: .08em; text-transform: uppercase; }
+@media (max-width: 768px) { .product-layout { grid-template-columns: 1fr; gap: 2.5rem; } }
+
+/* ===== LOOKBOOK PAGE ===== */
+#lookbook-view { padding-top: 4rem; }
+.lookbook-hero { height: 80vh; background: var(--bg-mute); display: flex; align-items: flex-end; padding: 4rem var(--pad); }
+.lookbook-hero h1 { font-family: var(--font-display); font-size: var(--fs-hero); font-weight: 900; text-transform: uppercase; letter-spacing: -.03em; line-height: .9; }
+.lookbook-editorial { padding: var(--section-pad) var(--pad); }
+.lb-spread { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; margin-bottom: 6rem; }
+.lb-spread.reverse { direction: rtl; }
+.lb-spread.reverse > * { direction: ltr; }
+.lb-img { aspect-ratio: 4/5; background: var(--bg-mute); border-radius: var(--radius); display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.lb-text { padding: 2rem 0; }
+.lb-text .lb-chapter { font-family: var(--font-display); font-size: var(--fs-label); letter-spacing: .2em; text-transform: uppercase; color: var(--brand-blue); margin-bottom: 1.25rem; }
+.lb-text p { font-size: clamp(1.25rem, 2.5vw, 2rem); font-weight: 400; line-height: 1.4; color: var(--ink); font-style: italic; }
+.lb-text small { display: block; margin-top: 1.5rem; font-size: var(--fs-small); color: var(--ink-soft); }
+@media (max-width: 768px) { .lb-spread { grid-template-columns: 1fr; direction: ltr; } }
+
+/* ===== ABOUT PAGE ===== */
+#about-view { padding: var(--section-pad) var(--pad); }
+.about-hero-title { font-family: var(--font-display); font-size: var(--fs-hero); font-weight: 900; text-transform: uppercase; letter-spacing: -.03em; line-height: .9; margin-bottom: 4rem; }
+.about-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start; }
+.about-text p { line-height: 1.85; color: var(--ink-soft); font-size: 1.05rem; margin-bottom: 1.5rem; }
+.about-values { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 5rem; padding-top: 4rem; border-top: 1px solid var(--line); }
+.value-item h3 { font-family: var(--font-display); font-weight: 800; text-transform: uppercase; letter-spacing: .04em; font-size: .9rem; margin-bottom: .5rem; }
+.value-item p { font-size: var(--fs-small); color: var(--ink-soft); line-height: 1.65; }
+.about-img { aspect-ratio: 3/4; background: var(--bg-mute); border-radius: var(--radius); display: flex; align-items: center; justify-content: center; position: sticky; top: 7rem; }
+@media (max-width: 768px) { .about-layout { grid-template-columns: 1fr; } .about-values { grid-template-columns: 1fr; } .about-img { position: static; } }
+
+/* ===== CONTACT PAGE ===== */
+#contact-view { padding: var(--section-pad) var(--pad); max-width: 720px; margin: 0 auto; }
+#contact-view h1 { font-family: var(--font-display); font-size: var(--fs-h1); font-weight: 900; text-transform: uppercase; letter-spacing: -.02em; margin-bottom: 3rem; }
+.contact-form { display: flex; flex-direction: column; gap: 2rem; }
+.form-field { position: relative; }
+.form-field label { display: block; font-family: var(--font-display); font-size: var(--fs-label); font-weight: 700; letter-spacing: .15em; text-transform: uppercase; margin-bottom: .5rem; color: var(--ink-soft); }
+.form-field input, .form-field textarea { width: 100%; border: none; border-bottom: 1.5px solid var(--line); background: transparent; padding: .75rem 0; font-size: var(--fs-body); color: var(--ink); outline: none; resize: vertical; }
+.form-field input:focus, .form-field textarea:focus { border-bottom-color: var(--brand-blue); }
+.form-error { font-size: var(--fs-small); color: #c0392b; margin-top: .3rem; display: none; }
+.form-field.has-error .form-error { display: block; }
+.form-field.has-error input, .form-field.has-error textarea { border-bottom-color: #c0392b; }
+.contact-info { margin-top: 4rem; padding-top: 3rem; border-top: 1px solid var(--line); display: flex; gap: 3rem; flex-wrap: wrap; }
+.contact-info-item { font-size: var(--fs-small); color: var(--ink-soft); }
+.contact-info-item strong { display: block; font-family: var(--font-display); font-size: var(--fs-label); letter-spacing: .12em; text-transform: uppercase; color: var(--ink); margin-bottom: .3rem; }
+.contact-confirm { display: none; text-align: center; padding: 3rem; }
+.contact-confirm h2 { font-family: var(--font-display); font-size: var(--fs-h2); font-weight: 900; text-transform: uppercase; }
+.contact-confirm p { margin-top: 1rem; color: var(--ink-soft); }
+
+/* ===== CART DRAWER ===== */
+#cart-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.4); z-index: 300; opacity: 0; pointer-events: none; transition: opacity .3s; }
+#cart-overlay.open { opacity: 1; pointer-events: all; }
+#cart-drawer { position: fixed; right: 0; top: 0; bottom: 0; width: min(420px, 100vw); background: var(--bg-pure); z-index: 301; transform: translateX(100%); transition: transform .35s cubic-bezier(.4,0,.2,1); display: flex; flex-direction: column; }
+#cart-drawer.open { transform: none; }
+.cart-header { display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 1.75rem; border-bottom: 1px solid var(--line); }
+.cart-header h2 { font-family: var(--font-display); font-size: 1rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+.cart-close { width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: background .2s; }
+.cart-close:hover { background: var(--bg-mute); }
+.cart-items { flex: 1; overflow-y: auto; padding: 1.5rem 1.75rem; }
+.cart-empty { text-align: center; padding: 4rem 0; }
+.cart-empty p { color: var(--ink-soft); margin-bottom: 1.5rem; }
+.cart-item { display: grid; grid-template-columns: 80px 1fr auto; gap: 1rem; padding: 1.25rem 0; border-bottom: 1px solid var(--line); align-items: center; }
+.cart-item-img { width: 80px; height: 100px; background: var(--bg-mute); border-radius: var(--radius); display: flex; align-items: center; justify-content: center; }
+.cart-item-img svg { width: 55px; height: auto; }
+.cart-item-info { }
+.cart-item-name { font-family: var(--font-display); font-size: .85rem; font-weight: 800; text-transform: uppercase; letter-spacing: -.01em; }
+.cart-item-meta { font-size: var(--fs-small); color: var(--ink-soft); margin-top: .25rem; }
+.cart-item-price { font-family: var(--font-display); font-weight: 700; font-size: .95rem; margin-top: .5rem; }
+.qty-ctrl { display: flex; align-items: center; gap: .5rem; margin-top: .5rem; }
+.qty-btn { width: 28px; height: 28px; border: 1.5px solid var(--line); border-radius: var(--radius); display: flex; align-items: center; justify-content: center; font-size: .9rem; transition: all .2s; }
+.qty-btn:hover { border-color: var(--ink); background: var(--ink); color: var(--ink-invert); }
+.qty-val { font-family: var(--font-display); font-size: .9rem; font-weight: 700; min-width: 24px; text-align: center; }
+.cart-remove { color: var(--ink-soft); font-size: 1.1rem; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: background .2s; align-self: flex-start; }
+.cart-remove:hover { background: var(--bg-mute); color: var(--ink); }
+.cart-footer { padding: 1.5rem 1.75rem; border-top: 1px solid var(--line); }
+.cart-shipping-bar { margin-bottom: 1.25rem; }
+.cart-shipping-text { font-size: var(--fs-small); color: var(--ink-soft); margin-bottom: .5rem; }
+.cart-bar-track { height: 3px; background: var(--line); border-radius: 99px; }
+.cart-bar-fill { height: 100%; background: var(--brand-blue); border-radius: 99px; transition: width .4s; }
+.cart-total { display: flex; justify-content: space-between; align-items: center; font-family: var(--font-display); font-weight: 700; font-size: 1rem; letter-spacing: .04em; margin-bottom: 1.25rem; }
+.cart-checkout { width: 100%; }
+
+/* ===== TOAST ===== */
+#toast { position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%) translateY(120%); background: var(--bg-dark); color: var(--ink-invert); font-family: var(--font-display); font-size: var(--fs-label); letter-spacing: .12em; text-transform: uppercase; padding: .85rem 2rem; border-radius: var(--radius); z-index: 500; transition: transform .35s cubic-bezier(.16,1,.3,1); white-space: nowrap; }
+#toast.show { transform: translateX(-50%) translateY(0); }
+
+/* ===== RELATED PRODUCTS ===== */
+.related { padding: var(--section-pad) var(--pad); border-top: 1px solid var(--line); }
+.related h2 { font-family: var(--font-display); font-size: var(--fs-h2); font-weight: 900; text-transform: uppercase; letter-spacing: -.01em; margin-bottom: 2.5rem; }
+.related-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+@media (max-width: 768px) { .related-grid { grid-template-columns: repeat(2, 1fr); } }
+
+/* ===== SCROLL REVEAL ===== */
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity .65s cubic-bezier(.16,1,.3,1), transform .65s cubic-bezier(.16,1,.3,1); }
+.reveal.visible { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
+
+/* ===== PAGE TRANSITION ===== */
+.view { opacity: 0; transition: opacity .3s; }
+.view.active { opacity: 1; }
+
+/* ===== FAQ SECTION ===== */
+.faq { padding: var(--section-pad) var(--pad); max-width: 720px; margin: 0 auto; }
+.faq h2 { font-family: var(--font-display); font-size: var(--fs-h2); font-weight: 900; text-transform: uppercase; letter-spacing: -.01em; margin-bottom: 2.5rem; }
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div id="topbar">Livraison offerte dès 80€&nbsp;·&nbsp;Nouveau drop disponible</div>
+
+<!-- HEADER -->
+<header id="header">
+  <div class="header-inner">
+    <nav class="nav-left" aria-label="Navigation principale">
+      <a href="#/" data-route="/">Accueil</a>
+      <a href="#/shop" data-route="/shop">Shop</a>
+      <a href="#/lookbook" data-route="/lookbook">Lookbook</a>
+      <a href="#/about" data-route="/about">About</a>
+      <a href="#/contact" data-route="/contact">Contact</a>
+    </nav>
+    <a href="#/" class="logo" data-route="/" aria-label="Kiffclub, retour à l'accueil">Klffclub<sup>®</sup></a>
+    <div class="nav-right">
+      <button class="nav-icon" aria-label="Rechercher" onclick="showToast('Recherche bientôt disponible')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="22" y2="22"/></svg>
+      </button>
+      <button class="nav-icon" aria-label="Mon compte" onclick="showToast('Compte bientôt disponible')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+      </button>
+      <button class="nav-icon" aria-label="Panier" id="cart-btn" onclick="openCart()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+        <span id="cart-badge" aria-live="polite">0</span>
+      </button>
+      <button class="burger" id="burger" aria-label="Menu" aria-expanded="false" onclick="toggleMobile()">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- MOBILE NAV -->
+<nav id="mobile-nav" aria-label="Menu mobile">
+  <button class="mobile-close" onclick="toggleMobile()" aria-label="Fermer le menu">✕</button>
+  <a href="#/" data-route="/" onclick="toggleMobile()">Accueil</a>
+  <a href="#/shop" data-route="/shop" onclick="toggleMobile()">Shop</a>
+  <a href="#/lookbook" data-route="/lookbook" onclick="toggleMobile()">Lookbook</a>
+  <a href="#/about" data-route="/about" onclick="toggleMobile()">About</a>
+  <a href="#/contact" data-route="/contact" onclick="toggleMobile()">Contact</a>
+</nav>
+
+<!-- ===== HOME VIEW ===== -->
+<div class="view" id="view-home">
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-content">
+      <h1 class="hero-title" aria-label="We are rich in memories.">
+        <span class="word"><span>WE ARE</span></span><br>
+        <span class="word"><span>RICH IN</span></span><br>
+        <span class="word"><span>MEMORIES.</span></span>
+      </h1>
+      <p class="hero-evid">ÉVIDEMMENT.</p>
+      <p class="hero-text">Le streetwear français qui collectionne les souvenirs. Coton lourd, coupes oversize, sérigraphies qui ne s'effacent pas — comme les bons moments.</p>
+      <div class="hero-cta">
+        <a href="#/shop" class="btn btn-primary" data-route="/shop">Découvrir le drop</a>
+      </div>
+    </div>
+    <div class="hero-visual" aria-hidden="true">
+      <!-- SVG: 4 t-shirts on hangers -->
+      <svg viewBox="0 0 480 380" fill="none" xmlns="http://www.w3.org/2000/svg" style="max-height:380px">
+        <!-- Wire -->
+        <line x1="20" y1="40" x2="460" y2="40" stroke="#ccc" stroke-width="2"/>
+        <!-- Hanger hooks -->
+        <path d="M100 40 Q100 30 110 28 Q120 26 120 36 L120 55" stroke="#999" stroke-width="1.5" fill="none"/>
+        <path d="M200 40 Q200 30 210 28 Q220 26 220 36 L220 55" stroke="#999" stroke-width="1.5" fill="none"/>
+        <path d="M300 40 Q300 30 310 28 Q320 26 320 36 L320 55" stroke="#999" stroke-width="1.5" fill="none"/>
+        <path d="M390 40 Q390 30 400 28 Q410 26 410 36 L410 55" stroke="#999" stroke-width="1.5" fill="none"/>
+        <!-- T-shirt 1: Charcoal -->
+        <g transform="translate(60,55)">
+          <path d="M25,0 L10,0 L0,22 L18,27 L18,80 L62,80 L62,27 L80,22 L70,0 L55,0 Q40,10 40,10 Q40,10 25,0Z" fill="#2b2b2d"/>
+          <text x="40" y="52" text-anchor="middle" font-family="Arial" font-size="6" fill="#e8a6c6" font-weight="bold">@KIFFCLUB</text>
+        </g>
+        <!-- T-shirt 2: White -->
+        <g transform="translate(160,55)">
+          <path d="M25,0 L10,0 L0,22 L18,27 L18,80 L62,80 L62,27 L80,22 L70,0 L55,0 Q40,10 40,10 Q40,10 25,0Z" fill="#ffffff" stroke="#dcdbd5" stroke-width="1"/>
+          <text x="40" y="52" text-anchor="middle" font-family="Arial" font-size="6" fill="#1b2bd6" font-weight="bold">@KIFFCLUB</text>
+        </g>
+        <!-- T-shirt 3: Rose -->
+        <g transform="translate(260,55)">
+          <path d="M25,0 L10,0 L0,22 L18,27 L18,80 L62,80 L62,27 L80,22 L70,0 L55,0 Q40,10 40,10 Q40,10 25,0Z" fill="#e8a6c6"/>
+          <text x="40" y="52" text-anchor="middle" font-family="Arial" font-size="6" fill="#ffffff" font-weight="bold">@KIFFCLUB</text>
+        </g>
+        <!-- T-shirt 4: Olive -->
+        <g transform="translate(350,55)">
+          <path d="M25,0 L10,0 L0,22 L18,27 L18,80 L62,80 L62,27 L80,22 L70,0 L55,0 Q40,10 40,10 Q40,10 25,0Z" fill="#5c5f3a"/>
+          <text x="40" y="44" text-anchor="middle" font-family="Arial" font-size="4.5" fill="#f7f6f3" font-weight="bold">WE ARE RICH</text>
+          <text x="40" y="50" text-anchor="middle" font-family="Arial" font-size="4.5" fill="#f7f6f3">IN MEMORIES.</text>
+        </g>
+      </svg>
+    </div>
+  </section>
+
+  <!-- CAROUSEL -->
+  <section id="carousel-section" aria-roledescription="carrousel" aria-label="Modèles Kiffclub">
+    <div class="section-header reveal">
+      <p class="eyebrow">Le Drop</p>
+      <h2 style="font-family:var(--font-display);font-size:var(--fs-h1);font-weight:900;text-transform:uppercase;letter-spacing:-.02em;">Les Modèles</h2>
+      <p style="color:var(--ink-soft);margin-top:.75rem;font-size:var(--fs-small)">Fais tourner le club. Clique sur un modèle pour le découvrir.</p>
+    </div>
+    <div class="carousel-wrap">
+      <div class="carousel-stage" id="carousel-stage">
+        <div class="ring" id="ring" role="list"></div>
+      </div>
+      <div class="carousel-caption" id="carousel-caption" aria-live="polite">
+        <div class="carousel-caption-name" id="cap-name"></div>
+        <div class="carousel-caption-price" id="cap-price"></div>
+      </div>
+      <div class="carousel-arrows">
+        <button class="carousel-arrow" id="arrow-prev" aria-label="Modèle précédent">←</button>
+        <button class="carousel-arrow" id="arrow-next" aria-label="Modèle suivant">→</button>
+      </div>
+      <p class="carousel-hint">Glisse ou utilise les flèches · Clique pour découvrir</p>
+    </div>
+  </section>
+
+  <!-- MARQUEE 1 -->
+  <div class="marquee-section" aria-hidden="true">
+    <div class="marquee-track" id="marquee1"></div>
+  </div>
+
+  <!-- CATEGORIES -->
+  <section id="categories" class="container">
+    <div class="reveal" style="margin-bottom:3rem">
+      <p class="eyebrow">Le Vestiaire</p>
+    </div>
+    <div class="cat-grid">
+      <div class="cat-list" id="cat-list">
+        <div class="cat-item active" data-cat="tshirts">T-Shirts</div>
+        <div class="cat-item soon" data-cat="hoodies">Hoodies</div>
+        <div class="cat-item soon" data-cat="casquettes">Casquettes</div>
+        <div class="cat-item soon" data-cat="accessoires">Accessoires</div>
+      </div>
+      <div class="cat-visual">
+        <div class="cat-visual-inner" id="cat-visual">
+          <!-- default: tshirt -->
+        </div>
+        <p class="cat-desc" id="cat-desc">La pièce fondatrice du club. Quatre couleurs, une seule mémoire.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- LIFESTYLE BAND -->
+  <section id="lifestyle" aria-label="Wear it your way">
+    <div class="lifestyle-bg" aria-hidden="true">
+      <svg viewBox="0 0 800 400" fill="none"><rect width="800" height="400" fill="#ecebe6"/><circle cx="400" cy="200" r="180" fill="#dcdbd5"/><circle cx="400" cy="200" r="100" fill="#c8c7c0"/></svg>
+    </div>
+    <div class="lifestyle-content">
+      <div style="overflow:hidden;width:100%">
+        <div class="lifestyle-marquee-track" id="marquee2"></div>
+      </div>
+      <a href="#/shop" class="btn btn-primary" data-route="/shop" style="margin-top:1rem">Voir la boutique</a>
+    </div>
+  </section>
+
+  <!-- LOOKBOOK PREVIEW -->
+  <section id="lookbook-preview" class="container">
+    <div class="reveal">
+      <p class="eyebrow">Lookbook</p>
+      <h2 style="font-family:var(--font-display);font-size:var(--fs-h1);font-weight:900;text-transform:uppercase;letter-spacing:-.02em;">Des Souvenirs<br>en Mouvement</h2>
+      <p style="margin-top:1rem;color:var(--ink-soft);max-width:40ch;">Une vieille Porsche, un mur en pierre, la lumière de fin d'après-midi. Le club, c'est aussi un décor.</p>
+    </div>
+    <div class="lookbook-grid reveal">
+      <div class="lookbook-card">
+        <div class="lookbook-card-img" id="lb1"></div>
+        <div class="lookbook-card-overlay"><span class="lookbook-card-label">Mur Haussmannien</span><a href="#/lookbook" class="btn btn-dark" style="padding:.5rem 1rem;font-size:.65rem" data-route="/lookbook">Voir</a></div>
+      </div>
+      <div class="lookbook-card">
+        <div class="lookbook-card-img" id="lb2"></div>
+        <div class="lookbook-card-overlay"><span class="lookbook-card-label">La Porsche</span><a href="#/lookbook" class="btn btn-dark" style="padding:.5rem 1rem;font-size:.65rem" data-route="/lookbook">Voir</a></div>
+      </div>
+      <div class="lookbook-card">
+        <div class="lookbook-card-img" id="lb3"></div>
+        <div class="lookbook-card-overlay"><span class="lookbook-card-label">Entre Amis</span><a href="#/lookbook" class="btn btn-dark" style="padding:.5rem 1rem;font-size:.65rem" data-route="/lookbook">Voir</a></div>
+      </div>
+    </div>
+    <div style="margin-top:2.5rem;text-align:center" class="reveal">
+      <a href="#/lookbook" class="btn btn-secondary" data-route="/lookbook">Voir le Lookbook</a>
+    </div>
+  </section>
+
+  <!-- ABOUT TEASER -->
+  <section id="about-teaser">
+    <div class="about-teaser-visual reveal">
+      <svg viewBox="0 0 300 300" width="220" aria-hidden="true">
+        <circle cx="150" cy="150" r="120" fill="rgba(27,43,214,.08)"/>
+        <text x="150" y="165" text-anchor="middle" font-family="Archivo,sans-serif" font-size="80" font-weight="900" fill="rgba(27,43,214,.3)">K</text>
+      </svg>
+    </div>
+    <div class="about-teaser-text reveal">
+      <h2>Nés Pour Durer</h2>
+      <p>Kiffclub est parti d'une idée simple : et si on pouvait porter ses souvenirs ? On fabrique des vêtements en petites séries, pensés pour vieillir bien — comme les meilleures histoires.</p>
+      <a href="#/about" data-route="/about">Notre histoire →</a>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <section id="newsletter" class="container">
+    <div class="reveal">
+      <h2>Rejoins le Club</h2>
+      <p>Les drops en avant-première, rien d'autre. Pas de spam, évidemment.</p>
+      <form class="newsletter-form" id="newsletter-form" onsubmit="handleNewsletter(event)">
+        <input type="email" placeholder="ton@email.fr" aria-label="Ton adresse email" required>
+        <button type="submit" class="btn btn-primary">S'inscrire</button>
+      </form>
+      <p class="newsletter-confirm" id="newsletter-confirm">Bienvenue au club. À très vite.</p>
+    </div>
+  </section>
+
+</div><!-- end view-home -->
+
+<!-- ===== SHOP VIEW ===== -->
+<div class="view" id="view-shop">
+  <div id="shop-view">
+    <div class="container">
+      <h1 style="font-family:var(--font-display);font-size:var(--fs-h1);font-weight:900;text-transform:uppercase;letter-spacing:-.02em;margin-bottom:2.5rem">Shop</h1>
+      <div class="shop-filters" id="shop-filters"></div>
+      <div class="shop-grid" id="shop-grid"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== PRODUCT VIEW ===== -->
+<div class="view" id="view-product">
+  <div id="product-view">
+    <div class="container">
+      <div class="product-layout">
+        <div>
+          <div class="product-gallery-main" id="prod-gallery-main"></div>
+          <div class="product-gallery-thumbs" id="prod-thumbs"></div>
+        </div>
+        <div>
+          <nav class="breadcrumb" aria-label="Fil d'Ariane">
+            <a href="#/" data-route="/">Accueil</a><span>·</span>
+            <a href="#/shop" data-route="/shop">Shop</a><span>·</span>
+            <span id="prod-breadcrumb"></span>
+          </nav>
+          <h1 class="product-name" id="prod-name"></h1>
+          <div class="product-price" id="prod-price"></div>
+          <p class="product-desc" id="prod-desc"></p>
+          <div class="size-label">Taille</div>
+          <div class="size-grid" id="size-grid"></div>
+          <p class="size-hint" id="size-hint">Choisis ta taille</p>
+          <button class="btn btn-primary add-to-cart" id="add-to-cart-btn" onclick="addToCart()">Ajouter au panier</button>
+          <div class="product-perks">
+            <span class="perk"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg>Livraison offerte dès 80€</span>
+            <span class="perk"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg>Retours 14 jours</span>
+            <span class="perk"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg>Paiement sécurisé</span>
+          </div>
+          <div class="accordion" id="prod-accordion"></div>
+        </div>
+      </div>
+    </div>
+    <div class="related container">
+      <h2>Tu aimeras aussi</h2>
+      <div class="related-grid" id="related-grid"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== LOOKBOOK VIEW ===== -->
+<div class="view" id="view-lookbook">
+  <div id="lookbook-view">
+    <div class="lookbook-hero">
+      <h1>Été Sans Fin</h1>
+    </div>
+    <div class="lookbook-editorial container">
+      <div class="lb-spread">
+        <div class="lb-img" id="lb-img1"></div>
+        <div class="lb-text">
+          <p class="lb-chapter">Chapitre 01</p>
+          <p>«&nbsp;On roulait sans destination, juste pour le plaisir de rouler.&nbsp;»</p>
+          <small>T-Shirt Memories — Kaki · 49€ · <a href="#/produit/kaki" data-route="/produit/kaki" style="border-bottom:1px solid var(--brand-blue)">Shop the look</a></small>
+        </div>
+      </div>
+      <div class="lb-spread reverse">
+        <div class="lb-img" id="lb-img2"></div>
+        <div class="lb-text">
+          <p class="lb-chapter">Chapitre 02</p>
+          <p>«&nbsp;Le mur connaissait nos noms. On y revenait chaque soir.&nbsp;»</p>
+          <small>T-Shirt Memories — Charcoal · 45€ · <a href="#/produit/charcoal" data-route="/produit/charcoal" style="border-bottom:1px solid var(--brand-blue)">Shop the look</a></small>
+        </div>
+      </div>
+      <div class="lb-spread">
+        <div class="lb-img" id="lb-img3"></div>
+        <div class="lb-text">
+          <p class="lb-chapter">Chapitre 03</p>
+          <p>«&nbsp;Certains souvenirs ne tiennent pas dans une photo. Alors on les a mis sur du coton.&nbsp;»</p>
+          <small>T-Shirt Memories — Blanc · 45€ · <a href="#/produit/blanc" data-route="/produit/blanc" style="border-bottom:1px solid var(--brand-blue)">Shop the look</a></small>
+        </div>
+      </div>
+      <div style="text-align:center;padding:4rem 0;font-family:var(--font-display);font-size:var(--fs-h2);font-weight:900;text-transform:uppercase;letter-spacing:-.01em;color:var(--ink-soft)">
+        À suivre. Évidemment.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== ABOUT VIEW ===== -->
+<div class="view" id="view-about">
+  <div id="about-view">
+    <h1 class="about-hero-title">We Are Rich<br>in Memories.</h1>
+    <div class="about-layout">
+      <div class="about-text">
+        <p>Kiffclub est né d'un été qui n'en finissait pas. De trajets en voiture les vitres ouvertes, de soirées qu'on aurait voulu figer, de l'envie un peu naïve de ne rien oublier.</p>
+        <p>On s'est dit qu'un vêtement pouvait être plus qu'un vêtement&nbsp;: un repère, une date, une personne. Une madeleine en coton.</p>
+        <p>Alors on a commencé petit. Du coton lourd, des coupes amples, des sérigraphies qui tiennent. Des séries limitées, fabriquées avec soin, sans course au volume. On préfère faire moins, mais bien.</p>
+        <p>On n'a pas inventé le streetwear. On lui a juste ajouté de la mémoire.</p>
+        <p style="font-family:var(--font-display);font-weight:800;font-size:1.1rem;color:var(--ink)">Bienvenue au club. Évidemment.</p>
+      </div>
+      <div class="about-img">
+        <svg viewBox="0 0 280 350" width="200" aria-hidden="true">
+          <rect width="280" height="350" fill="#ecebe6"/>
+          <circle cx="140" cy="140" r="80" fill="#dcdbd5"/>
+          <path d="M80,170 L100,170 L100,230 L180,230 L180,170 L200,170 L200,120 L140,90 L80,120Z" fill="#5c5f3a" opacity=".6"/>
+        </svg>
+      </div>
+    </div>
+    <div class="about-values">
+      <div class="value-item">
+        <h3>Séries Limitées</h3>
+        <p>On produit peu, exprès. Quand c'est parti, c'est parti.</p>
+      </div>
+      <div class="value-item">
+        <h3>Coton Lourd</h3>
+        <p>240 g/m², pensé pour durer des années, pas une saison.</p>
+      </div>
+      <div class="value-item">
+        <h3>Fabriqué avec Soin</h3>
+        <p>Petites séries, contrôle à chaque étape.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== CONTACT VIEW ===== -->
+<div class="view" id="view-contact">
+  <div id="contact-view">
+    <h1>Contact</h1>
+    <div id="contact-form-wrap">
+      <form class="contact-form" id="contact-form" onsubmit="handleContact(event)" novalidate>
+        <div class="form-field" id="ff-name">
+          <label for="c-name">Nom</label>
+          <input type="text" id="c-name" autocomplete="name" placeholder="Ton prénom">
+          <p class="form-error">Oups, vérifie ce champ.</p>
+        </div>
+        <div class="form-field" id="ff-email">
+          <label for="c-email">Email</label>
+          <input type="email" id="c-email" autocomplete="email" placeholder="ton@email.fr">
+          <p class="form-error">Oups, vérifie ce champ.</p>
+        </div>
+        <div class="form-field" id="ff-msg">
+          <label for="c-msg">Message</label>
+          <textarea id="c-msg" rows="5" placeholder="Ton message..."></textarea>
+          <p class="form-error">Oups, vérifie ce champ.</p>
+        </div>
+        <button type="submit" class="btn btn-primary" style="align-self:flex-start">Envoyer</button>
+      </form>
+    </div>
+    <div class="contact-confirm" id="contact-confirm">
+      <h2>Message reçu.</h2>
+      <p>On te répond vite. À très bientôt.</p>
+    </div>
+    <div class="contact-info">
+      <div class="contact-info-item"><strong>Instagram</strong><a href="https://instagram.com/_kiffclub_" target="_blank" rel="noopener">@_kiffclub_</a></div>
+      <div class="contact-info-item"><strong>Email</strong><a href="mailto:hello@kiffclub.fr">hello@kiffclub.fr</a></div>
+      <div class="contact-info-item"><strong>Localisation</strong>France</div>
+    </div>
+    <div class="faq">
+      <h2>FAQ</h2>
+      <div class="accordion" id="faq-accordion"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== FOOTER ===== -->
+<footer id="footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="logo">Klffclub<sup>®</sup></span>
+      <p>WE ARE RICH IN MEMORIES. ÉVIDEMMENT.<br>Le streetwear français qui collectionne les souvenirs.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Boutique</h4>
+      <a href="#/shop" data-route="/shop">Tous les produits</a>
+      <a href="#/lookbook" data-route="/lookbook">Lookbook</a>
+      <a href="#/shop" data-route="/shop">Nouveautés</a>
+    </div>
+    <div class="footer-col">
+      <h4>Aide</h4>
+      <a href="#/contact" data-route="/contact">Contact</a>
+      <a href="#/contact" data-route="/contact">Livraison</a>
+      <a href="#/contact" data-route="/contact">Retours</a>
+      <a href="#/contact" data-route="/contact">FAQ</a>
+    </div>
+    <div class="footer-col">
+      <h4>Suivre</h4>
+      <a href="https://instagram.com/_kiffclub_" target="_blank" rel="noopener">Instagram @_kiffclub_</a>
+      <a href="mailto:hello@kiffclub.fr">hello@kiffclub.fr</a>
+      <a href="kiffclub.fr">kiffclub.fr</a>
+    </div>
+  </div>
+  <div class="footer-bottom">© 2026 Kiffclub® — We are rich in memories. Évidemment.</div>
+  <div class="footer-wordmark" aria-hidden="true">KIFFCLUB</div>
+</footer>
+
+<!-- CART DRAWER -->
+<div id="cart-overlay" onclick="closeCart()" aria-hidden="true"></div>
+<aside id="cart-drawer" aria-label="Panier" role="dialog" aria-modal="true">
+  <div class="cart-header">
+    <h2>Panier</h2>
+    <button class="cart-close" onclick="closeCart()" aria-label="Fermer le panier">✕</button>
+  </div>
+  <div class="cart-items" id="cart-items"></div>
+  <div class="cart-footer">
+    <div class="cart-shipping-bar">
+      <p class="cart-shipping-text" id="shipping-text">Livraison offerte dès 80€</p>
+      <div class="cart-bar-track"><div class="cart-bar-fill" id="shipping-bar" style="width:0%"></div></div>
+    </div>
+    <div class="cart-total"><span>Sous-total</span><span id="cart-subtotal">0€</span></div>
+    <button class="btn btn-primary cart-checkout" onclick="handleCheckout()">Passer commande</button>
+  </div>
+</aside>
+
+<!-- TOAST -->
+<div id="toast" role="status" aria-live="polite"></div>
+
+<script>
+// ===== PRODUCT DATA =====
+const products = [
+  {
+    slug: 'charcoal',
+    nom: 'T-Shirt Memories — Charcoal',
+    prix: '45€',
+    prixNum: 45,
+    couleur: '#2b2b2d',
+    couleurNom: 'Charcoal',
+    coulImprime: '#e8a6c6',
+    texteImprime: '@KIFFCLUB',
+    imprimePos: 'dos',
+    tailles: ['S','M','L','XL'],
+    images: ['/assets/tshirt-charcoal-front.png', '/assets/tshirt-charcoal-back.png'],
+    description: "L'anthracite, c'est la couleur des souvenirs qu'on garde pour soi. Ce t-shirt oversize en coton lourd 240 g/m² tombe parfaitement et vieillit encore mieux. Au dos, la signature @KIFFCLUB sérigraphiée en rose poudré, avec son micro-texte manifeste.",
+    descLong: "L'anthracite, c'est la couleur des souvenirs qu'on garde pour soi. Ce t-shirt oversize en coton lourd 240 g/m² tombe parfaitement et vieillit encore mieux. Au dos, la signature @KIFFCLUB sérigraphiée en rose poudré, avec son micro-texte manifeste. Col côtelé renforcé qui ne se déforme pas. Une pièce sobre qui va avec tout, et qui restera dans ton vestiaire longtemps après les tendances. Coupe unisexe. Modèle 1m80 porté en M.",
+    matiere: 'Coton lourd 240 g/m². Coupe oversize unisexe. Col côtelé renforcé. Sérigraphie durable.',
+    livraison: 'Expédié sous 24–48h. Livraison en 2–4 jours ouvrés en France, offerte dès 80€. Retours acceptés sous 14 jours, article non porté.',
+    entretien: 'Lavage à 30° sur l\'envers. Pas de sèche-linge, pas de repassage direct sur l\'imprimé.',
+  },
+  {
+    slug: 'blanc',
+    nom: 'T-Shirt Memories — Blanc',
+    prix: '45€',
+    prixNum: 45,
+    couleur: '#ffffff',
+    couleurNom: 'Blanc',
+    coulImprime: '#1b2bd6',
+    texteImprime: '@KIFFCLUB',
+    imprimePos: 'dos',
+    tailles: ['S','M','L','XL'],
+    images: ['/assets/tshirt-blanc-front.png', '/assets/tshirt-blanc-back.png'],
+    description: "Blanc lumineux, imprimé dos bleu Kiffclub. Le classique du club. Coton lourd 240 g/m², coupe oversize, tombé impeccable.",
+    descLong: "Le blanc du club. Lumineux, franc, intemporel. Coton lourd 240 g/m², coupe oversize, tombé impeccable. Au dos, le logo @KIFFCLUB en bleu cobalt — notre bleu, évidemment. C'est le t-shirt qu'on porte cent fois et qu'on aime toujours autant. Sérigraphie durable, col renforcé, fabriqué en petite série. La base sur laquelle tout se construit.",
+    matiere: 'Coton lourd 240 g/m². Coupe oversize unisexe. Col côtelé renforcé. Sérigraphie durable.',
+    livraison: 'Expédié sous 24–48h. Livraison en 2–4 jours ouvrés en France, offerte dès 80€. Retours acceptés sous 14 jours.',
+    entretien: 'Lavage à 30° sur l\'envers. Pas de sèche-linge, pas de repassage direct sur l\'imprimé.',
+  },
+  {
+    slug: 'rose',
+    nom: 'T-Shirt Memories — Rose',
+    prix: '45€',
+    prixNum: 45,
+    couleur: '#e8a6c6',
+    couleurNom: 'Rose',
+    coulImprime: '#ffffff',
+    texteImprime: '@KIFFCLUB',
+    imprimePos: 'dos',
+    tailles: ['S','M','L','XL'],
+    images: ['/assets/tshirt-rose-front.png', '/assets/tshirt-rose-back.png'],
+    description: "Rose poudré, doux comme une fin d'après-midi d'été. Coton lourd 240 g/m², coupe ample unisexe, dos signé @KIFFCLUB en blanc.",
+    descLong: "Rose poudré, doux comme une fin d'après-midi d'été. Cette couleur n'est pas là pour crier, mais pour réchauffer. Coton lourd 240 g/m², coupe ample unisexe, dos signé @KIFFCLUB en blanc. Le genre de pièce qui rend une tenue tout de suite plus tendre. Édition limitée — quand c'est parti, c'est parti.",
+    matiere: 'Coton lourd 240 g/m². Coupe oversize unisexe. Col côtelé renforcé. Sérigraphie durable.',
+    livraison: 'Expédié sous 24–48h. Livraison en 2–4 jours ouvrés en France, offerte dès 80€. Retours acceptés sous 14 jours.',
+    entretien: 'Lavage à 30° sur l\'envers. Pas de sèche-linge, pas de repassage direct sur l\'imprimé.',
+  },
+  {
+    slug: 'kaki',
+    nom: 'T-Shirt Memories — Kaki',
+    prix: '49€',
+    prixNum: 49,
+    couleur: '#5c5f3a',
+    couleurNom: 'Kaki',
+    coulImprime: '#f7f6f3',
+    texteImprime: 'WE ARE RICH IN MEMORIES.',
+    imprimePos: 'chest',
+    tailles: ['S','M','L','XL'],
+    images: ['/assets/tshirt-kaki-front.png', '/assets/tshirt-kaki-back.png'],
+    description: "La pièce manifeste. Vert olive profond, côté cœur notre devise : WE ARE RICH IN MEMORIES. ÉVIDEMMENT.",
+    descLong: "La pièce manifeste. Vert olive profond, et côté cœur, notre devise brodée : WE ARE RICH IN MEMORIES. ÉVIDEMMENT. Coton lourd 240 g/m², coupe oversize, finitions soignées. C'est le t-shirt qu'on porte quand on veut tout dire sans rien dire. Le plus bavard de la collection, et le plus discret à la fois. Série limitée.",
+    matiere: 'Coton lourd 240 g/m². Coupe oversize unisexe. Col côtelé renforcé. Sérigraphie durable.',
+    livraison: 'Expédié sous 24–48h. Livraison en 2–4 jours ouvrés en France, offerte dès 80€. Retours acceptés sous 14 jours.',
+    entretien: 'Lavage à 30° sur l\'envers. Pas de sèche-linge, pas de repassage direct sur l\'imprimé.',
+  }
+];
+
+const comingSoon = [
+  { slug:'hoodie', nom:'Hoodie Memories', prix:'Bientôt', couleur:'#e8e4dc', couleurNom:'Écru' },
+  { slug:'casquette', nom:'Casquette Club', prix:'Bientôt', couleur:'#2b2b2d', couleurNom:'Noir' },
+  { slug:'tote', nom:'Tote Bag Kiffclub', prix:'Bientôt', couleur:'#ecebe6', couleurNom:'Sable' },
+];
+
+const faqData = [
+  { q:'Quelles sont les tailles ?', a:'Du S au XL, coupe oversize unisexe. Si tu hésites, prends ta taille habituelle pour un fit oversize, ou en dessous pour un fit ajusté.' },
+  { q:'Quels délais de livraison ?', a:'2 à 4 jours ouvrés en France. Livraison offerte dès 80€.' },
+  { q:'Puis-je retourner un article ?', a:'Oui, sous 14 jours, non porté, étiquettes attachées.' },
+  { q:'Comment entretenir mon t-shirt ?', a:'Lavage à 30° sur l\'envers, pas de sèche-linge. Il te suivra longtemps.' },
+  { q:'Où êtes-vous basés ?', a:'En France. Le club est petit mais le cœur est grand.' },
+];
+
+// ===== SVG HELPERS =====
+function tshirtSVG(p, view='front', size=180) {
+  const c = p.couleur;
+  const border = c === '#ffffff' ? 'stroke="#dcdbd5" stroke-width="1.5"' : '';
+  const h = Math.round(size * 1.38);
+  const w = size;
+  // Scale factor based on size=180
+  const s = size / 180;
+  const cx = w/2, neck=Math.round(30*s), shoulder=Math.round(18*s), sleeve=Math.round(42*s), body=Math.round(120*s), bodyH=Math.round(160*s);
+  const tshape = `M${cx-neck},0 L${cx-sleeve},0 L${cx-sleeve-shoulder},${sleeve} L${cx-sleeve-shoulder+12*s},${sleeve+12*s} L${cx-sleeve-shoulder+12*s},${h} L${cx+sleeve+shoulder-12*s},${h} L${cx+sleeve+shoulder-12*s},${sleeve+12*s} L${cx+sleeve+shoulder},${sleeve} L${cx+neck},0 Q${cx},${neck*1.2} ${cx-neck},0Z`;
+  const fill = `fill="${c}" ${border}`;
+  let printEl = '';
+  if (view === 'front' && p.imprimePos === 'chest') {
+    const lines = p.texteImprime.split(' ');
+    printEl = `<text x="${cx}" y="${Math.round(70*s)}" text-anchor="middle" font-family="Arial,sans-serif" font-size="${Math.round(7*s)}" fill="${p.coulImprime}" font-weight="bold">${lines.slice(0,3).join(' ')}</text>
+<text x="${cx}" y="${Math.round(79*s)}" text-anchor="middle" font-family="Arial,sans-serif" font-size="${Math.round(7*s)}" fill="${p.coulImprime}">${lines.slice(3).join(' ')}</text>`;
+  } else if (view === 'back') {
+    printEl = `<text x="${cx}" y="${Math.round(72*s)}" text-anchor="middle" font-family="Arial,sans-serif" font-size="${Math.round(9*s)}" fill="${p.coulImprime}" font-weight="bold">${p.texteImprime}</text>`;
+  }
+  return `<svg viewBox="0 0 ${w} ${h}" width="${w}" height="${h}" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="${tshape}" ${fill}/>${printEl}</svg>`;
+}
+
+function tshirtSVGComingSoon(p, size=180) {
+  const h = Math.round(size*1.38);
+  const w = size; const s=size/180;
+  const cx=w/2, sleeve=Math.round(42*s), shoulder=Math.round(18*s), neck=Math.round(30*s);
+  const tshape = `M${cx-neck},0 L${cx-sleeve},0 L${cx-sleeve-shoulder},${sleeve} L${cx-sleeve-shoulder+12*s},${sleeve+12*s} L${cx-sleeve-shoulder+12*s},${h} L${cx+sleeve+shoulder-12*s},${h} L${cx+sleeve+shoulder-12*s},${sleeve+12*s} L${cx+sleeve+shoulder},${sleeve} L${cx+neck},0 Q${cx},${neck*1.2} ${cx-neck},0Z`;
+  return `<svg viewBox="0 0 ${w} ${h}" width="${w}" height="${h}" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="${tshape}" fill="${p.couleur}" stroke="#dcdbd5" stroke-width="1.5" opacity=".5"/></svg>`;
+}
+
+// ===== CART STATE =====
+let cart = [];
+let currentProduct = null;
+let selectedSize = null;
+
+function cartTotal() { return cart.reduce((s,i)=>s+i.prixNum*i.qty, 0); }
+function cartCount() { return cart.reduce((s,i)=>s+i.qty, 0); }
+
+function updateCartBadge() {
+  const n = cartCount();
+  const badge = document.getElementById('cart-badge');
+  badge.textContent = n;
+  badge.classList.toggle('show', n > 0);
+}
+
+function renderCart() {
+  const el = document.getElementById('cart-items');
+  const total = cartTotal();
+  const pct = Math.min(100, (total/80)*100);
+  document.getElementById('shipping-bar').style.width = pct+'%';
+  document.getElementById('shipping-text').textContent = total >= 80 ? 'Livraison offerte ✓' : `Plus que ${(80-total).toFixed(0)}€ pour la livraison offerte`;
+  document.getElementById('cart-subtotal').textContent = total+'€';
+
+  if (cart.length === 0) {
+    el.innerHTML = `<div class="cart-empty"><p>Ton panier est vide.<br>Le club t'attend.</p><a href="#/shop" class="btn btn-primary" data-route="/shop" onclick="closeCart()">Voir la boutique</a></div>`;
+    return;
+  }
+  el.innerHTML = cart.map((item, i) => `
+    <div class="cart-item">
+      <div class="cart-item-img">${tshirtSVG(item, 'front', 55)}</div>
+      <div class="cart-item-info">
+        <div class="cart-item-name">${item.nom}</div>
+        <div class="cart-item-meta">Taille ${item.size}</div>
+        <div class="cart-item-price">${item.prix}</div>
+        <div class="qty-ctrl">
+          <button class="qty-btn" onclick="changeQty(${i},-1)" aria-label="Diminuer">−</button>
+          <span class="qty-val">${item.qty}</span>
+          <button class="qty-btn" onclick="changeQty(${i},1)" aria-label="Augmenter">+</button>
+        </div>
+      </div>
+      <button class="cart-remove" onclick="removeItem(${i})" aria-label="Supprimer">✕</button>
+    </div>`).join('');
+}
+
+function changeQty(i, d) {
+  cart[i].qty = Math.max(1, cart[i].qty + d);
+  renderCart(); updateCartBadge();
+}
+function removeItem(i) {
+  cart.splice(i, 1);
+  renderCart(); updateCartBadge();
+}
+
+function addToCart() {
+  if (!selectedSize) {
+    document.getElementById('size-hint').classList.add('show');
+    return;
+  }
+  const p = currentProduct;
+  const existing = cart.find(c=>c.slug===p.slug && c.size===selectedSize);
+  if (existing) { existing.qty++; }
+  else { cart.push({...p, size: selectedSize, qty:1}); }
+  renderCart(); updateCartBadge();
+  openCart();
+  showToast('Ajouté au panier ✓');
+}
+
+function openCart() {
+  document.getElementById('cart-drawer').classList.add('open');
+  document.getElementById('cart-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  renderCart();
+}
+function closeCart() {
+  document.getElementById('cart-drawer').classList.remove('open');
+  document.getElementById('cart-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function handleCheckout() {
+  showToast('Paiement bientôt disponible — Stay tuned !');
+}
+
+// ===== TOAST =====
+let toastTimeout;
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimeout);
+  toastTimeout = setTimeout(() => t.classList.remove('show'), 2600);
+}
+
+// ===== ROUTER =====
+let currentRoute = '/';
+
+function navigate(path, push=true) {
+  if (push) history.pushState({path}, '', '#'+path);
+  currentRoute = path;
+  // hide all views
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+  // update nav
+  document.querySelectorAll('[data-route]').forEach(a=>{
+    a.classList.toggle('active', a.dataset.route === path || (path==='/' && a.dataset.route==='/'));
+  });
+  if (path === '/') {
+    document.getElementById('view-home').classList.add('active');
+  } else if (path === '/shop') {
+    document.getElementById('view-shop').classList.add('active');
+    renderShop();
+  } else if (path.startsWith('/produit/')) {
+    const slug = path.split('/produit/')[1];
+    document.getElementById('view-product').classList.add('active');
+    renderProduct(slug);
+  } else if (path === '/lookbook') {
+    document.getElementById('view-lookbook').classList.add('active');
+    renderLookbook();
+  } else if (path === '/about') {
+    document.getElementById('view-about').classList.add('active');
+  } else if (path === '/contact') {
+    document.getElementById('view-contact').classList.add('active');
+    renderFAQ();
+  }
+  window.scrollTo({top:0, behavior:'instant'});
+  // show footer only on home, hide in product pages still show
+  document.getElementById('footer').style.display = '';
+  setupReveal();
+}
+
+window.addEventListener('popstate', e => {
+  const path = location.hash.replace('#','') || '/';
+  navigate(path, false);
+});
+
+document.addEventListener('click', e => {
+  const a = e.target.closest('[data-route]');
+  if (a) {
+    e.preventDefault();
+    navigate(a.dataset.route);
+  }
+});
+
+// ===== SHOP =====
+function renderShop(filter='all') {
+  const filters = document.getElementById('shop-filters');
+  const grid = document.getElementById('shop-grid');
+  // Filters
+  const fOpts = ['all','charcoal','blanc','rose','kaki'];
+  filters.innerHTML = fOpts.map(f=>`<button class="filter-btn${filter===f?' active':''}" onclick="renderShop('${f}')">${f==='all'?'Tous':f.charAt(0).toUpperCase()+f.slice(1)}</button>`).join('');
+
+  const visible = filter==='all' ? products : products.filter(p=>p.slug===filter);
+  grid.innerHTML = visible.map(p=>`
+    <div class="product-card" onclick="navigate('/produit/${p.slug}')" tabindex="0" role="button" aria-label="${p.nom}" onkeydown="if(event.key==='Enter')navigate('/produit/${p.slug}')">
+      <div class="product-card-img">${tshirtSVG(p,'front',130)}</div>
+      <div class="product-card-info">
+        <div class="product-card-name">${p.nom}</div>
+        <div class="product-card-price">${p.prix}</div>
+        <div class="product-card-dots"><span class="dot" style="background:${p.couleur};${p.couleur==='#ffffff'?'border-color:#dcdbd5':''}"></span></div>
+      </div>
+    </div>`).join('')
+  + comingSoon.map(p=>`
+    <div class="product-card" style="opacity:.55;cursor:default" aria-label="${p.nom} - bientôt disponible">
+      <div class="product-card-img">${tshirtSVGComingSoon(p,130)}</div>
+      <div class="product-card-info">
+        <div class="product-card-name">${p.nom}</div>
+        <div class="product-card-price" style="color:var(--ink-soft)">—</div>
+        <span class="coming-soon-tag">Bientôt</span>
+      </div>
+    </div>`).join('');
+}
+
+// ===== PRODUCT PAGE =====
+function renderProduct(slug) {
+  const p = products.find(x=>x.slug===slug);
+  if (!p) { navigate('/shop'); return; }
+  currentProduct = p;
+  selectedSize = null;
+
+  document.getElementById('prod-breadcrumb').textContent = p.nom;
+  document.getElementById('prod-name').textContent = p.nom;
+  document.getElementById('prod-price').textContent = p.prix;
+  document.getElementById('prod-desc').textContent = p.description;
+
+  // Gallery
+  const main = document.getElementById('prod-gallery-main');
+  main.innerHTML = tshirtSVG(p,'front',220);
+  // → Replace with: <img src="${p.images[0]}" alt="${p.nom} — face" loading="lazy">
+
+  const thumbs = document.getElementById('prod-thumbs');
+  thumbs.innerHTML = ['front','back'].map((v,i)=>`
+    <div class="thumb${i===0?' active':''}" onclick="setGalleryView('${v}','${slug}',this)">
+      ${tshirtSVG(p,v,40)}
+    </div>`).join('');
+
+  // Sizes
+  const sg = document.getElementById('size-grid');
+  sg.innerHTML = p.tailles.map(s=>`<button class="size-btn" onclick="selectSize('${s}',this)" aria-label="Taille ${s}">${s}</button>`).join('');
+  document.getElementById('add-to-cart-btn').removeAttribute('disabled');
+  document.getElementById('size-hint').classList.remove('show');
+
+  // Accordion
+  const acc = document.getElementById('prod-accordion');
+  acc.innerHTML = [
+    {title:'Description & matière', body: p.descLong + '<br><br>' + p.matiere},
+    {title:'Livraison & retours', body: p.livraison},
+    {title:'Entretien', body: p.entretien},
+  ].map((item,i)=>`
+    <div class="accordion-item">
+      <button class="accordion-trigger${i===0?' open':''}" onclick="toggleAccordion(this)" aria-expanded="${i===0}">
+        ${item.title}
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="accordion-body" style="max-height:${i===0?'400px':'0'}">
+        <div class="accordion-body-inner">${item.body}</div>
+      </div>
+    </div>`).join('');
+
+  // Related
+  const related = products.filter(x=>x.slug!==slug).slice(0,3);
+  document.getElementById('related-grid').innerHTML = related.map(rp=>`
+    <div class="product-card" onclick="navigate('/produit/${rp.slug}')" tabindex="0" role="button" aria-label="${rp.nom}" onkeydown="if(event.key==='Enter')navigate('/produit/${rp.slug}')">
+      <div class="product-card-img">${tshirtSVG(rp,'front',130)}</div>
+      <div class="product-card-info">
+        <div class="product-card-name">${rp.nom}</div>
+        <div class="product-card-price">${rp.prix}</div>
+      </div>
+    </div>`).join('');
+}
+
+function setGalleryView(view, slug, thumb) {
+  const p = products.find(x=>x.slug===slug);
+  document.getElementById('prod-gallery-main').innerHTML = tshirtSVG(p,view,220);
+  // → With real images: document.querySelector('#prod-gallery-main img').src = p.images[view==='front'?0:1];
+  document.querySelectorAll('.thumb').forEach(t=>t.classList.remove('active'));
+  thumb.classList.add('active');
+}
+
+function selectSize(size, btn) {
+  selectedSize = size;
+  document.querySelectorAll('.size-btn').forEach(b=>b.classList.remove('selected'));
+  btn.classList.add('selected');
+  document.getElementById('size-hint').classList.remove('show');
+}
+
+function toggleAccordion(trigger) {
+  const body = trigger.nextElementSibling;
+  const isOpen = trigger.classList.contains('open');
+  // Close all
+  document.querySelectorAll('.accordion-trigger').forEach(t=>{
+    t.classList.remove('open');
+    t.setAttribute('aria-expanded','false');
+    t.nextElementSibling.style.maxHeight = '0';
+  });
+  if (!isOpen) {
+    trigger.classList.add('open');
+    trigger.setAttribute('aria-expanded','true');
+    body.style.maxHeight = body.scrollHeight + 'px';
+  }
+}
+
+// ===== LOOKBOOK =====
+function renderLookbook() {
+  ['lb-img1','lb-img2','lb-img3'].forEach((id, i) => {
+    const el = document.getElementById(id);
+    if (el) el.innerHTML = tshirtSVG(products[i], i%2===0?'front':'back', 180);
+  });
+  // Home lookbook cards
+  ['lb1','lb2','lb3'].forEach((id, i) => {
+    const el = document.getElementById(id);
+    if (el) el.innerHTML = tshirtSVG(products[i], 'front', 120);
+  });
+}
+
+// ===== FAQ =====
+function renderFAQ() {
+  const acc = document.getElementById('faq-accordion');
+  if (!acc || acc.children.length > 0) return;
+  acc.innerHTML = faqData.map((item,i)=>`
+    <div class="accordion-item">
+      <button class="accordion-trigger" onclick="toggleAccordion(this)" aria-expanded="false">
+        ${item.q}
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="accordion-body">
+        <div class="accordion-body-inner">${item.a}</div>
+      </div>
+    </div>`).join('');
+}
+
+// ===== CATEGORIES =====
+function initCategories() {
+  const catVisual = document.getElementById('cat-visual');
+  const catDesc = document.getElementById('cat-desc');
+  if (!catVisual) return;
+
+  const catData = {
+    tshirts: { svg: tshirtSVG(products[0], 'front', 180), desc: 'La pièce fondatrice du club. Quatre couleurs, une seule mémoire.' },
+    hoodies: { svg: tshirtSVGComingSoon({couleur:'#e8e4dc', couleurNom:'Écru'}, 180), desc: 'Le hoodie du club. Bientôt disponible.' },
+    casquettes: { svg: `<svg viewBox="0 0 180 120" xmlns="http://www.w3.org/2000/svg"><ellipse cx="90" cy="80" rx="70" ry="30" fill="#2b2b2d" opacity=".3"/><path d="M20,70 Q90,10 160,70 L160,85 Q90,90 20,85Z" fill="#2b2b2d" opacity=".4"/></svg>`, desc: 'La casquette du club. Bientôt disponible.' },
+    accessoires: { svg: `<svg viewBox="0 0 180 200" xmlns="http://www.w3.org/2000/svg"><rect x="40" y="20" width="100" height="130" rx="2" fill="#ecebe6" stroke="#dcdbd5"/><line x1="40" y1="20" x2="50" y2="0" stroke="#999" stroke-width="1.5"/><line x1="140" y1="20" x2="130" y2="0" stroke="#999" stroke-width="1.5"/></svg>`, desc: 'Les accessoires du club. Bientôt disponible.' }
+  };
+
+  catVisual.innerHTML = catData.tshirts.svg;
+
+  document.querySelectorAll('.cat-item').forEach(item => {
+    item.addEventListener('mouseenter', () => {
+      document.querySelectorAll('.cat-item').forEach(c=>c.classList.remove('active'));
+      item.classList.add('active');
+      const cat = item.dataset.cat;
+      catVisual.style.opacity = '0';
+      setTimeout(()=>{
+        catVisual.innerHTML = catData[cat]?.svg || '';
+        catDesc.textContent = catData[cat]?.desc || '';
+        catVisual.style.opacity = '1';
+        catVisual.style.transition = 'opacity .35s';
+      }, 150);
+    });
+    if (!item.classList.contains('soon')) {
+      item.addEventListener('click', () => navigate('/shop'));
+      item.style.cursor = 'pointer';
+    }
+  });
+}
+
+// ===== MARQUEES =====
+function initMarquees() {
+  const text1 = 'WE ARE RICH IN MEMORIES. · ÉVIDEMMENT. · KIFFCLUB® · PORTE TES SOUVENIRS · ';
+  const m1 = document.getElementById('marquee1');
+  if (m1) m1.innerHTML = (text1.repeat(6)).split('').map((c,i,a)=>`<span class="marquee-item">${text1}</span>`).slice(0,6).join('');
+
+  const text2 = 'WEAR IT YOUR WAY · PORTE-LE À TA FAÇON · ';
+  const m2 = document.getElementById('marquee2');
+  if (m2) m2.innerHTML = Array(6).fill(`<span class="lifestyle-marquee-item">${text2}</span>`).join('');
+}
+
+// ===== 3D CAROUSEL =====
+let ringAngle = 0;
+let carouselSpeed = 0.15;
+let carouselPaused = false;
+let isDragging = false;
+let dragStartX = 0;
+let dragLastX = 0;
+let dragVelocity = 0;
+let dragTotalDx = 0;
+let rafId = null;
+let frontIndex = 0;
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+function initCarousel() {
+  const ring = document.getElementById('ring');
+  if (!ring) return;
+  const stage = document.getElementById('carousel-stage');
+  const N = products.length;
+  const anglePas = 360 / N;
+  const isMobile = window.innerWidth < 768;
+  const cellW = isMobile ? 150 : 200;
+  const radius = Math.round((cellW / 2) / Math.tan(Math.PI / N)) + (isMobile ? 20 : 60);
+
+  ring.innerHTML = products.map((p, i) => {
+    const angle = i * anglePas;
+    return `<button class="cell" data-slug="${p.slug}" data-index="${i}"
+      style="transform:rotateY(${angle}deg) translateZ(${radius}px)"
+      aria-label="${p.nom}, ${p.prix}"
+      role="listitem"
+      tabindex="${i===0?'0':'-1'}"
+      onkeydown="handleCellKey(event,this)">
+      ${tshirtSVG(p, 'front', cellW-20)}
+    </button>`;
+  }).join('');
+
+  function updateCells() {
+    const cells = ring.querySelectorAll('.cell');
+    let bestProx = -1, bestIdx = 0;
+    cells.forEach((cell, i) => {
+      const cellAngle = i * anglePas;
+      let effective = ((ringAngle + cellAngle) % 360 + 360) % 360;
+      const d = effective > 180 ? 360 - effective : effective;
+      const proximity = 1 - (d / 180);
+      const scale = 0.72 + 0.28 * proximity;
+      const opacity = 0.3 + 0.7 * proximity;
+      const blur = reducedMotion ? 0 : (1 - proximity) * 5;
+      const brightness = 0.55 + 0.45 * proximity;
+      cell.style.opacity = opacity;
+      cell.style.transform = `rotateY(${cellAngle}deg) translateZ(${radius}px) scale(${scale})`;
+      cell.style.filter = `blur(${blur}px) brightness(${brightness})`;
+      cell.style.zIndex = Math.round(proximity * 100);
+      if (proximity > bestProx) { bestProx = proximity; bestIdx = i; }
+    });
+    if (bestIdx !== frontIndex) {
+      frontIndex = bestIdx;
+      const p = products[frontIndex];
+      document.getElementById('cap-name').textContent = p.nom;
+      document.getElementById('cap-price').textContent = p.prix;
+      // Update tabindex
+      cells.forEach((c,i)=>c.setAttribute('tabindex', i===frontIndex?'0':'-1'));
+    }
+    ring.style.transform = `translateZ(-${radius}px) rotateY(${ringAngle}deg)`;
+  }
+
+  function frame() {
+    if (!carouselPaused && !isDragging && !reducedMotion) {
+      ringAngle += carouselSpeed;
+    }
+    if (!isDragging && Math.abs(dragVelocity) > 0.01) {
+      ringAngle += dragVelocity;
+      dragVelocity *= 0.92;
+    }
+    updateCells();
+    rafId = requestAnimationFrame(frame);
+  }
+
+  if (reducedMotion) { updateCells(); } else { frame(); }
+
+  // Pause on hover/focus
+  stage.addEventListener('mouseenter', () => { carouselPaused = true; });
+  stage.addEventListener('mouseleave', () => { carouselPaused = false; });
+
+  // Arrows
+  const angleStep = anglePas;
+  document.getElementById('arrow-prev').addEventListener('click', () => { ringAngle -= angleStep; if(reducedMotion) updateCells(); });
+  document.getElementById('arrow-next').addEventListener('click', () => { ringAngle += angleStep; if(reducedMotion) updateCells(); });
+
+  // Drag / swipe
+  function onDragStart(e) {
+    isDragging = true;
+    dragStartX = e.touches ? e.touches[0].clientX : e.clientX;
+    dragLastX = dragStartX;
+    dragTotalDx = 0;
+    dragVelocity = 0;
+    carouselPaused = true;
+  }
+  function onDragMove(e) {
+    if (!isDragging) return;
+    const x = e.touches ? e.touches[0].clientX : e.clientX;
+    const dx = x - dragLastX;
+    ringAngle += dx * 0.35;
+    dragVelocity = dx * 0.35;
+    dragTotalDx += Math.abs(x - dragLastX);
+    dragLastX = x;
+    if (reducedMotion) updateCells();
+  }
+  function onDragEnd(e) {
+    if (!isDragging) return;
+    isDragging = false;
+    carouselPaused = false;
+    // Click vs drag
+    if (dragTotalDx < 6) {
+      const target = e.target?.closest('.cell') || (e.changedTouches && document.elementFromPoint(e.changedTouches[0].clientX, e.changedTouches[0].clientY)?.closest('.cell'));
+      if (target) navigate('/produit/' + target.dataset.slug);
+    }
+  }
+
+  stage.addEventListener('mousedown', onDragStart);
+  window.addEventListener('mousemove', onDragMove);
+  window.addEventListener('mouseup', onDragEnd);
+  stage.addEventListener('touchstart', onDragStart, {passive:true});
+  window.addEventListener('touchmove', onDragMove, {passive:true});
+  window.addEventListener('touchend', onDragEnd);
+
+  // Click on cell (desktop, no drag)
+  ring.querySelectorAll('.cell').forEach(cell => {
+    cell.addEventListener('click', e => {
+      if (dragTotalDx < 6) {
+        e.stopPropagation();
+        navigate('/produit/' + cell.dataset.slug);
+      }
+    });
+  });
+
+  // Initial caption
+  const p0 = products[0];
+  document.getElementById('cap-name').textContent = p0.nom;
+  document.getElementById('cap-price').textContent = p0.prix;
+}
+
+window.handleCellKey = function(e, cell) {
+  if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); navigate('/produit/'+cell.dataset.slug); }
+  if (e.key === 'ArrowLeft') { ringAngle -= 360/products.length; }
+  if (e.key === 'ArrowRight') { ringAngle += 360/products.length; }
+};
+
+// ===== HEADER SCROLL =====
+window.addEventListener('scroll', () => {
+  document.getElementById('header').classList.toggle('scrolled', window.scrollY > 40);
+}, {passive:true});
+
+// ===== MOBILE MENU =====
+window.toggleMobile = function() {
+  const nav = document.getElementById('mobile-nav');
+  const burger = document.getElementById('burger');
+  const open = nav.classList.toggle('open');
+  burger.setAttribute('aria-expanded', open);
+  document.body.style.overflow = open ? 'hidden' : '';
+};
+
+// ===== HERO ANIMATION =====
+function animateHero() {
+  setTimeout(() => {
+    document.querySelectorAll('.hero-title .word span').forEach((el, i) => {
+      setTimeout(() => el.classList.add('visible'), i * 180);
+    });
+    setTimeout(() => document.querySelector('.hero-evid')?.classList.add('visible'), 600);
+    setTimeout(() => document.querySelector('.hero-text')?.classList.add('visible'), 800);
+    setTimeout(() => document.querySelector('.hero-cta')?.classList.add('visible'), 1000);
+  }, 200);
+}
+
+// ===== SCROLL REVEAL =====
+function setupReveal() {
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => { if (!el.classList.contains('visible')) obs.observe(el); });
+}
+
+// ===== FORMS =====
+window.handleNewsletter = function(e) {
+  e.preventDefault();
+  document.getElementById('newsletter-form').style.display = 'none';
+  document.getElementById('newsletter-confirm').style.display = 'block';
+};
+
+window.handleContact = function(e) {
+  e.preventDefault();
+  let valid = true;
+  const name = document.getElementById('c-name');
+  const email = document.getElementById('c-email');
+  const msg = document.getElementById('c-msg');
+  [['ff-name', name, v=>v.trim().length>0],
+   ['ff-email', email, v=>/^[^@]+@[^@]+\.[^@]+$/.test(v)],
+   ['ff-msg', msg, v=>v.trim().length>5]].forEach(([id, inp, test])=>{
+    const ff = document.getElementById(id);
+    if (!test(inp.value)) { ff.classList.add('has-error'); valid=false; }
+    else { ff.classList.remove('has-error'); }
+  });
+  if (valid) {
+    document.getElementById('contact-form-wrap').style.display = 'none';
+    document.getElementById('contact-confirm').style.display = 'block';
+  }
+};
+
+// ===== LOOKBOOK CARDS (HOME) =====
+function initLookbookCards() {
+  const cards = [
+    {id:'lb1', p: products[3]},
+    {id:'lb2', p: products[0]},
+    {id:'lb3', p: products[2]},
+  ];
+  cards.forEach(({id, p}) => {
+    const el = document.getElementById(id);
+    if (el) el.innerHTML = tshirtSVG(p, 'front', 140);
+  });
+}
+
+// ===== INIT =====
+document.addEventListener('DOMContentLoaded', () => {
+  initMarquees();
+  initCarousel();
+  initCategories();
+  initLookbookCards();
+  renderLookbook();
+  animateHero();
+  setupReveal();
+
+  // Route on load
+  const hash = location.hash.replace('#','') || '/';
+  navigate(hash, false);
+
+  // Escape key closes cart / mobile menu
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') { closeCart(); if(document.getElementById('mobile-nav').classList.contains('open')) toggleMobile(); }
+  });
+});
+</script>
+</body>
+</html>
