@@ -111,8 +111,8 @@ input,textarea{font-family:inherit}
 .hero-evid{font-family:var(--font-display);font-size:clamp(1.1rem,2.5vw,1.9rem);font-weight:800;letter-spacing:.06em;color:var(--brand-blue);margin-top:.6rem}
 .hero-text{margin-top:2rem;max-width:36ch;color:rgba(247,246,243,.5);line-height:1.75;font-size:.95rem}
 .hero-actions{display:flex;gap:1rem;margin-top:2.5rem;flex-wrap:wrap}
-.hero-visual{display:flex;align-items:center;justify-content:center;position:relative}
-.hero-tshirt-wrap{position:relative;width:100%;max-width:340px;margin:0 auto}
+.hero-visual{display:flex;align-items:center;justify-content:center;position:relative}.hero-visual::before{content:"";position:absolute;width:520px;height:520px;background:radial-gradient(ellipse,rgba(255,255,255,.07) 0%,transparent 68%);border-radius:50%;pointer-events:none;z-index:0}.hero-tshirt-wrap{position:relative;z-index:1}
+.hero-tshirt-wrap{width:100%;max-width:420px;margin:0 auto}
 .hero-tshirt-wrap svg{width:100%;height:auto;filter:drop-shadow(0 30px 60px rgba(0,0,0,.5));animation:floatHero 6s ease-in-out infinite}
 @keyframes floatHero{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
 @media(prefers-reduced-motion:reduce){.hero-tshirt-wrap svg{animation:none}}
@@ -139,7 +139,7 @@ input,textarea{font-family:inherit}
 .eyebrow{font-family:var(--font-display);font-size:var(--fs-label);letter-spacing:.22em;text-transform:uppercase;color:var(--brand-blue);display:block;margin-bottom:.75rem}
 .section-head h2{font-family:var(--font-display);font-size:var(--fs-h1);font-weight:900;text-transform:uppercase;letter-spacing:-.025em;line-height:1}
 .section-head p{color:var(--ink-soft);margin-top:.75rem;font-size:var(--fs-small);letter-spacing:.05em}
-.carousel-stage{perspective:1400px;perspective-origin:50% 50%;height:380px;display:flex;align-items:center;justify-content:center;overflow:visible;position:relative;contain:layout}
+.carousel-stage{perspective:1400px;perspective-origin:50% 50%;height:450px;display:flex;align-items:center;justify-content:center;overflow:visible;position:relative;contain:layout}
 .ring{position:relative;width:0;height:0;transform-style:preserve-3d;will-change:transform}
 .cell{position:absolute;transform-style:preserve-3d;display:flex;align-items:center;justify-content:center;cursor:pointer;border:none;background:none;padding:0;will-change:transform,opacity;transition:opacity .08s linear}
 .cell-inner{pointer-events:none;display:flex;flex-direction:column;align-items:center}
@@ -152,7 +152,7 @@ input,textarea{font-family:inherit}
 .carr-btn:hover{background:var(--ink);color:var(--ink-invert)}
 .carr-hint{font-family:var(--font-display);font-size:var(--fs-label);letter-spacing:.12em;color:var(--ink-soft);text-transform:uppercase}
 @media(max-width:767px){
-  .carousel-stage{height:280px}
+  .carousel-stage{height:330px}
 }
 
 /* ── MARQUEE ── */
@@ -172,7 +172,7 @@ input,textarea{font-family:inherit}
 .cat-item.active,.cat-item:not(.soon):hover{color:var(--ink)}
 .cat-item.active::before{content:'→';position:absolute;left:-1.8rem;color:var(--brand-blue);font-size:.45em;top:.55rem}
 .cat-soon{font-family:var(--font-display);font-size:var(--fs-label);letter-spacing:.14em;color:var(--ink-soft);margin-left:1rem;vertical-align:middle;font-weight:500}
-.cat-visual-box{position:sticky;top:6rem;aspect-ratio:4/5;background:var(--bg-mute);border-radius:var(--radius);display:flex;align-items:center;justify-content:center;overflow:hidden;transition:opacity .3s}
+.cat-visual-box{position:sticky;top:6rem;aspect-ratio:4/5;background:var(--bg-pure);border-radius:var(--radius);display:flex;align-items:center;justify-content:center;overflow:hidden;transition:opacity .3s;border:1px solid var(--line)}
 .cat-visual-box svg{transition:transform .3s}
 .cat-sub{margin-top:1.25rem;font-size:var(--fs-small);color:var(--ink-soft);max-width:30ch;line-height:1.6}
 @media(max-width:768px){
@@ -250,7 +250,7 @@ input,textarea{font-family:inherit}
 
 /* product card */
 .pcard{cursor:pointer}
-.pcard-img{aspect-ratio:4/5;background:var(--bg-mute);border-radius:var(--radius);overflow:hidden;display:flex;align-items:center;justify-content:center;transition:box-shadow .3s}
+.pcard-img{aspect-ratio:4/5;background:var(--bg-pure);border-radius:var(--radius);overflow:hidden;display:flex;align-items:center;justify-content:center;transition:box-shadow .3s;border:1px solid var(--line)}
 .pcard:hover .pcard-img{box-shadow:0 20px 50px rgba(0,0,0,.1)}
 .pcard-img-inner{transition:transform .4s cubic-bezier(.16,1,.3,1);display:flex;align-items:center;justify-content:center;width:100%;height:100%}
 .pcard:hover .pcard-img-inner{transform:scale(1.04)}
@@ -264,7 +264,7 @@ input,textarea{font-family:inherit}
 /* ── PRODUCT PAGE ── */
 #product-view{padding:var(--section-v) var(--pad)}
 .prod-layout{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start}
-.prod-main-img{aspect-ratio:4/5;background:var(--bg-mute);border-radius:var(--radius);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.prod-main-img{aspect-ratio:4/5;background:var(--bg-pure);border-radius:var(--radius);display:flex;align-items:center;justify-content:center;overflow:hidden;border:1px solid var(--line)}
 .prod-main-img svg,.prod-main-img img{width:72%;height:auto}
 .prod-thumbs{display:flex;gap:.6rem;margin-top:.75rem}
 .thumb{width:68px;height:84px;background:var(--bg-mute);border-radius:var(--radius);display:flex;align-items:center;justify-content:center;cursor:pointer;border:1.5px solid transparent;transition:border-color .2s}
@@ -741,133 +741,128 @@ const faqData = [
   {q:'Où êtes-vous basés ?', a:'En France. Le club est petit mais le cœur est grand.'}
 ];
 
-// ═══════════ SVG T-SHIRT — FIDÈLE AUX VRAIS MODÈLES ═══════════
-// Pour remplacer par une vraie photo, remplacer l'appel par :
-// <img src="${p.images[view==='front'?0:1]}" alt="${p.nom}" loading="lazy">
-//
-// Forme : oversize boxy (coupe ample, épaules larges, bas droit)
-// Font impressions : Fredoka One (bubbly, identique aux vrais t-shirts Instagram)
+// ═══════════ SVG T-SHIRT 3D RÉALISTE ═══════════
+// Forme oversize boxy, courbes cubiques de Bézier, ombre portée, cintre, plis de tissu,
+// 5 calques de lumière/ombre, col côtelé détaillé — style photoproduct sur fond neutre
 function tshirtSVG(p, view='front', size=240) {
-  // viewBox fixe 240×292 — le SVG scale via width/height
-  const W=240, H=292;
-  const uid = p.slug+view+size;
-  const front = view==='front';
-  const isWhite = p.couleur==='#ffffff';
-  const neckY = front ? 44 : 27;
+  const W=300, H=400;
+  const u=`t${p.slug}${view[0]}${size|0}`;
+  const fr=view==='front';
+  const isWh=p.couleur==='#ffffff';
+  const nk=fr?90:72; // encolure : devant plonge à 90, dos reste haut à 72
 
-  // Chemin oversize boxy (d'après les vraies photos Instagram Kiffclub)
-  const path =
-    `M90,22 Q120,${neckY} 150,22 `+   // col arrondi
-    `L216,25 L240,65 L231,98 L197,87 `+ // épaule droite + manche
-    `L195,265 L45,265 `+                 // corps + bas
-    `L43,87 L9,98 L0,65 L24,25 `+       // manche gauche + épaule
-    `Q62,18 90,22Z`;                     // retour col
+  // ── FORME : oversize boxy crewneck ──
+  // Courbes cubiques de Bézier pour des bords organiques (tissu épais qui drape naturellement)
+  const sh=
+    `M100,68 C125,${nk} 175,${nk} 200,68 `+   // encolure
+    `L258,78 C270,96 280,114 282,132 `+          // épaule droite → bord extérieur manche
+    `L276,166 C258,155 240,151 228,149 `+         // bout manche droite → emmanchure
+    `L228,342 L72,342 `+                          // corps droit + ourlet bas
+    `L72,149 C60,151 42,155 24,166 `+            // emmanchure gauche → bout manche gauche
+    `L18,132 C20,114 30,96 42,78 Z`;             // bord extérieur manche gauche → épaule
 
-  // Coutures
-  const collar = `M90,22 Q120,${neckY} 150,22`;
-  const armR   = `M197,87 L231,98`;
-  const armL   = `M43,87 L9,98`;
+  const nkP=`M100,68 C125,${nk} 175,${nk} 200,68`;
 
-  // ── IMPRESSIONS (fidèles aux photos Instagram) ──
-  let print = '';
-
-  if (front) {
-    if (p.slug==='blanc') {
-      // Blanc face : petit "KIFFCLUB" centré poitrine (comme sur la vraie photo)
-      print = `<text x="120" y="105" text-anchor="middle"
-        font-family="'Fredoka One','Fredoka',cursive" font-size="9"
-        fill="${p.coulImprime}" letter-spacing="1.8">KIFFCLUB</text>`;
+  // ── IMPRESSIONS (fidèles aux vraies photos) ──
+  let print='';
+  if(fr){
+    if(p.slug==='blanc'){
+      print=`<text x="150" y="178" text-anchor="middle" font-family="'Fredoka One',cursive" font-size="12" fill="${p.coulImprime}" letter-spacing="2">KIFFCLUB</text>`;
     }
-    if (p.slug==='kaki') {
-      // Kaki face : texte manifeste côté cœur gauche (petit)
-      print = `
-        <text x="68" y="93" font-family="'Fredoka One','Fredoka',cursive" font-size="6.2" fill="#f0ede6" opacity=".9">WE ARE RICH IN</text>
-        <text x="68" y="101" font-family="'Fredoka One','Fredoka',cursive" font-size="6.2" fill="#f0ede6" opacity=".9">MEMORIES.</text>
-        <text x="68" y="109" font-family="'Fredoka One','Fredoka',cursive" font-size="6.2" fill="#f0ede6" opacity=".9">ÉVIDEMMENT</text>`;
+    if(p.slug==='kaki'){
+      print=`
+        <text x="100" y="167" font-family="'Fredoka One',cursive" font-size="9" fill="#f0ede6" opacity=".88">WE ARE RICH IN</text>
+        <text x="100" y="179" font-family="'Fredoka One',cursive" font-size="9" fill="#f0ede6" opacity=".88">MEMORIES.</text>
+        <text x="100" y="191" font-family="'Fredoka One',cursive" font-size="9" fill="#f0ede6" opacity=".88">ÉVIDEMMENT</text>`;
     }
-    // Charcoal + Rose : face propre (pas d'imprimé, comme sur les vraies photos)
   } else {
-    // DOS — impression principale
-    if (p.slug==='kaki') {
-      // Kaki dos : "WE ARE RICH IN MEMORIES. ÉVIDEMMENT" stacked en rose bubbly
-      // (exactement comme sur la photo Instagram du dos kaki)
-      print = `
-        <text x="120" y="96" text-anchor="middle"
-          font-family="'Fredoka One','Fredoka',cursive" font-size="22"
-          fill="${p.coulImprime}">WE ARE RICH IN</text>
-        <text x="120" y="121" text-anchor="middle"
-          font-family="'Fredoka One','Fredoka',cursive" font-size="22"
-          fill="${p.coulImprime}">MEMORIES.</text>
-        <text x="120" y="146" text-anchor="middle"
-          font-family="'Fredoka One','Fredoka',cursive" font-size="22"
-          fill="${p.coulImprime}">ÉVIDEMMENT</text>`;
+    if(p.slug==='kaki'){
+      print=`
+        <text x="150" y="188" text-anchor="middle" font-family="'Fredoka One',cursive" font-size="24" fill="${p.coulImprime}">WE ARE RICH IN</text>
+        <text x="150" y="216" text-anchor="middle" font-family="'Fredoka One',cursive" font-size="24" fill="${p.coulImprime}">MEMORIES.</text>
+        <text x="150" y="244" text-anchor="middle" font-family="'Fredoka One',cursive" font-size="24" fill="${p.coulImprime}">ÉVIDEMMENT</text>`;
     } else {
-      // Charcoal, Blanc, Rose dos : "@KIFFCLUB" bubbly large
-      // (identique aux photos : charcoal→rose, blanc→bleu, rose→blanc)
-      print = `
-        <text x="120" y="110" text-anchor="middle"
-          font-family="'Fredoka One','Fredoka',cursive" font-size="28"
-          fill="${p.coulImprime}">@KIFFCLUB</text>
-        <text x="120" y="124" text-anchor="middle"
-          font-family="'Fredoka One','Fredoka',cursive" font-size="6"
-          fill="${p.coulImprime}" letter-spacing="1.5" opacity=".7">WE ARE RICH IN MEMORIES. ÉVIDEMMENT</text>`;
+      print=`
+        <text x="150" y="205" text-anchor="middle" font-family="'Fredoka One',cursive" font-size="30" fill="${p.coulImprime}">@KIFFCLUB</text>
+        <text x="150" y="222" text-anchor="middle" font-family="'Fredoka One',cursive" font-size="7.5" fill="${p.coulImprime}" letter-spacing="2" opacity=".75">WE ARE RICH IN MEMORIES. ÉVIDEMMENT</text>`;
     }
   }
 
   return `<svg viewBox="0 0 ${W} ${H}" width="${size}" height="${Math.round(size*H/W)}"
     xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
   <defs>
-    <filter id="sh_${uid}" x="-18%" y="-6%" width="136%" height="136%">
-      <feDropShadow dx="0" dy="10" stdDeviation="18" flood-color="#000" flood-opacity="0.25"/>
+    <filter id="sh_${u}" x="-25%" y="-5%" width="150%" height="130%">
+      <feDropShadow dx="0" dy="14" stdDeviation="22" flood-color="#000" flood-opacity=".20"/>
     </filter>
-    <linearGradient id="sg_${uid}" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%"   stop-color="rgba(0,0,0,.18)"/>
-      <stop offset="20%"  stop-color="rgba(0,0,0,.02)"/>
-      <stop offset="80%"  stop-color="rgba(0,0,0,.02)"/>
-      <stop offset="100%" stop-color="rgba(0,0,0,.15)"/>
+    <linearGradient id="sg_${u}" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="rgba(0,0,0,.30)"/>
+      <stop offset="14%" stop-color="rgba(0,0,0,.10)"/>
+      <stop offset="42%" stop-color="rgba(0,0,0,0)"/>
+      <stop offset="58%" stop-color="rgba(0,0,0,0)"/>
+      <stop offset="84%" stop-color="rgba(0,0,0,.07)"/>
+      <stop offset="100%" stop-color="rgba(0,0,0,.24)"/>
     </linearGradient>
-    <linearGradient id="tg_${uid}" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%"   stop-color="rgba(0,0,0,.1)"/>
-      <stop offset="10%"  stop-color="rgba(0,0,0,0)"/>
-      <stop offset="88%"  stop-color="rgba(0,0,0,0)"/>
-      <stop offset="100%" stop-color="rgba(0,0,0,.08)"/>
+    <linearGradient id="tg_${u}" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="rgba(255,255,255,.20)"/>
+      <stop offset="12%" stop-color="rgba(255,255,255,.06)"/>
+      <stop offset="35%" stop-color="rgba(0,0,0,0)"/>
+      <stop offset="80%" stop-color="rgba(0,0,0,.04)"/>
+      <stop offset="100%" stop-color="rgba(0,0,0,.20)"/>
     </linearGradient>
-    <linearGradient id="hl_${uid}" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="35%" stop-color="rgba(255,255,255,0)"/>
-      <stop offset="50%" stop-color="rgba(255,255,255,.07)"/>
-      <stop offset="65%" stop-color="rgba(255,255,255,0)"/>
-    </linearGradient>
+    <radialGradient id="hl_${u}" cx="35%" cy="24%" r="52%">
+      <stop offset="0%" stop-color="rgba(255,255,255,.26)"/>
+      <stop offset="55%" stop-color="rgba(255,255,255,.05)"/>
+      <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+    </radialGradient>
+    <radialGradient id="rl_${u}" cx="84%" cy="36%" r="30%">
+      <stop offset="0%" stop-color="rgba(255,255,255,.14)"/>
+      <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+    </radialGradient>
+    <radialGradient id="cs_${u}" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="rgba(0,0,0,.26)"/>
+      <stop offset="100%" stop-color="rgba(0,0,0,0)"/>
+    </radialGradient>
+    <clipPath id="cp_${u}"><path d="${sh}"/></clipPath>
   </defs>
-  <!-- Corps -->
-  <path d="${path}" fill="${p.couleur}"
-    ${isWhite ? 'stroke="#d5d2cc" stroke-width="1.5"' : ''}
-    filter="url(#sh_${uid})"/>
-  <!-- Ombrage latéral (effet tissu épais) -->
-  <path d="${path}" fill="url(#sg_${uid})"/>
-  <!-- Ombrage haut/bas -->
-  <path d="${path}" fill="url(#tg_${uid})"/>
-  <!-- Reflet central subtil -->
-  <path d="${path}" fill="url(#hl_${uid})"/>
-  <!-- Col côtelé -->
-  <path d="${collar}" fill="none"
-    stroke="rgba(0,0,0,${isWhite ? .08 : .16})" stroke-width="4" stroke-linecap="round"/>
-  <!-- Coutures emmanchures -->
-  <path d="${armR}" fill="none" stroke="rgba(0,0,0,.09)" stroke-width="2.5" stroke-linecap="round"/>
-  <path d="${armL}" fill="none" stroke="rgba(0,0,0,.09)" stroke-width="2.5" stroke-linecap="round"/>
-  <!-- Impression -->
+  <ellipse cx="150" cy="373" rx="84" ry="13" fill="url(#cs_${u})"/>
+  <line x1="150" y1="28" x2="150" y2="68" stroke="#c0c0c0" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M150,28 C150,18 157,12 163,14 C169,16 169,24 163,28" fill="none" stroke="#b0b0b0" stroke-width="2" stroke-linecap="round"/>
+  <path d="${sh}" fill="${p.couleur}" ${isWh?'stroke="#ccc" stroke-width="1.5"':''} filter="url(#sh_${u})"/>
+  <path d="${sh}" fill="url(#sg_${u})"/>
+  <path d="${sh}" fill="url(#tg_${u})"/>
+  <path d="${sh}" fill="url(#hl_${u})"/>
+  <path d="${sh}" fill="url(#rl_${u})"/>
+  <g clip-path="url(#cp_${u})">
+    <path d="M130,149 C128,211 132,274 130,342" fill="none" stroke="rgba(0,0,0,.045)" stroke-width="3.5"/>
+    <path d="M168,149 C170,211 166,274 168,342" fill="none" stroke="rgba(0,0,0,.038)" stroke-width="3"/>
+    <path d="M150,149 C149,211 151,268 150,342" fill="none" stroke="${isWh?'rgba(0,0,0,.028)':'rgba(0,0,0,.04)'}" stroke-width="2.5"/>
+    <path d="M113,95 C111,117 115,134 113,149" fill="none" stroke="rgba(0,0,0,.04)" stroke-width="2"/>
+    <path d="M187,95 C189,117 185,134 187,149" fill="none" stroke="rgba(0,0,0,.04)" stroke-width="2"/>
+  </g>
+  <path d="${nkP}" fill="none" stroke="${isWh?'rgba(0,0,0,.18)':'rgba(0,0,0,.26)'}" stroke-width="9" stroke-linecap="round"/>
+  <path d="${nkP}" fill="none" stroke="${isWh?'rgba(255,255,255,.38)':'rgba(255,255,255,.20)'}" stroke-width="4.5" stroke-linecap="round"/>
+  <path d="${nkP}" fill="none" stroke="rgba(0,0,0,.06)" stroke-width="1.5" stroke-dasharray="3 4" stroke-linecap="round"/>
+  <ellipse cx="150" cy="${fr?82:70}" rx="28" ry="${fr?11:8}" fill="rgba(0,0,0,.38)"/>
+  <path d="M200,68 L258,78" fill="none" stroke="rgba(0,0,0,.10)" stroke-width="1.5" stroke-dasharray="3.5 3" stroke-linecap="round"/>
+  <path d="M100,68 L42,78" fill="none" stroke="rgba(0,0,0,.10)" stroke-width="1.5" stroke-dasharray="3.5 3" stroke-linecap="round"/>
+  <path d="M276,166 L228,149" fill="none" stroke="rgba(0,0,0,.15)" stroke-width="3" stroke-linecap="round"/>
+  <path d="M24,166 L72,149" fill="none" stroke="rgba(0,0,0,.15)" stroke-width="3" stroke-linecap="round"/>
+  <path d="M72,342 C150,348 150,348 228,342" fill="none" stroke="rgba(0,0,0,.12)" stroke-width="2.5" stroke-linecap="round"/>
   ${print}
 </svg>`;
 }
 
 
-function tshirtCSVG(p, size=180) { // coming soon - greyed, même forme boxy
-  const W=240,H=292,uid='cs'+p.slug+size;
-  const path=`M90,22 Q120,44 150,22 L216,25 L240,65 L231,98 L197,87 L195,265 L45,265 L43,87 L9,98 L0,65 L24,25 Q62,18 90,22Z`;
+function tshirtCSVG(p, size=180) {
+  const W=300,H=400,u=`cs${p.slug||'x'}${size|0}`;
+  const sh=`M100,68 C125,90 175,90 200,68 L258,78 C270,96 280,114 282,132 L276,166 C258,155 240,151 228,149 L228,342 L72,342 L72,149 C60,151 42,155 24,166 L18,132 C20,114 30,96 42,78 Z`;
   return `<svg viewBox="0 0 ${W} ${H}" width="${size}" height="${Math.round(size*H/W)}" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <defs><filter id="shcs_${uid}"><feDropShadow dx="0" dy="8" stdDeviation="14" flood-color="#000" flood-opacity="0.12"/></filter></defs>
-    <path d="${path}" fill="${p.couleur}" stroke="#dcdbd5" stroke-width="1.5" opacity=".45" filter="url(#shcs_${uid})"/>
+    <defs><filter id="shcs_${u}"><feDropShadow dx="0" dy="8" stdDeviation="14" flood-color="#000" flood-opacity="0.10"/></filter></defs>
+    <path d="${sh}" fill="${p.couleur}" stroke="#dcdbd5" stroke-width="1.5" opacity=".38" filter="url(#shcs_${u})"/>
   </svg>`;
 }
+
+
 
 
 // ═══════════ CART ═══════════
@@ -1090,7 +1085,7 @@ function initCarousel(){
   const stage=document.getElementById('cstage');
   const N=products.length, step=360/N;
   const mob=innerWidth<768;
-  const cellW=mob?150:220, cellH=mob?200:285;
+  const cellW=mob?155:245, cellH=mob?220:340;
   // radius: distance from center so cells don't overlap
   const radius=Math.max(R((cellW/2)/Math.tan(Math.PI/N))+50, mob?180:260);
 
@@ -1099,7 +1094,7 @@ function initCarousel(){
       style="width:${cellW}px;height:${cellH}px;left:${-cellW/2}px;top:${-cellH/2}px;position:absolute"
       aria-label="${p.nom}, ${p.prix}" role="listitem" tabindex="${i===0?0:-1}"
       onkeydown="cellKey(event,this)">
-      ${tshirtSVG(p,'back',cellW-10)}
+      ${tshirtSVG(p,'front',cellW-10)}
     </button>`).join('');
 
   function updateCells(){
@@ -1200,7 +1195,7 @@ window.cellKey=function(e,cell){
 function initHero(){
   // Show featured product (kaki, the "pièce manifeste") in hero
   const el=document.getElementById('hero-tshirt');
-  if(el)el.innerHTML=tshirtSVG(products[0],'back',300); // charcoal dos — @KIFFCLUB rose, très impactful
+  if(el)el.innerHTML=tshirtSVG(products[0],'back',360); // charcoal dos — @KIFFCLUB rose, très impactful
   // animate hero elements in
   setTimeout(()=>{
     document.querySelectorAll('.hero-label,.hero-title,.hero-evid,.hero-text,.hero-actions').forEach((el,i)=>{
