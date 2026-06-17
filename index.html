@@ -10,7 +10,7 @@
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%231b2bd6'/><text x='50%' y='74%' text-anchor='middle' font-family='Arial Black' font-weight='900' font-size='22' fill='white'>K</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;700;800;900&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;700;800;900&family=Inter:wght@400;500&family=Fredoka+One&family=Fredoka:wght@600&display=swap" rel="stylesheet">
 <style>
 :root {
   --bg: #f7f6f3;
@@ -683,7 +683,7 @@ const R = Math.round;
 const products = [
   {
     slug:'charcoal', nom:'T-Shirt Memories — Charcoal', prix:'45€', prixNum:45,
-    couleur:'#2b2b2d', coulImprime:'#e8a6c6', texteImprime:'@KIFFCLUB', imprimePos:'back',
+    couleur:'#1a1818', coulImprime:'#e855a8', texteImprime:'@KIFFCLUB', imprimePos:'back',
     tailles:['S','M','L','XL'],
     images:['/assets/tshirt-charcoal-front.png','/assets/tshirt-charcoal-back.png'],
     description:"L'anthracite, c'est la couleur des souvenirs qu'on garde pour soi. T-shirt oversize en coton lourd 240 g/m². Au dos, @KIFFCLUB sérigraphié en rose poudré.",
@@ -694,7 +694,7 @@ const products = [
   },
   {
     slug:'blanc', nom:'T-Shirt Memories — Blanc', prix:'45€', prixNum:45,
-    couleur:'#ffffff', coulImprime:'#1b2bd6', texteImprime:'@KIFFCLUB', imprimePos:'back',
+    couleur:'#ffffff', coulImprime:'#7ab8f5', texteImprime:'@KIFFCLUB', imprimePos:'back',
     tailles:['S','M','L','XL'],
     images:['/assets/tshirt-blanc-front.png','/assets/tshirt-blanc-back.png'],
     description:'Blanc lumineux, imprimé dos bleu Kiffclub. Le classique du club. Coton lourd 240 g/m², coupe oversize, tombé impeccable.',
@@ -716,7 +716,7 @@ const products = [
   },
   {
     slug:'kaki', nom:'T-Shirt Memories — Kaki', prix:'49€', prixNum:49,
-    couleur:'#5c5f3a', coulImprime:'#f7f6f3', texteImprime:'WE ARE RICH IN MEMORIES.', imprimePos:'chest',
+    couleur:'#4a5128', coulImprime:'#e855a8', texteImprime:'WE ARE RICH IN MEMORIES.', imprimePos:'back',
     tailles:['S','M','L','XL'],
     images:['/assets/tshirt-kaki-front.png','/assets/tshirt-kaki-back.png'],
     description:"La pièce manifeste. Vert olive profond, côté cœur : WE ARE RICH IN MEMORIES. ÉVIDEMMENT. Coton 240 g/m², série limitée.",
@@ -741,90 +741,134 @@ const faqData = [
   {q:'Où êtes-vous basés ?', a:'En France. Le club est petit mais le cœur est grand.'}
 ];
 
-// ═══════════ SVG T-SHIRT (RÉALISTE) ═══════════
-// Pour remplacer par une vraie photo : changer tshirtSVG(p,view,size) par
-// <img src="${p.images[view==='front'?0:1]}" alt="${p.nom}">
-function tshirtSVG(p, view='front', size=220) {
-  const w = size, s = size / 220;
-  const h = R(275 * s);
-  const uid = p.slug + '_' + view + '_' + size;
-  const isFront = view === 'front';
-  const neckDip = isFront ? R(50*s) : R(30*s);
-  const isWhite = p.couleur === '#ffffff';
+// ═══════════ SVG T-SHIRT — FIDÈLE AUX VRAIS MODÈLES ═══════════
+// Pour remplacer par une vraie photo, remplacer l'appel par :
+// <img src="${p.images[view==='front'?0:1]}" alt="${p.nom}" loading="lazy">
+//
+// Forme : oversize boxy (coupe ample, épaules larges, bas droit)
+// Font impressions : Fredoka One (bubbly, identique aux vrais t-shirts Instagram)
+function tshirtSVG(p, view='front', size=240) {
+  // viewBox fixe 240×292 — le SVG scale via width/height
+  const W=240, H=292;
+  const uid = p.slug+view+size;
+  const front = view==='front';
+  const isWhite = p.couleur==='#ffffff';
+  const neckY = front ? 44 : 27;
 
-  // T-shirt outline path
-  const path = [
-    `M${R(70*s)},${R(24*s)}`,
-    `Q${R(110*s)},${neckDip} ${R(150*s)},${R(24*s)}`,
-    `L${R(204*s)},${R(30*s)}`,
-    `L${R(220*s)},${R(68*s)}`,
-    `L${R(210*s)},${R(102*s)}`,
-    `L${R(184*s)},${R(90*s)}`,
-    `L${R(182*s)},${R(258*s)}`,
-    `Q${R(110*s)},${R(265*s)} ${R(38*s)},${R(258*s)}`,
-    `L${R(36*s)},${R(90*s)}`,
-    `L${R(10*s)},${R(102*s)}`,
-    `L${R(0)},${R(68*s)}`,
-    `L${R(16*s)},${R(30*s)}`,
-    `Q${R(42*s)},${R(18*s)} ${R(70*s)},${R(24*s)}Z`
-  ].join('');
+  // Chemin oversize boxy (d'après les vraies photos Instagram Kiffclub)
+  const path =
+    `M90,22 Q120,${neckY} 150,22 `+   // col arrondi
+    `L216,25 L240,65 L231,98 L197,87 `+ // épaule droite + manche
+    `L195,265 L45,265 `+                 // corps + bas
+    `L43,87 L9,98 L0,65 L24,25 `+       // manche gauche + épaule
+    `Q62,18 90,22Z`;                     // retour col
 
-  // Collar seam arc
-  const collar = `M${R(70*s)},${R(24*s)} Q${R(110*s)},${neckDip} ${R(150*s)},${R(24*s)}`;
+  // Coutures
+  const collar = `M90,22 Q120,${neckY} 150,22`;
+  const armR   = `M197,87 L231,98`;
+  const armL   = `M43,87 L9,98`;
 
-  // Armhole seam hint (subtle lines)
-  const armL = `M${R(36*s)},${R(90*s)} L${R(10*s)},${R(102*s)}`;
-  const armR = `M${R(184*s)},${R(90*s)} L${R(210*s)},${R(102*s)}`;
-
-  // Print
+  // ── IMPRESSIONS (fidèles aux photos Instagram) ──
   let print = '';
-  if (isFront && p.imprimePos === 'chest') {
-    const tx = R(62*s), ty = R(95*s), fs = R(7.5*s);
-    print = `
-      <text x="${tx}" y="${ty}" font-family="Arial Narrow,Arial,sans-serif" font-size="${fs}" font-weight="700" fill="${p.coulImprime}" letter-spacing="${R(0.8*s)}">WE ARE RICH</text>
-      <text x="${tx}" y="${R((ty+fs*1.35))}$" font-family="Arial Narrow,Arial,sans-serif" font-size="${fs}" fill="${p.coulImprime}" letter-spacing="${R(0.8*s)}">IN MEMORIES.</text>
-      <text x="${tx}" y="${R((ty+fs*2.7))}" font-family="Arial Narrow,Arial,sans-serif" font-size="${R(6*s)}" fill="${p.coulImprime}" letter-spacing="${R(1.2*s)}">ÉVIDEMMENT</text>`;
-  } else if (!isFront) {
-    const cx = R(110*s), ty = R(92*s);
-    const fs = Math.max(R(13*s), 8);
-    print = `
-      <text x="${cx}" y="${ty}" text-anchor="middle" font-family="Arial Black,Arial,sans-serif" font-size="${fs}" font-weight="900" fill="${p.coulImprime}" letter-spacing="${R(1.5*s)}">@KIFFCLUB</text>
-      <text x="${cx}" y="${R(ty+fs*1.45)}" text-anchor="middle" font-family="Arial,sans-serif" font-size="${R(5*s)}" fill="${p.coulImprime}" letter-spacing="${R(3*s)}" opacity=".8">KIFFCLUB.FR</text>`;
+
+  if (front) {
+    if (p.slug==='blanc') {
+      // Blanc face : petit "KIFFCLUB" centré poitrine (comme sur la vraie photo)
+      print = `<text x="120" y="105" text-anchor="middle"
+        font-family="'Fredoka One','Fredoka',cursive" font-size="9"
+        fill="${p.coulImprime}" letter-spacing="1.8">KIFFCLUB</text>`;
+    }
+    if (p.slug==='kaki') {
+      // Kaki face : texte manifeste côté cœur gauche (petit)
+      print = `
+        <text x="68" y="93" font-family="'Fredoka One','Fredoka',cursive" font-size="6.2" fill="#f0ede6" opacity=".9">WE ARE RICH IN</text>
+        <text x="68" y="101" font-family="'Fredoka One','Fredoka',cursive" font-size="6.2" fill="#f0ede6" opacity=".9">MEMORIES.</text>
+        <text x="68" y="109" font-family="'Fredoka One','Fredoka',cursive" font-size="6.2" fill="#f0ede6" opacity=".9">ÉVIDEMMENT</text>`;
+    }
+    // Charcoal + Rose : face propre (pas d'imprimé, comme sur les vraies photos)
+  } else {
+    // DOS — impression principale
+    if (p.slug==='kaki') {
+      // Kaki dos : "WE ARE RICH IN MEMORIES. ÉVIDEMMENT" stacked en rose bubbly
+      // (exactement comme sur la photo Instagram du dos kaki)
+      print = `
+        <text x="120" y="96" text-anchor="middle"
+          font-family="'Fredoka One','Fredoka',cursive" font-size="22"
+          fill="${p.coulImprime}">WE ARE RICH IN</text>
+        <text x="120" y="121" text-anchor="middle"
+          font-family="'Fredoka One','Fredoka',cursive" font-size="22"
+          fill="${p.coulImprime}">MEMORIES.</text>
+        <text x="120" y="146" text-anchor="middle"
+          font-family="'Fredoka One','Fredoka',cursive" font-size="22"
+          fill="${p.coulImprime}">ÉVIDEMMENT</text>`;
+    } else {
+      // Charcoal, Blanc, Rose dos : "@KIFFCLUB" bubbly large
+      // (identique aux photos : charcoal→rose, blanc→bleu, rose→blanc)
+      print = `
+        <text x="120" y="110" text-anchor="middle"
+          font-family="'Fredoka One','Fredoka',cursive" font-size="28"
+          fill="${p.coulImprime}">@KIFFCLUB</text>
+        <text x="120" y="124" text-anchor="middle"
+          font-family="'Fredoka One','Fredoka',cursive" font-size="6"
+          fill="${p.coulImprime}" letter-spacing="1.5" opacity=".7">WE ARE RICH IN MEMORIES. ÉVIDEMMENT</text>`;
+    }
   }
 
-  return `<svg viewBox="0 0 ${w} ${h}" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  return `<svg viewBox="0 0 ${W} ${H}" width="${size}" height="${Math.round(size*H/W)}"
+    xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
   <defs>
-    <filter id="sh_${uid}" x="-15%" y="-5%" width="130%" height="130%">
-      <feDropShadow dx="0" dy="${R(8*s)}" stdDeviation="${R(14*s)}" flood-color="#000" flood-opacity="0.22"/>
+    <filter id="sh_${uid}" x="-18%" y="-6%" width="136%" height="136%">
+      <feDropShadow dx="0" dy="10" stdDeviation="18" flood-color="#000" flood-opacity="0.25"/>
     </filter>
     <linearGradient id="sg_${uid}" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="rgba(0,0,0,.14)"/>
-      <stop offset="22%" stop-color="rgba(0,0,0,.01)"/>
-      <stop offset="78%" stop-color="rgba(0,0,0,.01)"/>
-      <stop offset="100%" stop-color="rgba(0,0,0,.12)"/>
+      <stop offset="0%"   stop-color="rgba(0,0,0,.18)"/>
+      <stop offset="20%"  stop-color="rgba(0,0,0,.02)"/>
+      <stop offset="80%"  stop-color="rgba(0,0,0,.02)"/>
+      <stop offset="100%" stop-color="rgba(0,0,0,.15)"/>
     </linearGradient>
     <linearGradient id="tg_${uid}" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="rgba(0,0,0,.07)"/>
-      <stop offset="12%" stop-color="rgba(0,0,0,0)"/>
-      <stop offset="88%" stop-color="rgba(0,0,0,0)"/>
-      <stop offset="100%" stop-color="rgba(0,0,0,.05)"/>
+      <stop offset="0%"   stop-color="rgba(0,0,0,.1)"/>
+      <stop offset="10%"  stop-color="rgba(0,0,0,0)"/>
+      <stop offset="88%"  stop-color="rgba(0,0,0,0)"/>
+      <stop offset="100%" stop-color="rgba(0,0,0,.08)"/>
+    </linearGradient>
+    <linearGradient id="hl_${uid}" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="35%" stop-color="rgba(255,255,255,0)"/>
+      <stop offset="50%" stop-color="rgba(255,255,255,.07)"/>
+      <stop offset="65%" stop-color="rgba(255,255,255,0)"/>
     </linearGradient>
   </defs>
-  <path d="${path}" fill="${p.couleur}" ${isWhite ? 'stroke="#dcdbd5" stroke-width="1.5"' : ''} filter="url(#sh_${uid})"/>
+  <!-- Corps -->
+  <path d="${path}" fill="${p.couleur}"
+    ${isWhite ? 'stroke="#d5d2cc" stroke-width="1.5"' : ''}
+    filter="url(#sh_${uid})"/>
+  <!-- Ombrage latéral (effet tissu épais) -->
   <path d="${path}" fill="url(#sg_${uid})"/>
+  <!-- Ombrage haut/bas -->
   <path d="${path}" fill="url(#tg_${uid})"/>
-  <path d="${collar}" fill="none" stroke="rgba(0,0,0,${isWhite?.08:.12})" stroke-width="${R(2.5*s)}" stroke-linecap="round"/>
-  <path d="${armL}" fill="none" stroke="rgba(0,0,0,.06)" stroke-width="${R(1.5*s)}" stroke-linecap="round"/>
-  <path d="${armR}" fill="none" stroke="rgba(0,0,0,.06)" stroke-width="${R(1.5*s)}" stroke-linecap="round"/>
+  <!-- Reflet central subtil -->
+  <path d="${path}" fill="url(#hl_${uid})"/>
+  <!-- Col côtelé -->
+  <path d="${collar}" fill="none"
+    stroke="rgba(0,0,0,${isWhite ? .08 : .16})" stroke-width="4" stroke-linecap="round"/>
+  <!-- Coutures emmanchures -->
+  <path d="${armR}" fill="none" stroke="rgba(0,0,0,.09)" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="${armL}" fill="none" stroke="rgba(0,0,0,.09)" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Impression -->
   ${print}
 </svg>`;
 }
 
-function tshirtCSVG(p, size=180) { // coming soon - greyed
-  const w=size,s=size/220,h=R(275*s);
-  const path=`M${R(70*s)},${R(24*s)} Q${R(110*s)},${R(50*s)} ${R(150*s)},${R(24*s)} L${R(204*s)},${R(30*s)} L${R(220*s)},${R(68*s)} L${R(210*s)},${R(102*s)} L${R(184*s)},${R(90*s)} L${R(182*s)},${R(258*s)} Q${R(110*s)},${R(265*s)} ${R(38*s)},${R(258*s)} L${R(36*s)},${R(90*s)} L${R(10*s)},${R(102*s)} L${R(0)},${R(68*s)} L${R(16*s)},${R(30*s)} Q${R(42*s)},${R(18*s)} ${R(70*s)},${R(24*s)}Z`;
-  return `<svg viewBox="0 0 ${w} ${h}" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="${path}" fill="${p.couleur}" stroke="#dcdbd5" stroke-width="1.5" opacity=".45"/></svg>`;
+
+function tshirtCSVG(p, size=180) { // coming soon - greyed, même forme boxy
+  const W=240,H=292,uid='cs'+p.slug+size;
+  const path=`M90,22 Q120,44 150,22 L216,25 L240,65 L231,98 L197,87 L195,265 L45,265 L43,87 L9,98 L0,65 L24,25 Q62,18 90,22Z`;
+  return `<svg viewBox="0 0 ${W} ${H}" width="${size}" height="${Math.round(size*H/W)}" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs><filter id="shcs_${uid}"><feDropShadow dx="0" dy="8" stdDeviation="14" flood-color="#000" flood-opacity="0.12"/></filter></defs>
+    <path d="${path}" fill="${p.couleur}" stroke="#dcdbd5" stroke-width="1.5" opacity=".45" filter="url(#shcs_${uid})"/>
+  </svg>`;
 }
+
 
 // ═══════════ CART ═══════════
 let cart = [];
@@ -1055,7 +1099,7 @@ function initCarousel(){
       style="width:${cellW}px;height:${cellH}px;left:${-cellW/2}px;top:${-cellH/2}px;position:absolute"
       aria-label="${p.nom}, ${p.prix}" role="listitem" tabindex="${i===0?0:-1}"
       onkeydown="cellKey(event,this)">
-      ${tshirtSVG(p,'front',cellW-10)}
+      ${tshirtSVG(p,'back',cellW-10)}
     </button>`).join('');
 
   function updateCells(){
@@ -1156,7 +1200,7 @@ window.cellKey=function(e,cell){
 function initHero(){
   // Show featured product (kaki, the "pièce manifeste") in hero
   const el=document.getElementById('hero-tshirt');
-  if(el)el.innerHTML=tshirtSVG(products[3],'front',300);
+  if(el)el.innerHTML=tshirtSVG(products[0],'back',300); // charcoal dos — @KIFFCLUB rose, très impactful
   // animate hero elements in
   setTimeout(()=>{
     document.querySelectorAll('.hero-label,.hero-title,.hero-evid,.hero-text,.hero-actions').forEach((el,i)=>{
