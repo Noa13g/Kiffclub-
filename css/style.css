@@ -1,0 +1,946 @@
+/* =========================================================================
+   LA RÉSERVE — Feuille de style principale
+   Pizzeria-restaurant, cuisson au feu de bois — Cabriès / Calas
+
+   Organisation du fichier :
+   1.  Variables globales (:root)      — couleurs, polices, mesures
+   2.  Réinitialisation & bases        — remise à zéro, réglages de fond
+   3.  Grain de papier (fond subtil)   — texture en CSS pur, sans image
+   4.  Typographie                     — titres, textes, filets décoratifs
+   5.  Boutons                         — appel, itinéraire, etc.
+   6.  Conteneur & sections            — largeurs, respirations
+   7.  En-tête / barre de navigation
+   8.  Hero (accueil plein écran)
+   9.  Bandeau livraison
+   10. Le feu de bois
+   11. La carte (menu)
+   12. Horaires & accès
+   13. Avis clients
+   14. Pied de page
+   15. Barre fixe mobile (Appeler / Itinéraire)
+   16. Animations d'apparition au défilement
+   17. Media queries (tablette / ordinateur)
+   ========================================================================= */
+
+
+/* =========================================================================
+   1. VARIABLES GLOBALES
+   Toutes les couleurs et mesures du site sont définies ici.
+   Pour changer l'ambiance du site, modifie surtout cette section.
+   ========================================================================= */
+:root {
+  /* --- Palette de couleurs --- */
+  --creme: #F7F1E8;        /* fond principal, crème chaud            */
+  --creme-fonce: #EFE6D6;  /* variante un peu plus sombre du crème   */
+  --encre: #1C1917;        /* couleur du texte courant               */
+  --brique: #7B1E1E;       /* rouge brique : titres et accents       */
+  --braise: #C2410C;       /* orange braise : survols et boutons     */
+  --olive: #5F6B4A;        /* vert olive discret : petits détails    */
+  --blanc: #FFFFFF;
+
+  /* --- Couleurs dérivées (transparences) --- */
+  --voile-sombre: rgba(20, 12, 8, 0.55);   /* voile posé sur le hero */
+  --filet: rgba(28, 25, 23, 0.18);         /* fins traits de séparation */
+
+  /* --- Typographie --- */
+  --titre: "Anton", "Archivo Black", Impact, sans-serif;  /* titres capitales */
+  --corps: "DM Sans", "Inter", system-ui, sans-serif;     /* texte courant    */
+
+  /* --- Mesures & rythme --- */
+  --largeur-max: 1180px;   /* largeur maximale du contenu centré */
+  --rayon: 14px;           /* coins légèrement arrondis          */
+  --rayon-doux: 8px;
+  --espace-section: 5rem;  /* respiration verticale entre sections */
+
+  /* --- Barre fixe mobile : hauteur réservée en bas de page --- */
+  --barre-mobile: 68px;
+}
+
+
+/* =========================================================================
+   2. RÉINITIALISATION & BASES
+   On remet quelques réglages à zéro pour partir sur une base saine.
+   ========================================================================= */
+
+/* La box-sizing border-box rend les largeurs plus simples à raisonner. */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* On enlève les marges par défaut du navigateur. */
+* {
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;    /* défilement doux vers les ancres */
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--corps);
+  color: var(--encre);
+  background-color: var(--creme);
+  line-height: 1.6;           /* interligne généreux demandé */
+  font-size: 1.0625rem;       /* ≈ 17px, confortable à lire */
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;         /* évite les débordements horizontaux */
+}
+
+/* Les images ne dépassent jamais leur conteneur. */
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* Les liens héritent de la couleur par défaut, on stylise au cas par cas. */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+
+/* =========================================================================
+   3. GRAIN DE PAPIER (fond subtil, sans image)
+   Un très léger grain donne un aspect « papier » artisanal.
+   Réalisé avec un dégradé radial répété, purement en CSS.
+   ========================================================================= */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;                   /* couvre tout l'écran */
+  z-index: 0;
+  pointer-events: none;       /* ne gêne pas les clics */
+  opacity: 0.5;
+  /* Minuscules points semi-transparents, répétés très finement. */
+  background-image: radial-gradient(rgba(28, 25, 23, 0.05) 1px, transparent 1px);
+  background-size: 4px 4px;
+}
+
+/* On remet le contenu au-dessus du grain. */
+body > * {
+  position: relative;
+  z-index: 1;
+}
+
+
+/* =========================================================================
+   4. TYPOGRAPHIE
+   Fort contraste entre les titres (Anton, capitales, rouge brique)
+   et le texte courant (DM Sans, généreux).
+   ========================================================================= */
+
+/* Style commun à tous les titres. */
+h1, h2, h3 {
+  font-family: var(--titre);
+  font-weight: 400;           /* Anton n'a qu'une graisse */
+  text-transform: uppercase;  /* capitales demandées */
+  letter-spacing: 0.01em;     /* très serré */
+  line-height: 1.02;
+  color: var(--brique);
+}
+
+h1 { font-size: clamp(2.8rem, 9vw, 6rem); }
+h2 { font-size: clamp(2rem, 6vw, 3.4rem); }
+h3 { font-size: clamp(1.3rem, 3vw, 1.7rem); }
+
+p { max-width: 62ch; }        /* longueur de ligne lisible */
+
+/* Petit intitulé de section, au-dessus des grands titres. */
+.sur-titre {
+  font-family: var(--corps);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  font-size: 0.8rem;
+  color: var(--braise);
+  margin-bottom: 0.6rem;
+  display: block;
+}
+
+/* Filet horizontal fin, décoratif, placé sous certains titres. */
+.filet {
+  width: 64px;
+  height: 3px;
+  background-color: var(--braise);
+  border: none;
+  margin: 1.2rem 0 2rem;
+}
+
+
+/* =========================================================================
+   5. BOUTONS
+   Deux styles : plein (braise) et contour. Coins arrondis, sans ombre lourde.
+   ========================================================================= */
+.bouton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: var(--corps);
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 0.9rem 1.6rem;
+  border-radius: var(--rayon-doux);
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease,
+              transform 0.15s ease, border-color 0.2s ease;
+}
+
+/* Bouton plein : fond braise, texte crème. */
+.bouton--plein {
+  background-color: var(--braise);
+  color: var(--creme);
+}
+.bouton--plein:hover {
+  background-color: var(--brique);
+  transform: translateY(-2px);   /* léger soulèvement au survol */
+}
+
+/* Bouton contour : bordure claire, se remplit au survol. */
+.bouton--contour {
+  background-color: transparent;
+  color: var(--creme);
+  border-color: rgba(247, 241, 232, 0.7);
+}
+.bouton--contour:hover {
+  background-color: var(--creme);
+  color: var(--encre);
+  transform: translateY(-2px);
+}
+
+/* Variante sombre du bouton contour (sur fond clair). */
+.bouton--contour-sombre {
+  background-color: transparent;
+  color: var(--brique);
+  border-color: var(--brique);
+}
+.bouton--contour-sombre:hover {
+  background-color: var(--brique);
+  color: var(--creme);
+  transform: translateY(-2px);
+}
+
+
+/* =========================================================================
+   6. CONTENEUR & SECTIONS
+   ========================================================================= */
+
+/* Conteneur centré, utilisé dans chaque section pour aligner le contenu. */
+.conteneur {
+  width: 100%;
+  max-width: var(--largeur-max);
+  margin: 0 auto;
+  padding: 0 1.25rem;         /* marges latérales sur mobile */
+}
+
+/* Espacement vertical standard de chaque section. */
+.section {
+  padding: var(--espace-section) 0;
+}
+
+/* Fond légèrement plus foncé pour alterner les sections. */
+.section--creme-fonce {
+  background-color: var(--creme-fonce);
+}
+
+
+/* =========================================================================
+   7. EN-TÊTE / BARRE DE NAVIGATION
+   Barre simple en haut, transparente sur le hero puis fond crème.
+   ========================================================================= */
+.entete {
+  position: absolute;         /* posée par-dessus le hero */
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 20;
+}
+
+.entete__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.1rem 1.25rem;
+}
+
+/* Nom du restaurant en petit, dans la barre. */
+.entete__logo {
+  font-family: var(--titre);
+  text-transform: uppercase;
+  color: var(--creme);
+  font-size: 1.4rem;
+  letter-spacing: 0.02em;
+}
+
+/* Navigation : cachée sur mobile, affichée sur grand écran. */
+.entete__nav {
+  display: none;
+  gap: 1.6rem;
+}
+.entete__nav a {
+  font-weight: 500;
+  color: var(--creme);
+  font-size: 0.95rem;
+  padding-bottom: 2px;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.2s ease;
+}
+.entete__nav a:hover {
+  border-color: var(--braise);
+}
+
+
+/* =========================================================================
+   8. HERO (accueil plein écran)
+   Photo du four à bois en fond, voile sombre, grand titre + boutons.
+   ========================================================================= */
+.hero {
+  position: relative;
+  min-height: 100svh;         /* toute la hauteur de l'écran */
+  display: flex;
+  align-items: center;
+  /* Bloc de remplacement gris tant qu'il n'y a pas de photo.
+     Une fois la photo ajoutée dans le HTML, elle passe au-dessus. */
+  background-color: #2a2422;
+  overflow: hidden;
+}
+
+/* Image de fond du hero (posée dans le HTML avec la classe .hero__image). */
+.hero__image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;          /* remplit sans se déformer */
+  z-index: 0;
+}
+
+/* Voile sombre par-dessus la photo, pour lire le texte blanc. */
+.hero__voile {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(180deg,
+      rgba(20, 12, 8, 0.45) 0%,
+      var(--voile-sombre) 55%,
+      rgba(20, 12, 8, 0.75) 100%);
+}
+
+.hero__contenu {
+  position: relative;
+  z-index: 2;
+  color: var(--creme);
+  padding: 6rem 0 calc(var(--barre-mobile) + 2rem);
+  max-width: 760px;
+}
+
+/* Petit lieu-dit au-dessus du grand titre. */
+.hero__lieu {
+  font-family: var(--corps);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.28em;
+  font-size: 0.85rem;
+  color: var(--creme);
+  opacity: 0.9;
+  margin-bottom: 1rem;
+}
+
+.hero h1 {
+  color: var(--creme);       /* titre blanc sur le hero */
+  margin-bottom: 1.2rem;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.35);
+}
+
+/* Slogan du restaurant, repris tel quel. */
+.hero__slogan {
+  font-size: clamp(1.05rem, 2.4vw, 1.35rem);
+  font-style: italic;
+  max-width: 34ch;
+  margin-bottom: 2rem;
+  color: var(--creme);
+}
+
+.hero__boutons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+}
+
+
+/* =========================================================================
+   9. BANDEAU LIVRAISON
+   Message fort en rouge brique, très visible, mis en avant.
+   ========================================================================= */
+.livraison {
+  background-color: var(--brique);
+  color: var(--creme);
+  text-align: center;
+  padding: 2.2rem 1.25rem;
+}
+.livraison__label {
+  display: inline-block;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 0.75rem;
+  color: var(--creme);
+  opacity: 0.85;
+  margin-bottom: 0.5rem;
+}
+.livraison__texte {
+  font-family: var(--titre);
+  text-transform: uppercase;
+  font-size: clamp(1.3rem, 4.2vw, 2.2rem);
+  line-height: 1.1;
+  max-width: 20ch;
+  margin: 0 auto;
+  color: var(--creme);
+}
+.livraison__precision {
+  margin: 0.9rem auto 0;
+  font-size: 0.95rem;
+  opacity: 0.92;
+  max-width: 46ch;
+}
+/* Mots mis en valeur dans le bandeau. */
+.livraison__texte em {
+  font-style: normal;
+  color: #FBD9A8;            /* jaune chaud pour souligner les jours */
+}
+
+
+/* =========================================================================
+   10. LE FEU DE BOIS
+   Court texte chaleureux + bloc image rond décoratif.
+   ========================================================================= */
+.feu {
+  display: grid;
+  gap: 2.5rem;
+  align-items: center;
+}
+.feu__texte h2 { margin-bottom: 0; }
+.feu__texte p { font-size: 1.15rem; }
+
+/* Bloc image rond pour la photo du feu / des flammes. */
+.feu__media {
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  overflow: hidden;
+  max-width: 420px;
+  margin: 0 auto;
+}
+.feu__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+/* =========================================================================
+   11. LA CARTE (menu)
+   Grille alternée gauche/droite, photos rondes qui débordent,
+   filets fins entre les plats, prix aligné à droite.
+   ========================================================================= */
+.carte__intro {
+  text-align: center;
+  margin-bottom: 3.5rem;
+}
+.carte__intro .filet { margin-left: auto; margin-right: auto; }
+
+/* Un « groupe » = une catégorie (Pizzas, Salades, Viandes, Desserts). */
+.categorie {
+  margin-bottom: 4.5rem;
+}
+.categorie:last-child { margin-bottom: 0; }
+
+/* En-tête de catégorie avec son visuel rond. */
+.categorie__entete {
+  display: grid;
+  gap: 1.5rem;
+  align-items: center;
+  margin-bottom: 2.5rem;
+}
+
+/* Photo ronde de la catégorie (pizza vue du dessus, etc.). */
+.categorie__photo {
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  overflow: hidden;
+  width: 200px;
+  max-width: 55vw;
+  justify-self: center;      /* centré sur mobile */
+  /* Léger débordement décoratif : l'image « sort » un peu. */
+  box-shadow: 0 0 0 6px var(--creme);
+}
+.categorie__photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.categorie__titre .filet { margin-top: 0.8rem; }
+
+/* Liste des plats d'une catégorie. */
+.plats { display: flex; flex-direction: column; }
+
+/* Un plat : nom + ingrédients à gauche, prix à droite. */
+.plat {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.4rem 1rem;
+  align-items: baseline;
+  padding: 1.1rem 0;
+  border-bottom: 1px solid var(--filet);   /* filet fin entre les plats */
+}
+.plat:first-child { padding-top: 0; }
+
+.plat__nom {
+  font-family: var(--corps);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--brique);
+  font-size: 1.05rem;
+}
+
+/* Prix, aligné à droite, à côté du nom. */
+.plat__prix {
+  font-weight: 700;
+  color: var(--encre);
+  white-space: nowrap;
+  text-align: right;
+}
+/* Prix pas encore connu : style discret et en italique. */
+.plat__prix--a-venir {
+  font-weight: 500;
+  font-style: italic;
+  color: var(--olive);
+  font-size: 0.9rem;
+}
+
+/* Ingrédients, sur la ligne du dessous, en pleine largeur. */
+.plat__ingredients {
+  grid-column: 1 / -1;
+  color: rgba(28, 25, 23, 0.75);
+  font-size: 0.98rem;
+  max-width: 60ch;
+}
+
+/* Encadré des menus (midi / autre). */
+.menus {
+  margin-top: 3rem;
+  display: grid;
+  gap: 1.25rem;
+}
+.menu-carte {
+  background-color: var(--creme);
+  border: 1px solid var(--filet);
+  border-radius: var(--rayon);
+  padding: 1.5rem 1.6rem;
+}
+.section--creme-fonce .menu-carte { background-color: var(--blanc); }
+.menu-carte h3 { color: var(--brique); margin-bottom: 0.3rem; }
+.menu-carte__prix {
+  font-family: var(--titre);
+  color: var(--braise);
+  font-size: 1.8rem;
+}
+
+/* Note rappelant que la vraie carte n'est pas encore en ligne. */
+.carte__note {
+  margin-top: 2.5rem;
+  text-align: center;
+  font-size: 0.9rem;
+  font-style: italic;
+  color: var(--olive);
+}
+
+
+/* =========================================================================
+   12. HORAIRES & ACCÈS
+   Tableau des horaires + carte Google Maps + coordonnées cliquables.
+   ========================================================================= */
+.acces {
+  display: grid;
+  gap: 3rem;
+}
+
+/* Tableau des horaires. */
+.horaires {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 1rem;
+}
+.horaires caption {
+  text-align: left;
+  margin-bottom: 1rem;
+}
+.horaires th,
+.horaires td {
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--filet);
+  text-align: left;
+  vertical-align: top;
+}
+.horaires th {
+  font-weight: 700;
+  width: 8rem;
+}
+/* Jour de fermeture : grisé. */
+.horaires tr.est-ferme { color: var(--olive); }
+.horaires .badge-ferme {
+  font-size: 0.8rem;
+  font-style: italic;
+}
+/* Mention spéciale du dimanche. */
+.horaires .mention {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--braise);
+  font-style: italic;
+  margin-top: 0.2rem;
+}
+
+/* Bloc coordonnées (adresse, téléphone). */
+.coordonnees { margin-top: 2rem; }
+.coordonnees dt {
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.75rem;
+  color: var(--braise);
+  margin-top: 1rem;
+}
+.coordonnees dd {
+  margin: 0.2rem 0 0;
+  font-size: 1.1rem;
+}
+.coordonnees a {
+  color: var(--brique);
+  font-weight: 700;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s ease;
+}
+.coordonnees a:hover { border-color: var(--brique); }
+
+/* Carte Google Maps intégrée (iframe). */
+.carte-maps {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border: 1px solid var(--filet);
+  border-radius: var(--rayon);
+  overflow: hidden;
+}
+.carte-maps iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+
+
+/* =========================================================================
+   13. AVIS CLIENTS
+   Trois citations sobres + la note Google.
+   ========================================================================= */
+.avis__entete {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+.avis__note {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+.avis__note strong {
+  font-family: var(--titre);
+  color: var(--braise);
+  font-size: 2.4rem;
+}
+.avis__etoiles { color: var(--braise); font-size: 1.2rem; letter-spacing: 2px; }
+.avis__nombre { color: var(--olive); font-size: 0.95rem; }
+
+.avis__liste {
+  display: grid;
+  gap: 1.5rem;
+}
+.avis-carte {
+  background-color: var(--creme);
+  border: 1px solid var(--filet);
+  border-radius: var(--rayon);
+  padding: 1.8rem 1.6rem;
+}
+.section--creme-fonce .avis-carte { background-color: var(--blanc); }
+.avis-carte blockquote {
+  font-size: 1.08rem;
+  font-style: italic;
+  line-height: 1.55;
+}
+.avis-carte figcaption {
+  margin-top: 1rem;
+  font-weight: 700;
+  color: var(--brique);
+  font-style: normal;
+  font-size: 0.95rem;
+}
+.avis-carte figcaption span {
+  display: block;
+  font-weight: 400;
+  color: var(--olive);
+  font-size: 0.85rem;
+}
+
+
+/* =========================================================================
+   14. PIED DE PAGE
+   ========================================================================= */
+.pied {
+  background-color: var(--encre);
+  color: var(--creme);
+  padding: 3.5rem 0 calc(var(--barre-mobile) + 2rem);
+}
+.pied__grille {
+  display: grid;
+  gap: 2rem;
+}
+.pied h2 {
+  color: var(--creme);
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+.pied p, .pied li { color: rgba(247, 241, 232, 0.85); font-size: 0.95rem; }
+.pied a { color: var(--creme); border-bottom: 1px solid rgba(247,241,232,0.4); }
+.pied a:hover { border-color: var(--braise); }
+.pied__titre-col {
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.75rem;
+  color: var(--braise);
+  margin-bottom: 0.8rem;
+}
+.pied__horaires li { padding: 0.15rem 0; }
+.pied__bas {
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(247, 241, 232, 0.2);
+  font-size: 0.85rem;
+  opacity: 0.75;
+}
+
+
+/* =========================================================================
+   15. BARRE FIXE MOBILE (Appeler / Itinéraire)
+   L'élément le plus important : toujours visible en bas sur mobile.
+   ========================================================================= */
+.barre-mobile {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 50;
+  display: grid;
+  grid-template-columns: 1fr 1fr;   /* deux boutons pleine largeur */
+  background-color: var(--encre);
+  box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.2);
+  /* Respect de la zone sûre sur iPhone (encoche du bas). */
+  padding-bottom: env(safe-area-inset-bottom);
+}
+.barre-mobile a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  height: var(--barre-mobile);
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--creme);
+}
+/* Bouton « Appeler » : fond braise. */
+.barre-mobile__appel { background-color: var(--braise); }
+/* Bouton « Itinéraire » : fond brique. */
+.barre-mobile__itineraire { background-color: var(--brique); }
+
+
+/* =========================================================================
+   16. ANIMATIONS D'APPARITION AU DÉFILEMENT
+   Les éléments montent de 20px en apparaissant en fondu.
+   La classe .visible est ajoutée par JavaScript (IntersectionObserver).
+   ========================================================================= */
+.apparition {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.apparition.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Accessibilité : si l'utilisateur préfère moins d'animations,
+   on désactive tout mouvement et on affiche directement le contenu. */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+  .apparition {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+
+/* =========================================================================
+   BLOCS DE REMPLACEMENT (en attendant les vraies photos)
+   Tant qu'une photo n'est pas fournie, on affiche un joli bloc gris
+   avec une petite étiquette décrivant l'image à venir.
+   Pour mettre une vraie photo : voir les commentaires dans index.html.
+   ========================================================================= */
+.placeholder {
+  width: 100%;
+  height: 100%;
+  min-height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 1rem;
+  /* Dégradé gris chaud + fines diagonales pour rester élégant. */
+  background-color: #d9d2c6;
+  background-image:
+    linear-gradient(135deg, rgba(0,0,0,0.05) 25%, transparent 25%,
+      transparent 50%, rgba(0,0,0,0.05) 50%, rgba(0,0,0,0.05) 75%,
+      transparent 75%, transparent);
+  background-size: 22px 22px;
+  color: #6b6155;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  line-height: 1.4;
+}
+/* Étiquette du bloc de remplacement (petite pastille). */
+.placeholder span {
+  display: inline-block;
+  background-color: rgba(247, 241, 232, 0.85);
+  padding: 0.4rem 0.7rem;
+  border-radius: var(--rayon-doux);
+  max-width: 90%;
+}
+/* Sur le hero, le bloc de remplacement occupe tout le fond. */
+.hero .placeholder {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-color: #322a26;
+  color: rgba(247, 241, 232, 0.55);
+}
+.hero .placeholder span { background-color: rgba(20, 12, 8, 0.5); }
+
+
+/* =========================================================================
+   ACCESSIBILITÉ : focus clavier bien visible
+   ========================================================================= */
+a:focus-visible,
+.bouton:focus-visible,
+iframe:focus-visible {
+  outline: 3px solid var(--braise);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+/* Lien d'évitement pour la navigation au clavier. */
+.aller-au-contenu {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  background: var(--brique);
+  color: var(--creme);
+  padding: 0.8rem 1.2rem;
+  z-index: 100;
+  border-radius: 0 0 var(--rayon-doux) 0;
+}
+.aller-au-contenu:focus {
+  left: 0;
+}
+
+
+/* =========================================================================
+   17. MEDIA QUERIES — mise en page tablette et ordinateur
+   Le site est pensé « mobile d'abord » : ici on améliore les grands écrans.
+   ========================================================================= */
+
+/* --- À partir de 700px (grandes tablettes) --- */
+@media (min-width: 700px) {
+
+  /* La barre fixe mobile disparaît : plus besoin sur grand écran. */
+  .barre-mobile { display: none; }
+  .hero__contenu { padding-bottom: 6rem; }
+  .pied { padding-bottom: 3.5rem; }
+
+  /* Section « feu de bois » : texte à gauche, image ronde à droite. */
+  .feu {
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 3.5rem;
+  }
+
+  /* En-tête de catégorie : visuel rond à côté du titre. */
+  .categorie__entete {
+    grid-template-columns: 200px 1fr;
+    gap: 2.5rem;
+  }
+  .categorie__photo { justify-self: start; }
+
+  /* Une catégorie sur deux : on inverse (photo à droite). */
+  .categorie:nth-child(even) .categorie__entete {
+    grid-template-columns: 1fr 200px;
+  }
+  .categorie:nth-child(even) .categorie__photo { order: 2; justify-self: end; }
+
+  /* Menus côte à côte. */
+  .menus { grid-template-columns: 1fr 1fr; }
+
+  /* Accès : horaires à gauche, carte à droite. */
+  .acces { grid-template-columns: 1fr 1fr; gap: 3.5rem; }
+
+  /* Avis : trois colonnes. */
+  .avis__liste { grid-template-columns: repeat(3, 1fr); }
+
+  /* Pied de page : trois colonnes. */
+  .pied__grille { grid-template-columns: 1.4fr 1fr 1fr; gap: 3rem; }
+}
+
+/* --- À partir de 960px (ordinateur) --- */
+@media (min-width: 960px) {
+
+  /* La navigation du haut apparaît. */
+  .entete__nav { display: flex; }
+
+  :root { --espace-section: 6.5rem; }
+
+  /* Les photos de catégorie deviennent plus grandes et débordent un peu. */
+  .categorie__photo { width: 260px; }
+  .categorie__entete { grid-template-columns: 260px 1fr; }
+  .categorie:nth-child(even) .categorie__entete {
+    grid-template-columns: 1fr 260px;
+  }
+}
+
+/* --- Très grands écrans (au-delà de 1400px) --- */
+@media (min-width: 1400px) {
+  :root { --largeur-max: 1240px; }
+}
