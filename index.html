@@ -1,1271 +1,567 @@
 <!DOCTYPE html>
+<!--
+  ======================================================================
+  LA RÉSERVE — Pizzeria-restaurant, cuisson au feu de bois
+  Cabriès / Calas (13480)
+
+  Site vitrine sur une seule page longue.
+  Technologie : HTML + CSS + JavaScript, sans aucun outil de build.
+  Pour le modifier, tout est expliqué dans le fichier README.md.
+  ======================================================================
+-->
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kiffclub® — We are rich in memories. Streetwear français.</title>
-<meta name="description" content="Kiffclub, le streetwear français qui collectionne les souvenirs. Coton lourd, coupes oversize, séries limitées.">
-<meta property="og:title" content="Kiffclub® — We are rich in memories.">
-<meta property="og:description" content="Le streetwear français qui collectionne les souvenirs.">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%231b2bd6'/><text x='50%' y='74%' text-anchor='middle' font-family='Arial Black' font-weight='900' font-size='22' fill='white'>K</text></svg>">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;700;800;900&family=Inter:wght@400;500&family=Fredoka+One&family=Fredoka:wght@600&display=swap" rel="stylesheet">
-<style>
-:root {
-  --bg: #f7f6f3;
-  --bg-pure: #ffffff;
-  --bg-dark: #0b0b0c;
-  --bg-mute: #ecebe6;
-  --ink: #111111;
-  --ink-soft: #6b6b6b;
-  --ink-invert: #f7f6f3;
-  --brand-blue: #1b2bd6;
-  --brand-rose: #e8a6c6;
-  --brand-olive: #5c5f3a;
-  --brand-charcoal: #2b2b2d;
-  --line: #dcdbd5;
-  --shadow: 0 20px 60px rgba(0,0,0,.1);
-  --font-display: "Archivo", system-ui, sans-serif;
-  --font-body: "Inter", system-ui, sans-serif;
-  --fs-hero: clamp(3rem, 9vw, 8rem);
-  --fs-h1: clamp(2rem, 5vw, 4rem);
-  --fs-h2: clamp(1.4rem, 3vw, 2.4rem);
-  --fs-cat: clamp(2.5rem, 7vw, 5.5rem);
-  --fs-body: 1rem;
-  --fs-small: .8rem;
-  --fs-label: .7rem;
-  --radius: 2px;
-  --pad: clamp(1.25rem, 5vw, 4rem);
-  --section-v: clamp(5rem, 10vw, 9rem);
-}
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{font-family:var(--font-body);font-size:var(--fs-body);background:var(--bg);color:var(--ink);line-height:1.6;overflow-x:hidden}
-img{max-width:100%;display:block}
-a{color:inherit;text-decoration:none}
-button{cursor:pointer;font-family:inherit;border:none;background:none}
-ul{list-style:none}
-input,textarea{font-family:inherit}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-/* layout */
-.container{max-width:1320px;margin:0 auto;padding:0 var(--pad)}
+  <!-- ============================================================
+       SEO — titre, description et aperçu pour les réseaux sociaux
+       ============================================================ -->
+  <title>La Réserve — Pizzeria au feu de bois à Cabriès (Calas)</title>
+  <meta name="description" content="La Réserve, pizzeria-restaurant à Cabriès (quartier Calas). Pizzas et viandes au feu de bois. Livraison gratuite le week-end sur Calas, Cabriès et la Duranne dès 2 pizzas." />
 
-/* buttons */
-.btn{display:inline-flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:var(--fs-label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;padding:1rem 2.5rem;border-radius:var(--radius);transition:background .2s,color .2s,border-color .2s;cursor:pointer;border:1.5px solid transparent}
-.btn-primary{background:var(--ink);color:var(--ink-invert);border-color:var(--ink)}
-.btn-primary:hover{background:transparent;color:var(--ink)}
-.btn-blue{background:var(--brand-blue);color:#fff;border-color:var(--brand-blue)}
-.btn-blue:hover{background:transparent;color:var(--brand-blue)}
-.btn-ghost{background:transparent;color:var(--ink-invert);border-color:rgba(247,246,243,.4)}
-.btn-ghost:hover{background:var(--ink-invert);color:var(--ink)}
-.btn-outline{background:transparent;color:var(--ink);border-color:var(--ink)}
-.btn-outline:hover{background:var(--ink);color:var(--ink-invert)}
-.btn:disabled{opacity:.4;pointer-events:none}
-.btn:focus-visible{outline:2px solid var(--brand-blue);outline-offset:3px}
+  <!-- Open Graph : aperçu lors d'un partage (Facebook, WhatsApp, etc.) -->
+  <meta property="og:type" content="restaurant" />
+  <meta property="og:title" content="La Réserve — Pizzeria au feu de bois à Cabriès" />
+  <meta property="og:description" content="Pizzas et viandes au feu de bois. Livraison gratuite le week-end sur Calas, Cabriès et la Duranne, dès 2 pizzas." />
+  <meta property="og:locale" content="fr_FR" />
+  <!-- Quand une vraie photo sera disponible, indiquer son adresse ici :
+       <meta property="og:image" content="https://VOTRE-SITE/images/og-four.jpg" /> -->
 
-/* topbar */
-#topbar{background:var(--brand-blue);color:#fff;text-align:center;padding:.55rem var(--pad);font-family:var(--font-display);font-size:var(--fs-label);letter-spacing:.18em;text-transform:uppercase}
+  <!-- Favicon : petite flamme dessinée en SVG, aucune image externe. -->
+  <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%237B1E1E'/><path d='M16 5c3 4 5 6 5 10a5 5 0 0 1-10 0c0-2 1-3 2-4 0 2 1 3 2 3-1-3 0-6 1-9z' fill='%23C2410C'/></svg>" />
 
-/* header */
-#header{position:sticky;top:0;z-index:100;transition:background .3s,border-color .3s,box-shadow .3s}
-#header.scrolled{background:rgba(247,246,243,.96);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 1px 0 var(--line)}
-.header-inner{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:.95rem var(--pad);gap:1rem}
-.nav-left{display:flex;gap:2rem;align-items:center}
-.nav-left a{font-family:var(--font-display);font-size:var(--fs-label);font-weight:700;letter-spacing:.14em;text-transform:uppercase;position:relative;color:var(--ink-invert)}
-#header.scrolled .nav-left a{color:var(--ink)}
-.nav-left a::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:1.5px;background:var(--brand-blue);transition:width .25s}
-.nav-left a:hover::after,.nav-left a.active::after{width:100%}
-.logo{font-family:var(--font-display);font-size:1.45rem;font-weight:900;letter-spacing:-.02em;color:#fff;text-align:center;cursor:pointer;user-select:none;transition:color .3s}
-#header.scrolled .logo{color:var(--brand-blue)}
-.logo sup{font-size:.5em;vertical-align:super}
-.nav-right{display:flex;align-items:center;gap:1rem;justify-content:flex-end}
-.nav-icon{display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;color:var(--ink-invert);transition:background .2s,color .2s;position:relative}
-#header.scrolled .nav-icon{color:var(--ink)}
-.nav-icon:hover{background:rgba(255,255,255,.12)}
-#header.scrolled .nav-icon:hover{background:var(--bg-mute)}
-.nav-icon svg{width:19px;height:19px;stroke-width:1.6}
-#cart-badge{position:absolute;top:4px;right:4px;background:var(--brand-blue);color:#fff;font-size:9px;font-weight:700;min-width:15px;height:15px;border-radius:50%;display:none;align-items:center;justify-content:center;padding:0 3px}
-#cart-badge.show{display:flex}
-.burger{display:none;flex-direction:column;gap:5px;width:40px;height:40px;align-items:center;justify-content:center}
-.burger span{display:block;width:22px;height:1.5px;background:var(--ink-invert);transition:transform .3s,opacity .3s}
-#header.scrolled .burger span{background:var(--ink)}
+  <!-- ============================================================
+       POLICES GOOGLE FONTS (seul CDN autorisé)
+       Anton pour les titres, DM Sans pour le texte courant.
+       ============================================================ -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet" />
 
-/* mobile nav */
-#mobile-nav{position:fixed;inset:0;z-index:200;background:var(--bg-dark);display:flex;flex-direction:column;justify-content:center;align-items:center;gap:2rem;transform:translateX(100%);transition:transform .35s cubic-bezier(.4,0,.2,1)}
-#mobile-nav.open{transform:none}
-#mobile-nav a{font-family:var(--font-display);font-size:clamp(2.2rem,8vw,3.5rem);font-weight:900;text-transform:uppercase;color:var(--ink-invert);letter-spacing:-.01em}
-#mobile-nav a:hover{color:var(--brand-blue)}
-.mobile-close{position:absolute;top:1.5rem;right:1.5rem;color:var(--ink-invert);font-size:1.4rem;width:44px;height:44px;display:flex;align-items:center;justify-content:center}
+  <!-- Feuille de style du site. -->
+  <link rel="stylesheet" href="css/style.css" />
 
-/* views */
-.view{display:none;opacity:0;transition:opacity .25s}
-.view.active{display:block;opacity:1}
-
-/* ── HERO ── */
-#hero{min-height:95vh;background:var(--bg-dark);display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:clamp(5rem,10vw,8rem) var(--pad) clamp(4rem,8vw,6rem);gap:3rem;position:relative;overflow:hidden}
-#hero::before{content:'';position:absolute;top:-20%;right:-10%;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(27,43,214,.12) 0%,transparent 70%);pointer-events:none}
-.hero-label{font-family:var(--font-display);font-size:var(--fs-label);letter-spacing:.22em;text-transform:uppercase;color:var(--brand-blue);margin-bottom:1.5rem;display:block}
-.hero-title{font-family:var(--font-display);font-size:var(--fs-hero);font-weight:900;line-height:.91;letter-spacing:-.03em;text-transform:uppercase;color:var(--ink-invert)}
-.hero-title .hl{color:transparent;-webkit-text-stroke:1.5px rgba(247,246,243,.35)}
-.hero-evid{font-family:var(--font-display);font-size:clamp(1.1rem,2.5vw,1.9rem);font-weight:800;letter-spacing:.06em;color:var(--brand-blue);margin-top:.6rem}
-.hero-text{margin-top:2rem;max-width:36ch;color:rgba(247,246,243,.5);line-height:1.75;font-size:.95rem}
-.hero-actions{display:flex;gap:1rem;margin-top:2.5rem;flex-wrap:wrap}
-.hero-visual{display:flex;align-items:center;justify-content:center;position:relative}.hero-visual::before{content:"";position:absolute;width:520px;height:520px;background:radial-gradient(ellipse,rgba(255,255,255,.07) 0%,transparent 68%);border-radius:50%;pointer-events:none;z-index:0}.hero-tshirt-wrap{position:relative;z-index:1}
-.hero-tshirt-wrap{width:100%;max-width:420px;margin:0 auto}
-.hero-tshirt-wrap svg{width:100%;height:auto;filter:drop-shadow(0 30px 60px rgba(0,0,0,.5));animation:floatHero 6s ease-in-out infinite}
-@keyframes floatHero{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
-@media(prefers-reduced-motion:reduce){.hero-tshirt-wrap svg{animation:none}}
-.hero-scroll{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.5rem;color:rgba(247,246,243,.3);font-family:var(--font-display);font-size:var(--fs-label);letter-spacing:.15em;text-transform:uppercase}
-.hero-scroll span{display:block;width:1px;height:50px;background:linear-gradient(to bottom,rgba(247,246,243,.3),transparent);animation:scrollLine 2s ease-in-out infinite}
-@keyframes scrollLine{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
-@media(max-width:768px){
-  #hero{grid-template-columns:1fr;min-height:auto;padding-top:5rem;gap:2rem}
-  .hero-visual{order:-1;max-width:240px;margin:0 auto}
-  .hero-scroll{display:none}
-}
-
-/* stagger reveal on hero */
-.hero-label,.hero-title,.hero-evid,.hero-text,.hero-actions{opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1)}
-.hero-label.in{opacity:1;transform:none;transition-delay:.1s}
-.hero-title.in{opacity:1;transform:none;transition-delay:.25s}
-.hero-evid.in{opacity:1;transform:none;transition-delay:.45s}
-.hero-text.in{opacity:1;transform:none;transition-delay:.6s}
-.hero-actions.in{opacity:1;transform:none;transition-delay:.75s}
-
-/* ── CAROUSEL ── */
-#carousel-section{padding:var(--section-v) 0;background:var(--bg);overflow:hidden}
-.section-head{text-align:center;padding:0 var(--pad);margin-bottom:4rem}
-.eyebrow{font-family:var(--font-display);font-size:var(--fs-label);letter-spacing:.22em;text-transform:uppercase;color:var(--brand-blue);display:block;margin-bottom:.75rem}
-.section-head h2{font-family:var(--font-display);font-size:var(--fs-h1);font-weight:900;text-transform:uppercase;letter-spacing:-.025em;line-height:1}
-.section-head p{color:var(--ink-soft);margin-top:.75rem;font-size:var(--fs-small);letter-spacing:.05em}
-.carousel-stage{perspective:1400px;perspective-origin:50% 50%;height:450px;display:flex;align-items:center;justify-content:center;overflow:visible;position:relative;contain:layout}
-.ring{position:relative;width:0;height:0;transform-style:preserve-3d;will-change:transform}
-.cell{position:absolute;transform-style:preserve-3d;display:flex;align-items:center;justify-content:center;cursor:pointer;border:none;background:none;padding:0;will-change:transform,opacity;transition:opacity .08s linear}
-.cell-inner{pointer-events:none;display:flex;flex-direction:column;align-items:center}
-.cell svg,.cell img{display:block}
-.carousel-info{text-align:center;min-height:4rem;padding:1.75rem var(--pad) 0}
-.carousel-name{font-family:var(--font-display);font-size:1.2rem;font-weight:900;text-transform:uppercase;letter-spacing:-.01em;transition:opacity .25s}
-.carousel-price{font-family:var(--font-display);font-size:var(--fs-label);letter-spacing:.14em;color:var(--ink-soft);margin-top:.3rem}
-.carousel-nav{display:flex;justify-content:center;align-items:center;gap:1.5rem;margin-top:1.5rem}
-.carr-btn{width:52px;height:52px;border:1.5px solid var(--ink);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1rem;transition:background .2s,color .2s}
-.carr-btn:hover{background:var(--ink);color:var(--ink-invert)}
-.carr-hint{font-family:var(--font-display);font-size:var(--fs-label);letter-spacing:.12em;color:var(--ink-soft);text-transform:uppercase}
-@media(max-width:767px){
-  .carousel-stage{height:330px}
-}
-
-/* ── MARQUEE ── */
-.marquee-band{overflow:hidden;background:var(--bg-dark);padding:1.2rem 0}
-.marquee-track{display:flex;width:max-content;animation:mq 30s linear infinite}
-.marquee-track:hover{animation-play-state:paused}
-.marquee-item{font-family:var(--font-display);font-size:clamp(.9rem,2vw,1.35rem);font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-invert);white-space:nowrap;padding:0 2rem}
-.marquee-sep{color:var(--brand-blue)}
-@keyframes mq{to{transform:translateX(-50%)}}
-@media(prefers-reduced-motion:reduce){.marquee-track{animation-play-state:paused}}
-
-/* ── CATEGORIES ── */
-#categories{padding:var(--section-v) var(--pad)}
-.cat-wrap{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start;margin-top:3.5rem}
-.cat-list{display:flex;flex-direction:column}
-.cat-item{font-family:var(--font-display);font-size:var(--fs-cat);font-weight:900;letter-spacing:-.025em;text-transform:uppercase;color:var(--line);border-bottom:1px solid var(--line);padding:.3rem 0;line-height:1.05;cursor:default;transition:color .2s;position:relative}
-.cat-item.active,.cat-item:not(.soon):hover{color:var(--ink)}
-.cat-item.active::before{content:'→';position:absolute;left:-1.8rem;color:var(--brand-blue);font-size:.45em;top:.55rem}
-.cat-soon{font-family:var(--font-display);font-size:var(--fs-label);letter-spacing:.14em;color:var(--ink-soft);margin-left:1rem;vertical-align:middle;font-weight:500}
-.cat-visual-box{position:sticky;top:6rem;aspect-ratio:4/5;background:var(--bg-pure);border-radius:var(--radius);display:flex;align-items:center;justify-content:center;overflow:hidden;transition:opacity .3s;border:1px solid var(--line)}
-.cat-visual-box svg{transition:transform .3s}
-.cat-sub{margin-top:1.25rem;font-size:var(--fs-small);color:var(--ink-soft);max-width:30ch;line-height:1.6}
-@media(max-width:768px){
-  .cat-wrap{grid-template-columns:1fr;gap:3rem}
-  .cat-visual-box{position:static;aspect-ratio:3/2}
-  .cat-item{font-size:clamp(2.2rem,9vw,4rem)}
-}
-
-/* ── LIFESTYLE ── */
-#lifestyle{position:relative;background:var(--bg-dark);padding:clamp(5rem,12vw,10rem) 0;overflow:hidden;text-align:center}
-.lifestyle-marquee{overflow:hidden;width:100%}
-.lifestyle-track{display:flex;width:max-content;animation:mq 25s linear infinite reverse}
-.lifestyle-track:hover{animation-play-state:paused}
-.lifestyle-item{font-family:var(--font-display);font-size:clamp(1.1rem,3vw,2.2rem);font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:rgba(247,246,243,.22);white-space:nowrap;padding:0 3rem}
-.lifestyle-item.hl{color:var(--ink-invert)}
-.lifestyle-cta{margin-top:3rem}
-@media(prefers-reduced-motion:reduce){.lifestyle-track{animation-play-state:paused}}
-
-/* ── LOOKBOOK PREVIEW ── */
-#lookbook-preview{padding:var(--section-v) var(--pad)}
-.lb-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin-top:3rem}
-.lb-card{position:relative;aspect-ratio:4/5;background:var(--bg-mute);overflow:hidden;border-radius:var(--radius)}
-.lb-card-body{width:100%;height:100%;display:flex;align-items:center;justify-content:center;transition:transform .4s cubic-bezier(.16,1,.3,1)}
-.lb-card:hover .lb-card-body{transform:scale(1.04)}
-.lb-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(11,11,12,.7) 0%,transparent 50%);opacity:0;transition:opacity .3s;display:flex;align-items:flex-end;padding:1.5rem}
-.lb-card:hover .lb-overlay{opacity:1}
-.lb-tag{font-family:var(--font-display);font-size:var(--fs-label);font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#fff}
-@media(max-width:768px){.lb-grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:480px){.lb-grid{grid-template-columns:1fr}}
-
-/* ── ABOUT TEASER ── */
-#about-teaser{padding:var(--section-v) var(--pad);background:var(--bg-dark);display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
-.at-label{font-family:var(--font-display);font-size:var(--fs-label);letter-spacing:.2em;text-transform:uppercase;color:var(--brand-blue);margin-bottom:1.25rem;display:block}
-.at-title{font-family:var(--font-display);font-size:var(--fs-h1);font-weight:900;text-transform:uppercase;letter-spacing:-.025em;line-height:1.05;color:var(--ink-invert)}
-.at-text{margin-top:1.5rem;color:rgba(247,246,243,.5);line-height:1.8}
-.at-link{display:inline-block;margin-top:2rem;font-family:var(--font-display);font-size:var(--fs-label);font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-invert);border-bottom:1.5px solid var(--brand-blue);padding-bottom:2px;transition:color .2s}
-.at-link:hover{color:var(--brand-blue)}
-.at-visual{aspect-ratio:1;background:#161616;border-radius:var(--radius);display:flex;align-items:center;justify-content:center}
-@media(max-width:768px){#about-teaser{grid-template-columns:1fr}}
-
-/* ── NEWSLETTER ── */
-#newsletter{padding:var(--section-v) var(--pad);text-align:center}
-#newsletter h2{font-family:var(--font-display);font-size:var(--fs-h1);font-weight:900;text-transform:uppercase;letter-spacing:-.025em}
-#newsletter p{color:var(--ink-soft);margin-top:.75rem}
-.nl-form{display:flex;gap:.5rem;max-width:420px;margin:2.5rem auto 0;flex-wrap:wrap;justify-content:center}
-.nl-form input{flex:1;min-width:200px;border:none;border-bottom:1.5px solid var(--ink);background:transparent;padding:.75rem 0;font-size:var(--fs-body);outline:none;color:var(--ink)}
-.nl-form input:focus{border-bottom-color:var(--brand-blue)}
-.nl-ok{display:none;font-family:var(--font-display);font-weight:700;color:var(--brand-blue);margin-top:1rem;letter-spacing:.06em}
-
-/* ── FOOTER ── */
-#footer{background:var(--bg-dark);color:var(--ink-invert);padding:clamp(4rem,8vw,7rem) var(--pad) 0;overflow:hidden}
-.footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:3rem;padding-bottom:4rem;border-bottom:1px solid rgba(255,255,255,.07)}
-.footer-logo{font-family:var(--font-display);font-size:1.3rem;font-weight:900;letter-spacing:-.02em;color:var(--brand-blue);display:block;margin-bottom:1rem}
-.footer-logo sup{font-size:.5em;vertical-align:super}
-.footer-sub{font-size:var(--fs-small);color:rgba(247,246,243,.35);line-height:1.7;max-width:26ch}
-.footer-col h4{font-family:var(--font-display);font-size:var(--fs-label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(247,246,243,.3);margin-bottom:1.25rem}
-.footer-col a{display:block;font-size:var(--fs-small);color:rgba(247,246,243,.55);margin-bottom:.6rem;transition:color .2s}
-.footer-col a:hover{color:var(--ink-invert)}
-.footer-bottom{padding:1.5rem 0;font-size:var(--fs-label);letter-spacing:.1em;text-transform:uppercase;color:rgba(247,246,243,.2)}
-.footer-wm{font-family:var(--font-display);font-size:clamp(5rem,18vw,13rem);font-weight:900;letter-spacing:-.04em;text-transform:uppercase;color:rgba(255,255,255,.03);line-height:1;margin-top:1.5rem;white-space:nowrap}
-@media(max-width:900px){.footer-grid{grid-template-columns:1fr 1fr}}
-@media(max-width:480px){.footer-grid{grid-template-columns:1fr}}
-
-/* ── SHOP ── */
-#shop-view{padding:var(--section-v) var(--pad)}
-#shop-view h1{font-family:var(--font-display);font-size:var(--fs-h1);font-weight:900;text-transform:uppercase;letter-spacing:-.025em;margin-bottom:2.5rem}
-.filters{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:3rem;border-bottom:1px solid var(--line);padding-bottom:1.5rem}
-.f-btn{font-family:var(--font-display);font-size:var(--fs-label);font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:.45rem 1.1rem;border:1.5px solid transparent;border-radius:var(--radius);color:var(--ink-soft);transition:all .2s}
-.f-btn:hover,.f-btn.on{border-color:var(--ink);color:var(--ink)}
-.f-btn.on{background:var(--ink);color:var(--ink-invert)}
-.shop-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2rem}
-@media(max-width:1100px){.shop-grid{grid-template-columns:repeat(3,1fr)}}
-@media(max-width:768px){.shop-grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:420px){.shop-grid{grid-template-columns:repeat(2,1fr);gap:1rem}}
-
-/* product card */
-.pcard{cursor:pointer}
-.pcard-img{aspect-ratio:4/5;background:var(--bg-pure);border-radius:var(--radius);overflow:hidden;display:flex;align-items:center;justify-content:center;transition:box-shadow .3s;border:1px solid var(--line)}
-.pcard:hover .pcard-img{box-shadow:0 20px 50px rgba(0,0,0,.1)}
-.pcard-img-inner{transition:transform .4s cubic-bezier(.16,1,.3,1);display:flex;align-items:center;justify-content:center;width:100%;height:100%}
-.pcard:hover .pcard-img-inner{transform:scale(1.04)}
-.pcard-info{padding:.9rem 0 .4rem}
-.pcard-name{font-family:var(--font-display);font-weight:800;font-size:.88rem;letter-spacing:-.005em;text-transform:uppercase}
-.pcard-price{font-family:var(--font-display);font-size:var(--fs-label);letter-spacing:.1em;color:var(--ink-soft);margin-top:.2rem}
-.pcard-dots{display:flex;gap:.3rem;margin-top:.45rem}
-.dot{width:13px;height:13px;border-radius:50%;border:1.5px solid var(--line)}
-.soon-tag{display:inline-block;font-family:var(--font-display);font-size:calc(var(--fs-label) - .05rem);letter-spacing:.12em;text-transform:uppercase;background:var(--bg-mute);color:var(--ink-soft);padding:.22rem .55rem;border-radius:var(--radius);margin-top:.45rem}
-
-/* ── PRODUCT PAGE ── */
-#product-view{padding:var(--section-v) var(--pad)}
-.prod-layout{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start}
-.prod-main-img{aspect-ratio:4/5;background:var(--bg-pure);border-radius:var(--radius);display:flex;align-items:center;justify-content:center;overflow:hidden;border:1px solid var(--line)}
-.prod-main-img svg,.prod-main-img img{width:72%;height:auto}
-.prod-thumbs{display:flex;gap:.6rem;margin-top:.75rem}
-.thumb{width:68px;height:84px;background:var(--bg-mute);border-radius:var(--radius);display:flex;align-items:center;justify-content:center;cursor:pointer;border:1.5px solid transparent;transition:border-color .2s}
-.thumb.active{border-color:var(--ink)}
-.thumb svg,.thumb img{width:68%;height:auto}
-.breadcrumb{font-family:var(--font-display);font-size:var(--fs-label);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:1.5rem}
-.breadcrumb span{margin:0 .4rem}
-.prod-name{font-family:var(--font-display);font-size:var(--fs-h1);font-weight:900;text-transform:uppercase;letter-spacing:-.025em;line-height:1.02}
-.prod-price{font-family:var(--font-display);font-size:1.45rem;font-weight:700;letter-spacing:.03em;margin-top:.6rem}
-.prod-desc{margin-top:1.25rem;color:var(--ink-soft);line-height:1.8;max-width:40ch;font-size:.95rem}
-.size-lbl{font-family:var(--font-display);font-size:var(--fs-label);font-weight:700;letter-spacing:.15em;text-transform:uppercase;margin-top:2rem;margin-bottom:.65rem}
-.size-row{display:flex;gap:.45rem;flex-wrap:wrap}
-.sz{width:50px;height:50px;border:1.5px solid var(--line);border-radius:var(--radius);font-family:var(--font-display);font-size:.82rem;font-weight:700;letter-spacing:.04em;transition:all .2s}
-.sz:hover{border-color:var(--ink)}
-.sz.on{background:var(--ink);color:var(--ink-invert);border-color:var(--ink)}
-.size-hint{font-size:var(--fs-small);color:var(--brand-blue);margin-top:.45rem;display:none}
-.size-hint.show{display:block}
-.atc{width:100%;margin-top:1.5rem;padding:1.2rem}
-.perks{display:flex;gap:1.5rem;margin-top:1.5rem;flex-wrap:wrap}
-.perk{display:flex;align-items:center;gap:.4rem;font-family:var(--font-display);font-size:calc(var(--fs-label) - .02rem);letter-spacing:.07em;text-transform:uppercase;color:var(--ink-soft)}
-.acc{margin-top:2rem;border-top:1px solid var(--line)}
-.acc-item{border-bottom:1px solid var(--line)}
-.acc-trigger{display:flex;justify-content:space-between;align-items:center;width:100%;padding:.95rem 0;font-family:var(--font-display);font-size:var(--fs-small);font-weight:700;letter-spacing:.1em;text-transform:uppercase;background:none;border:none;cursor:pointer}
-.acc-trigger svg{transition:transform .25s;flex-shrink:0}
-.acc-trigger.open svg{transform:rotate(180deg)}
-.acc-body{max-height:0;overflow:hidden;transition:max-height .3s ease;font-size:var(--fs-small);color:var(--ink-soft);line-height:1.75}
-.acc-body-inner{padding:.1rem 0 1.1rem}
-.related{padding:var(--section-v) var(--pad);border-top:1px solid var(--line)}
-.related h2{font-family:var(--font-display);font-size:var(--fs-h2);font-weight:900;text-transform:uppercase;letter-spacing:-.015em;margin-bottom:2.5rem}
-.related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem}
-@media(max-width:768px){.prod-layout{grid-template-columns:1fr;gap:2.5rem}.related-grid{grid-template-columns:repeat(2,1fr)}}
-
-/* ── LOOKBOOK PAGE ── */
-#lookbook-view{padding-top:5rem}
-.lb-hero-sec{min-height:75vh;background:var(--bg-dark);display:flex;align-items:flex-end;padding:5rem var(--pad)}
-.lb-hero-sec h1{font-family:var(--font-display);font-size:var(--fs-hero);font-weight:900;text-transform:uppercase;letter-spacing:-.03em;line-height:.9;color:var(--ink-invert)}
-.lb-editorial{padding:var(--section-v) var(--pad)}
-.lb-spread{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;margin-bottom:7rem}
-.lb-spread.rev{direction:rtl}
-.lb-spread.rev>*{direction:ltr}
-.lb-img-box{aspect-ratio:4/5;background:var(--bg-mute);border-radius:var(--radius);display:flex;align-items:center;justify-content:center;overflow:hidden}
-.lb-txt .lb-ch{font-family:var(--font-display);font-size:var(--fs-label);letter-spacing:.2em;text-transform:uppercase;color:var(--brand-blue);margin-bottom:1.5rem;display:block}
-.lb-txt blockquote{font-size:clamp(1.2rem,2.5vw,1.9rem);font-weight:400;line-height:1.45;color:var(--ink);font-style:italic}
-.lb-txt small{display:block;margin-top:1.75rem;font-size:var(--fs-small);color:var(--ink-soft)}
-.lb-txt small a{border-bottom:1px solid var(--brand-blue)}
-@media(max-width:768px){.lb-spread{grid-template-columns:1fr;direction:ltr!important}}
-
-/* ── ABOUT PAGE ── */
-#about-view{padding:var(--section-v) var(--pad)}
-.about-big{font-family:var(--font-display);font-size:var(--fs-hero);font-weight:900;text-transform:uppercase;letter-spacing:-.03em;line-height:.9;margin-bottom:5rem}
-.about-layout{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:start}
-.about-body p{line-height:1.85;color:var(--ink-soft);font-size:.97rem;margin-bottom:1.5rem}
-.about-body p strong{color:var(--ink);font-weight:600}
-.about-img-box{aspect-ratio:3/4;background:var(--bg-mute);border-radius:var(--radius);display:flex;align-items:center;justify-content:center;position:sticky;top:6rem}
-.values{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-top:5rem;padding-top:4rem;border-top:1px solid var(--line)}
-.val h3{font-family:var(--font-display);font-weight:800;text-transform:uppercase;letter-spacing:.04em;font-size:.85rem;margin-bottom:.5rem}
-.val p{font-size:var(--fs-small);color:var(--ink-soft);line-height:1.65}
-@media(max-width:768px){.about-layout{grid-template-columns:1fr}.about-img-box{position:static}.values{grid-template-columns:1fr}}
-
-/* ── CONTACT ── */
-#contact-view{padding:var(--section-v) var(--pad);max-width:680px;margin:0 auto}
-#contact-view h1{font-family:var(--font-display);font-size:var(--fs-h1);font-weight:900;text-transform:uppercase;letter-spacing:-.025em;margin-bottom:3rem}
-.c-form{display:flex;flex-direction:column;gap:2.25rem}
-.c-field label{display:block;font-family:var(--font-display);font-size:var(--fs-label);font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:.5rem}
-.c-field input,.c-field textarea{width:100%;border:none;border-bottom:1.5px solid var(--line);background:transparent;padding:.7rem 0;font-size:var(--fs-body);color:var(--ink);outline:none;resize:vertical}
-.c-field input:focus,.c-field textarea:focus{border-bottom-color:var(--brand-blue)}
-.c-err{font-size:var(--fs-small);color:#c0392b;margin-top:.3rem;display:none}
-.c-field.err .c-err{display:block}
-.c-field.err input,.c-field.err textarea{border-bottom-color:#c0392b}
-.c-confirm{display:none;text-align:center;padding:4rem 0}
-.c-confirm h2{font-family:var(--font-display);font-size:var(--fs-h2);font-weight:900;text-transform:uppercase}
-.c-confirm p{color:var(--ink-soft);margin-top:1rem}
-.c-info{margin-top:4rem;padding-top:3rem;border-top:1px solid var(--line);display:flex;gap:3rem;flex-wrap:wrap}
-.c-info-block strong{display:block;font-family:var(--font-display);font-size:var(--fs-label);letter-spacing:.12em;text-transform:uppercase;margin-bottom:.3rem}
-.c-info-block{font-size:var(--fs-small);color:var(--ink-soft)}
-.faq-sec{padding:3rem 0 0}
-.faq-sec h2{font-family:var(--font-display);font-size:var(--fs-h2);font-weight:900;text-transform:uppercase;letter-spacing:-.015em;margin-bottom:2rem}
-
-/* ── CART DRAWER ── */
-#cart-veil{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:300;opacity:0;pointer-events:none;transition:opacity .3s}
-#cart-veil.on{opacity:1;pointer-events:all}
-#cart-drawer{position:fixed;right:0;top:0;bottom:0;width:min(440px,100vw);background:var(--bg-pure);z-index:301;transform:translateX(100%);transition:transform .35s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column}
-#cart-drawer.on{transform:none}
-.cd-head{display:flex;justify-content:space-between;align-items:center;padding:1.5rem 1.75rem;border-bottom:1px solid var(--line)}
-.cd-head h2{font-family:var(--font-display);font-size:.9rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
-.cd-close{width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:50%;transition:background .2s}
-.cd-close:hover{background:var(--bg-mute)}
-.cd-items{flex:1;overflow-y:auto;padding:1.5rem 1.75rem}
-.cd-empty{text-align:center;padding:4rem 0}
-.cd-empty p{color:var(--ink-soft);margin-bottom:1.5rem}
-.cd-item{display:grid;grid-template-columns:78px 1fr auto;gap:1rem;padding:1.25rem 0;border-bottom:1px solid var(--line);align-items:start}
-.cd-item-img{width:78px;height:96px;background:var(--bg-mute);border-radius:var(--radius);display:flex;align-items:center;justify-content:center}
-.cd-item-name{font-family:var(--font-display);font-size:.82rem;font-weight:800;text-transform:uppercase;letter-spacing:-.005em}
-.cd-item-meta{font-size:var(--fs-small);color:var(--ink-soft);margin-top:.2rem}
-.cd-item-price{font-family:var(--font-display);font-weight:700;font-size:.9rem;margin-top:.4rem}
-.qty{display:flex;align-items:center;gap:.4rem;margin-top:.5rem}
-.qty-b{width:26px;height:26px;border:1.5px solid var(--line);border-radius:var(--radius);display:flex;align-items:center;justify-content:center;font-size:.9rem;transition:all .2s}
-.qty-b:hover{border-color:var(--ink);background:var(--ink);color:var(--ink-invert)}
-.qty-n{font-family:var(--font-display);font-size:.88rem;font-weight:700;min-width:22px;text-align:center}
-.cd-rm{color:var(--ink-soft);width:30px;height:30px;display:flex;align-items:center;justify-content:center;border-radius:50%;transition:background .2s;font-size:1rem}
-.cd-rm:hover{background:var(--bg-mute);color:var(--ink)}
-.cd-foot{padding:1.5rem 1.75rem;border-top:1px solid var(--line)}
-.cd-ship{margin-bottom:1.25rem}
-.cd-ship-txt{font-size:var(--fs-small);color:var(--ink-soft);margin-bottom:.5rem}
-.cd-bar-bg{height:3px;background:var(--line);border-radius:99px}
-.cd-bar{height:100%;background:var(--brand-blue);border-radius:99px;transition:width .4s}
-.cd-total{display:flex;justify-content:space-between;font-family:var(--font-display);font-weight:700;margin-bottom:1.25rem}
-.cd-checkout{width:100%}
-
-/* ── TOAST ── */
-#toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(130%);background:var(--bg-dark);color:var(--ink-invert);font-family:var(--font-display);font-size:var(--fs-label);letter-spacing:.13em;text-transform:uppercase;padding:.8rem 2rem;border-radius:var(--radius);z-index:600;transition:transform .35s cubic-bezier(.16,1,.3,1);white-space:nowrap}
-#toast.show{transform:translateX(-50%) translateY(0)}
-
-/* reveal */
-.reveal{opacity:0;transform:translateY(26px);transition:opacity .65s cubic-bezier(.16,1,.3,1),transform .65s cubic-bezier(.16,1,.3,1)}
-.reveal.in{opacity:1;transform:none}
-@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
-
-@media(max-width:768px){
-  .nav-left{display:none}
-  .burger{display:flex}
-  .header-inner{grid-template-columns:44px 1fr 44px}
-}
-</style>
+  <!-- ============================================================
+       DONNÉES STRUCTURÉES JSON-LD — type Restaurant
+       Essentiel pour le référencement local (Google).
+       ============================================================ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Restaurant",
+    "name": "La Réserve",
+    "description": "Pizzeria-restaurant, cuisson des pizzas et des viandes au feu de bois.",
+    "servesCuisine": ["Pizza", "Italienne", "Française"],
+    "priceRange": "€€",
+    "telephone": "+33442690087",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "2 rue Baséli",
+      "addressLocality": "Cabriès",
+      "postalCode": "13480",
+      "addressRegion": "Provence-Alpes-Côte d'Azur",
+      "addressCountry": "FR"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 43.4604038,
+      "longitude": 5.3524899
+    },
+    "areaServed": ["Calas", "Cabriès", "La Duranne"],
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.3",
+      "reviewCount": "460",
+      "bestRating": "5"
+    },
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+        "opens": "12:00",
+        "closes": "14:00"
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+        "opens": "19:00",
+        "closes": "22:00"
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": "Sunday",
+        "opens": "19:00",
+        "closes": "21:30"
+      }
+    ]
+  }
+  </script>
 </head>
+
 <body>
 
-<div id="topbar">Livraison offerte dès 80€&nbsp;·&nbsp;Nouveau drop disponible</div>
+  <!-- Lien d'évitement : permet de sauter directement au contenu (clavier). -->
+  <a class="aller-au-contenu" href="#contenu">Aller au contenu</a>
 
-<header id="header">
-  <div class="header-inner">
-    <nav class="nav-left" aria-label="Navigation">
-      <a href="#/" data-route="/">Accueil</a>
-      <a href="#/shop" data-route="/shop">Shop</a>
-      <a href="#/lookbook" data-route="/lookbook">Lookbook</a>
-      <a href="#/about" data-route="/about">About</a>
-      <a href="#/contact" data-route="/contact">Contact</a>
-    </nav>
-    <a href="#/" class="logo" data-route="/" aria-label="Kiffclub accueil">Klffclub<sup>®</sup></a>
-    <div class="nav-right">
-      <button class="nav-icon" aria-label="Rechercher" onclick="showToast('Recherche bientôt disponible')">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="22" y2="22"/></svg>
-      </button>
-      <button class="nav-icon" aria-label="Mon compte" onclick="showToast('Compte bientôt disponible')">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
-      </button>
-      <button class="nav-icon" aria-label="Panier" id="cart-btn" onclick="openCart()">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
-        <span id="cart-badge" aria-live="polite"></span>
-      </button>
-      <button class="burger" id="burger" aria-label="Menu" onclick="toggleMobile()">
-        <span></span><span></span><span></span>
-      </button>
+  <!-- ================================================================
+       EN-TÊTE / BARRE DE NAVIGATION
+       Posée par-dessus le hero. La navigation n'apparaît que sur
+       grand écran (voir la feuille de style).
+       ================================================================ -->
+  <header class="entete">
+    <div class="entete__inner">
+      <a href="#" class="entete__logo">La Réserve</a>
+      <nav class="entete__nav" aria-label="Navigation principale">
+        <a href="#carte">La carte</a>
+        <a href="#horaires">Horaires &amp; accès</a>
+        <a href="#avis">Avis</a>
+        <a href="tel:+33442690087">04&nbsp;42&nbsp;69&nbsp;00&nbsp;87</a>
+      </nav>
     </div>
-  </div>
-</header>
+  </header>
 
-<nav id="mobile-nav" aria-label="Menu mobile">
-  <button class="mobile-close" onclick="toggleMobile()" aria-label="Fermer">✕</button>
-  <a href="#/" data-route="/" onclick="toggleMobile()">Accueil</a>
-  <a href="#/shop" data-route="/shop" onclick="toggleMobile()">Shop</a>
-  <a href="#/lookbook" data-route="/lookbook" onclick="toggleMobile()">Lookbook</a>
-  <a href="#/about" data-route="/about" onclick="toggleMobile()">About</a>
-  <a href="#/contact" data-route="/contact" onclick="toggleMobile()">Contact</a>
-</nav>
+  <main id="contenu">
 
-<!-- ═══════════ HOME ═══════════ -->
-<div class="view" id="view-home">
-
-  <section id="hero">
-    <div class="hero-content">
-      <span class="hero-label">Streetwear Français</span>
-      <h1 class="hero-title">WE<br>ARE<br><span class="hl">RICH</span><br>IN<br>MEMORIES.</h1>
-      <p class="hero-evid">ÉVIDEMMENT.</p>
-      <p class="hero-text">Le streetwear français qui collectionne les souvenirs. Coton lourd, coupes oversize, sérigraphies qui ne s'effacent pas — comme les bons moments.</p>
-      <div class="hero-actions">
-        <a href="#/shop" class="btn btn-blue" data-route="/shop">Découvrir le drop</a>
-        <a href="#/lookbook" class="btn btn-ghost" data-route="/lookbook">Lookbook</a>
+    <!-- ==============================================================
+         1. HERO — accueil plein écran
+         ==============================================================
+         PHOTO À VENIR : le four à bois en pleine flambée, cadrage
+         large et sombre. Format paysage, au moins 2000 × 1200 px.
+         Pour l'ajouter, REMPLACER le bloc <div class="placeholder">
+         ci-dessous par :
+           <img class="hero__image" src="images/hero-four.jpg"
+                alt="Le four à bois de La Réserve en pleine flambée"
+                width="2000" height="1200" />
+    -->
+    <section class="hero" aria-label="Accueil">
+      <!-- Bloc de remplacement gris tant qu'il n'y a pas de photo -->
+      <div class="placeholder" aria-hidden="true">
+        <span>PHOTO À VENIR — le four à bois en flambée (paysage, 2000×1200)</span>
       </div>
-    </div>
-    <div class="hero-visual">
-      <div class="hero-tshirt-wrap" id="hero-tshirt"></div>
-    </div>
-    <div class="hero-scroll" aria-hidden="true"><span></span></div>
-  </section>
 
-  <section id="carousel-section">
-    <div class="section-head reveal">
-      <span class="eyebrow">Le Drop</span>
-      <h2>Les Modèles</h2>
-      <p>Fais tourner le club · Clique sur un modèle pour le découvrir</p>
-    </div>
-    <div class="carousel-stage" id="cstage" aria-label="Carrousel des modèles" role="region">
-      <div class="ring" id="ring" role="list"></div>
-    </div>
-    <div class="carousel-info">
-      <div class="carousel-name" id="cap-name"></div>
-      <div class="carousel-price" id="cap-price"></div>
-    </div>
-    <div class="carousel-nav">
-      <button class="carr-btn" id="carr-prev" aria-label="Précédent">←</button>
-      <span class="carr-hint">Glisse ou utilise les flèches</span>
-      <button class="carr-btn" id="carr-next" aria-label="Suivant">→</button>
-    </div>
-  </section>
+      <!-- Voile sombre pour la lisibilité du texte -->
+      <div class="hero__voile" aria-hidden="true"></div>
 
-  <div class="marquee-band" aria-hidden="true"><div class="marquee-track" id="mq1"></div></div>
-
-  <section id="categories" class="container">
-    <div class="reveal"><span class="eyebrow">Le Vestiaire</span></div>
-    <div class="cat-wrap">
-      <div class="cat-list" id="cat-list">
-        <div class="cat-item active" data-cat="tshirts">T-Shirts</div>
-        <div class="cat-item soon" data-cat="hoodies">Hoodies<span class="cat-soon">Bientôt</span></div>
-        <div class="cat-item soon" data-cat="casquettes">Casquettes<span class="cat-soon">Bientôt</span></div>
-        <div class="cat-item soon" data-cat="accessoires">Accessoires<span class="cat-soon">Bientôt</span></div>
-      </div>
-      <div>
-        <div class="cat-visual-box" id="cat-visual"></div>
-        <p class="cat-sub" id="cat-desc">La pièce fondatrice du club. Quatre couleurs, une seule mémoire.</p>
-      </div>
-    </div>
-  </section>
-
-  <section id="lifestyle">
-    <div class="lifestyle-marquee"><div class="lifestyle-track" id="mq2"></div></div>
-    <div class="lifestyle-cta">
-      <a href="#/shop" class="btn btn-ghost" data-route="/shop">Voir la boutique</a>
-    </div>
-  </section>
-
-  <section id="lookbook-preview" class="container">
-    <div class="reveal">
-      <span class="eyebrow">Lookbook</span>
-      <h2 style="font-family:var(--font-display);font-size:var(--fs-h1);font-weight:900;text-transform:uppercase;letter-spacing:-.025em;margin-top:.5rem">Des Souvenirs<br>en Mouvement</h2>
-      <p style="color:var(--ink-soft);margin-top:1rem;max-width:38ch">Une vieille Porsche, un mur en pierre, la lumière de fin d'après-midi. Le club, c'est aussi un décor.</p>
-    </div>
-    <div class="lb-grid reveal">
-      <div class="lb-card"><div class="lb-card-body" id="lbp1"></div><div class="lb-overlay"><span class="lb-tag">Mur Haussmannien</span></div></div>
-      <div class="lb-card"><div class="lb-card-body" id="lbp2"></div><div class="lb-overlay"><span class="lb-tag">La Porsche</span></div></div>
-      <div class="lb-card"><div class="lb-card-body" id="lbp3"></div><div class="lb-overlay"><span class="lb-tag">Entre Amis</span></div></div>
-    </div>
-    <div style="text-align:center;margin-top:2.5rem" class="reveal">
-      <a href="#/lookbook" class="btn btn-outline" data-route="/lookbook">Voir le Lookbook</a>
-    </div>
-  </section>
-
-  <section id="about-teaser">
-    <div class="reveal">
-      <span class="at-label">Notre histoire</span>
-      <h2 class="at-title">Nés Pour Durer</h2>
-      <p class="at-text">Kiffclub est parti d'une idée simple : et si on pouvait porter ses souvenirs ? On fabrique des vêtements en petites séries, pensés pour vieillir bien — comme les meilleures histoires.</p>
-      <a href="#/about" class="at-link" data-route="/about">Notre histoire →</a>
-    </div>
-    <div class="at-visual reveal">
-      <svg viewBox="0 0 280 280" width="180" aria-hidden="true">
-        <circle cx="140" cy="140" r="120" fill="rgba(27,43,214,.06)"/>
-        <text x="140" y="168" text-anchor="middle" font-family="Arial Black,sans-serif" font-size="90" font-weight="900" fill="rgba(27,43,214,.2)">K</text>
-      </svg>
-    </div>
-  </section>
-
-  <section id="newsletter" class="container">
-    <div class="reveal">
-      <h2>Rejoins le Club</h2>
-      <p>Les drops en avant-première, rien d'autre. Pas de spam, évidemment.</p>
-      <form class="nl-form" id="nl-form" onsubmit="handleNL(event)">
-        <input type="email" placeholder="ton@email.fr" aria-label="Email" required>
-        <button type="submit" class="btn btn-primary">S'inscrire</button>
-      </form>
-      <p class="nl-ok" id="nl-ok">Bienvenue au club. À très vite.</p>
-    </div>
-  </section>
-
-</div>
-
-<!-- ═══════════ SHOP ═══════════ -->
-<div class="view" id="view-shop">
-  <div id="shop-view" class="container">
-    <h1>Shop</h1>
-    <div class="filters" id="shop-filters"></div>
-    <div class="shop-grid" id="shop-grid"></div>
-  </div>
-</div>
-
-<!-- ═══════════ PRODUCT ═══════════ -->
-<div class="view" id="view-product">
-  <div id="product-view" class="container">
-    <div class="prod-layout">
-      <div>
-        <div class="prod-main-img" id="prod-main"></div>
-        <div class="prod-thumbs" id="prod-thumbs"></div>
-      </div>
-      <div>
-        <nav class="breadcrumb"><a href="#/" data-route="/">Accueil</a><span>·</span><a href="#/shop" data-route="/shop">Shop</a><span>·</span><span id="prod-bc"></span></nav>
-        <h1 class="prod-name" id="prod-name"></h1>
-        <div class="prod-price" id="prod-price"></div>
-        <p class="prod-desc" id="prod-desc"></p>
-        <div class="size-lbl">Taille</div>
-        <div class="size-row" id="size-row"></div>
-        <p class="size-hint" id="size-hint">Choisis ta taille pour continuer</p>
-        <button class="btn btn-primary atc" id="atc-btn" onclick="addToCart()">Ajouter au panier</button>
-        <div class="perks">
-          <span class="perk"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Livraison offerte dès 80€</span>
-          <span class="perk"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Retours 14 jours</span>
-          <span class="perk"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Paiement sécurisé</span>
-        </div>
-        <div class="acc" id="prod-acc"></div>
-      </div>
-    </div>
-  </div>
-  <div class="related container">
-    <h2>Tu aimeras aussi</h2>
-    <div class="related-grid" id="related-grid"></div>
-  </div>
-</div>
-
-<!-- ═══════════ LOOKBOOK ═══════════ -->
-<div class="view" id="view-lookbook">
-  <div id="lookbook-view">
-    <div class="lb-hero-sec"><h1>Été<br>Sans Fin</h1></div>
-    <div class="lb-editorial container">
-      <div class="lb-spread">
-        <div class="lb-img-box" id="lb1"></div>
-        <div class="lb-txt"><span class="lb-ch">Chapitre 01</span><blockquote>«&nbsp;On roulait sans destination, juste pour le plaisir de rouler.&nbsp;»</blockquote><small>T-Shirt Memories — Kaki · 49€ · <a href="#/produit/kaki" data-route="/produit/kaki">Shop the look</a></small></div>
-      </div>
-      <div class="lb-spread rev">
-        <div class="lb-img-box" id="lb2"></div>
-        <div class="lb-txt"><span class="lb-ch">Chapitre 02</span><blockquote>«&nbsp;Le mur connaissait nos noms. On y revenait chaque soir.&nbsp;»</blockquote><small>T-Shirt Memories — Charcoal · 45€ · <a href="#/produit/charcoal" data-route="/produit/charcoal">Shop the look</a></small></div>
-      </div>
-      <div class="lb-spread">
-        <div class="lb-img-box" id="lb3"></div>
-        <div class="lb-txt"><span class="lb-ch">Chapitre 03</span><blockquote>«&nbsp;Certains souvenirs ne tiennent pas dans une photo. Alors on les a mis sur du coton.&nbsp;»</blockquote><small>T-Shirt Memories — Rose · 45€ · <a href="#/produit/rose" data-route="/produit/rose">Shop the look</a></small></div>
-      </div>
-      <p style="text-align:center;font-family:var(--font-display);font-size:var(--fs-h2);font-weight:900;text-transform:uppercase;letter-spacing:-.01em;color:var(--ink-soft);padding:3rem 0 5rem">À suivre. Évidemment.</p>
-    </div>
-  </div>
-</div>
-
-<!-- ═══════════ ABOUT ═══════════ -->
-<div class="view" id="view-about">
-  <div id="about-view" class="container">
-    <h1 class="about-big">We Are Rich<br>in Memories.</h1>
-    <div class="about-layout">
-      <div class="about-body">
-        <p>Kiffclub est né d'un été qui n'en finissait pas. De trajets en voiture les vitres ouvertes, de soirées qu'on aurait voulu figer, de l'envie un peu naïve de ne rien oublier.</p>
-        <p>On s'est dit qu'un vêtement pouvait être plus qu'un vêtement&nbsp;: un repère, une date, une personne. Une madeleine en coton.</p>
-        <p>Alors on a commencé petit. Du coton lourd, des coupes amples, des sérigraphies qui tiennent. Des séries limitées, fabriquées avec soin, sans course au volume. <strong>On préfère faire moins, mais bien.</strong></p>
-        <p>On n'a pas inventé le streetwear. On lui a juste ajouté de la mémoire.</p>
-        <p style="font-family:var(--font-display);font-weight:800;font-size:1.05rem;color:var(--ink)">Bienvenue au club. Évidemment.</p>
-      </div>
-      <div class="about-img-box" id="about-img"></div>
-    </div>
-    <div class="values">
-      <div class="val"><h3>Séries Limitées</h3><p>On produit peu, exprès. Quand c'est parti, c'est parti.</p></div>
-      <div class="val"><h3>Coton Lourd</h3><p>240 g/m², pensé pour durer des années, pas une saison.</p></div>
-      <div class="val"><h3>Fabriqué avec Soin</h3><p>Petites séries, contrôle à chaque étape.</p></div>
-    </div>
-  </div>
-</div>
-
-<!-- ═══════════ CONTACT ═══════════ -->
-<div class="view" id="view-contact">
-  <div id="contact-view">
-    <h1>Contact</h1>
-    <div id="c-form-wrap">
-      <form class="c-form" id="c-form" onsubmit="handleContact(event)" novalidate>
-        <div class="c-field" id="ff-name"><label for="cn">Nom</label><input type="text" id="cn" placeholder="Ton prénom"><p class="c-err">Oups, vérifie ce champ.</p></div>
-        <div class="c-field" id="ff-email"><label for="ce">Email</label><input type="email" id="ce" placeholder="ton@email.fr"><p class="c-err">Oups, vérifie ce champ.</p></div>
-        <div class="c-field" id="ff-msg"><label for="cm">Message</label><textarea id="cm" rows="5" placeholder="Ton message…"></textarea><p class="c-err">Oups, vérifie ce champ.</p></div>
-        <button type="submit" class="btn btn-primary" style="align-self:flex-start">Envoyer</button>
-      </form>
-    </div>
-    <div class="c-confirm" id="c-confirm"><h2>Message reçu.</h2><p>On te répond vite. À très bientôt.</p></div>
-    <div class="c-info">
-      <div class="c-info-block"><strong>Instagram</strong><a href="https://instagram.com/_kiffclub_" target="_blank" rel="noopener">@_kiffclub_</a></div>
-      <div class="c-info-block"><strong>Email</strong><a href="mailto:hello@kiffclub.fr">hello@kiffclub.fr</a></div>
-      <div class="c-info-block"><strong>Localisation</strong>France</div>
-    </div>
-    <div class="faq-sec"><h2>FAQ</h2><div class="acc" id="faq-acc"></div></div>
-  </div>
-</div>
-
-<!-- FOOTER (toujours visible) -->
-<footer id="footer">
-  <div class="footer-grid">
-    <div>
-      <span class="footer-logo">Klffclub<sup>®</sup></span>
-      <p class="footer-sub">WE ARE RICH IN MEMORIES. ÉVIDEMMENT.<br>Le streetwear français qui collectionne les souvenirs.</p>
-    </div>
-    <div class="footer-col"><h4>Boutique</h4><a href="#/shop" data-route="/shop">Tous les produits</a><a href="#/lookbook" data-route="/lookbook">Lookbook</a></div>
-    <div class="footer-col"><h4>Aide</h4><a href="#/contact" data-route="/contact">Contact</a><a href="#/contact" data-route="/contact">Livraison</a><a href="#/contact" data-route="/contact">Retours & FAQ</a></div>
-    <div class="footer-col"><h4>Suivre</h4><a href="https://instagram.com/_kiffclub_" target="_blank" rel="noopener">Instagram @_kiffclub_</a><a href="mailto:hello@kiffclub.fr">hello@kiffclub.fr</a></div>
-  </div>
-  <div class="footer-bottom">© 2026 Kiffclub® — We are rich in memories. Évidemment.</div>
-  <div class="footer-wm" aria-hidden="true">KIFFCLUB</div>
-</footer>
-
-<!-- CART -->
-<div id="cart-veil" onclick="closeCart()" aria-hidden="true"></div>
-<aside id="cart-drawer" aria-label="Panier" role="dialog" aria-modal="true">
-  <div class="cd-head"><h2>Panier</h2><button class="cd-close" onclick="closeCart()" aria-label="Fermer">✕</button></div>
-  <div class="cd-items" id="cd-items"></div>
-  <div class="cd-foot">
-    <div class="cd-ship"><p class="cd-ship-txt" id="ship-txt"></p><div class="cd-bar-bg"><div class="cd-bar" id="ship-bar" style="width:0"></div></div></div>
-    <div class="cd-total"><span>Sous-total</span><span id="cd-total">0€</span></div>
-    <button class="btn btn-primary cd-checkout" onclick="handleCheckout()">Passer commande</button>
-  </div>
-</aside>
-
-<div id="toast" role="status" aria-live="polite"></div>
-
-<script>
-// ═══════════ DATA ═══════════
-const R = Math.round;
-const products = [
-  {
-    slug:'charcoal', nom:'T-Shirt Memories — Charcoal', prix:'45€', prixNum:45,
-    couleur:'#1a1818', coulImprime:'#e855a8', texteImprime:'@KIFFCLUB', imprimePos:'back',
-    tailles:['S','M','L','XL'],
-    images:['/assets/tshirt-charcoal-front.png','/assets/tshirt-charcoal-back.png'],
-    description:"L'anthracite, c'est la couleur des souvenirs qu'on garde pour soi. T-shirt oversize en coton lourd 240 g/m². Au dos, @KIFFCLUB sérigraphié en rose poudré.",
-    descLong:"L'anthracite, c'est la couleur des souvenirs qu'on garde pour soi. Ce t-shirt oversize en coton lourd 240 g/m² tombe parfaitement et vieillit encore mieux. Au dos, la signature @KIFFCLUB sérigraphiée en rose poudré avec son micro-texte manifeste. Col côtelé renforcé. Une pièce sobre qui va avec tout. Coupe unisexe. Modèle 1m80 porté en M.",
-    matiere:'Coton lourd 240 g/m². Coupe oversize unisexe. Col côtelé renforcé. Sérigraphie durable.',
-    livraison:'Expédié sous 24–48h. Livraison 2–4 jours ouvrés en France, offerte dès 80€. Retours sous 14 jours.',
-    entretien:"Lavage à 30° sur l'envers. Pas de sèche-linge ni repassage direct sur l'imprimé."
-  },
-  {
-    slug:'blanc', nom:'T-Shirt Memories — Blanc', prix:'45€', prixNum:45,
-    couleur:'#ffffff', coulImprime:'#7ab8f5', texteImprime:'@KIFFCLUB', imprimePos:'back',
-    tailles:['S','M','L','XL'],
-    images:['/assets/tshirt-blanc-front.png','/assets/tshirt-blanc-back.png'],
-    description:'Blanc lumineux, imprimé dos bleu Kiffclub. Le classique du club. Coton lourd 240 g/m², coupe oversize, tombé impeccable.',
-    descLong:"Le blanc du club. Lumineux, franc, intemporel. Coton lourd 240 g/m², coupe oversize, tombé impeccable. Au dos, le logo @KIFFCLUB en bleu cobalt — notre bleu, évidemment. C'est le t-shirt qu'on porte cent fois et qu'on aime toujours autant. Série limitée.",
-    matiere:'Coton lourd 240 g/m². Coupe oversize unisexe. Col côtelé renforcé. Sérigraphie durable.',
-    livraison:'Expédié sous 24–48h. Livraison 2–4 jours ouvrés en France, offerte dès 80€. Retours sous 14 jours.',
-    entretien:"Lavage à 30° sur l'envers. Pas de sèche-linge ni repassage direct sur l'imprimé."
-  },
-  {
-    slug:'rose', nom:'T-Shirt Memories — Rose', prix:'45€', prixNum:45,
-    couleur:'#e8a6c6', coulImprime:'#ffffff', texteImprime:'@KIFFCLUB', imprimePos:'back',
-    tailles:['S','M','L','XL'],
-    images:['/assets/tshirt-rose-front.png','/assets/tshirt-rose-back.png'],
-    description:"Rose poudré, doux comme une fin d'après-midi d'été. Coton 240 g/m², coupe ample, dos signé @KIFFCLUB en blanc. Édition limitée.",
-    descLong:"Rose poudré, doux comme une fin d'après-midi d'été. Cette couleur n'est pas là pour crier, mais pour réchauffer. Coton lourd 240 g/m², coupe ample unisexe, dos signé @KIFFCLUB en blanc. Édition limitée — quand c'est parti, c'est parti.",
-    matiere:'Coton lourd 240 g/m². Coupe oversize unisexe. Col côtelé renforcé. Sérigraphie durable.',
-    livraison:'Expédié sous 24–48h. Livraison 2–4 jours ouvrés en France, offerte dès 80€. Retours sous 14 jours.',
-    entretien:"Lavage à 30° sur l'envers. Pas de sèche-linge ni repassage direct sur l'imprimé."
-  },
-  {
-    slug:'kaki', nom:'T-Shirt Memories — Kaki', prix:'49€', prixNum:49,
-    couleur:'#4a5128', coulImprime:'#e855a8', texteImprime:'WE ARE RICH IN MEMORIES.', imprimePos:'back',
-    tailles:['S','M','L','XL'],
-    images:['/assets/tshirt-kaki-front.png','/assets/tshirt-kaki-back.png'],
-    description:"La pièce manifeste. Vert olive profond, côté cœur : WE ARE RICH IN MEMORIES. ÉVIDEMMENT. Coton 240 g/m², série limitée.",
-    descLong:"La pièce manifeste. Vert olive profond, et côté cœur, notre devise brodée : WE ARE RICH IN MEMORIES. ÉVIDEMMENT. Coton lourd 240 g/m², coupe oversize, finitions soignées. Le plus bavard de la collection, et le plus discret à la fois. Série limitée.",
-    matiere:'Coton lourd 240 g/m². Coupe oversize unisexe. Col côtelé renforcé. Sérigraphie durable.',
-    livraison:'Expédié sous 24–48h. Livraison 2–4 jours ouvrés en France, offerte dès 80€. Retours sous 14 jours.',
-    entretien:"Lavage à 30° sur l'envers. Pas de sèche-linge ni repassage direct sur l'imprimé."
-  }
-];
-
-const comingSoon = [
-  {slug:'hoodie', nom:'Hoodie Memories', couleur:'#e8e4dc'},
-  {slug:'cap', nom:'Casquette Club', couleur:'#2b2b2d'},
-  {slug:'tote', nom:'Tote Bag Kiffclub', couleur:'#ecebe6'}
-];
-
-const faqData = [
-  {q:'Quelles sont les tailles ?', a:'Du S au XL, coupe oversize unisexe. Prends ta taille habituelle pour un fit oversize, ou en dessous pour un fit ajusté.'},
-  {q:'Quels délais de livraison ?', a:'2 à 4 jours ouvrés en France. Livraison offerte dès 80€.'},
-  {q:'Puis-je retourner un article ?', a:'Oui, sous 14 jours, non porté, étiquettes attachées.'},
-  {q:'Comment entretenir mon t-shirt ?', a:"Lavage à 30° sur l'envers, pas de sèche-linge. Il te suivra longtemps."},
-  {q:'Où êtes-vous basés ?', a:'En France. Le club est petit mais le cœur est grand.'}
-];
-
-// ═══════════ SVG T-SHIRT 3D RÉALISTE ═══════════
-// Forme oversize boxy, courbes cubiques de Bézier, ombre portée, cintre, plis de tissu,
-// 5 calques de lumière/ombre, col côtelé détaillé — style photoproduct sur fond neutre
-function tshirtSVG(p, view='front', size=240) {
-  const W=300, H=400;
-  const u=`t${p.slug}${view[0]}${size|0}`;
-  const fr=view==='front';
-  const isWh=p.couleur==='#ffffff';
-  const nk=fr?90:72; // encolure : devant plonge à 90, dos reste haut à 72
-
-  // ── FORME : oversize boxy crewneck ──
-  // Courbes cubiques de Bézier pour des bords organiques (tissu épais qui drape naturellement)
-  const sh=
-    `M100,68 C125,${nk} 175,${nk} 200,68 `+   // encolure
-    `L258,78 C270,96 280,114 282,132 `+          // épaule droite → bord extérieur manche
-    `L276,166 C258,155 240,151 228,149 `+         // bout manche droite → emmanchure
-    `L228,342 L72,342 `+                          // corps droit + ourlet bas
-    `L72,149 C60,151 42,155 24,166 `+            // emmanchure gauche → bout manche gauche
-    `L18,132 C20,114 30,96 42,78 Z`;             // bord extérieur manche gauche → épaule
-
-  const nkP=`M100,68 C125,${nk} 175,${nk} 200,68`;
-
-  // ── IMPRESSIONS (fidèles aux vraies photos) ──
-  let print='';
-  if(fr){
-    if(p.slug==='blanc'){
-      print=`<text x="150" y="178" text-anchor="middle" font-family="'Fredoka One',cursive" font-size="12" fill="${p.coulImprime}" letter-spacing="2">KIFFCLUB</text>`;
-    }
-    if(p.slug==='kaki'){
-      print=`
-        <text x="100" y="167" font-family="'Fredoka One',cursive" font-size="9" fill="#f0ede6" opacity=".88">WE ARE RICH IN</text>
-        <text x="100" y="179" font-family="'Fredoka One',cursive" font-size="9" fill="#f0ede6" opacity=".88">MEMORIES.</text>
-        <text x="100" y="191" font-family="'Fredoka One',cursive" font-size="9" fill="#f0ede6" opacity=".88">ÉVIDEMMENT</text>`;
-    }
-  } else {
-    if(p.slug==='kaki'){
-      print=`
-        <text x="150" y="188" text-anchor="middle" font-family="'Fredoka One',cursive" font-size="24" fill="${p.coulImprime}">WE ARE RICH IN</text>
-        <text x="150" y="216" text-anchor="middle" font-family="'Fredoka One',cursive" font-size="24" fill="${p.coulImprime}">MEMORIES.</text>
-        <text x="150" y="244" text-anchor="middle" font-family="'Fredoka One',cursive" font-size="24" fill="${p.coulImprime}">ÉVIDEMMENT</text>`;
-    } else {
-      print=`
-        <text x="150" y="205" text-anchor="middle" font-family="'Fredoka One',cursive" font-size="30" fill="${p.coulImprime}">@KIFFCLUB</text>
-        <text x="150" y="222" text-anchor="middle" font-family="'Fredoka One',cursive" font-size="7.5" fill="${p.coulImprime}" letter-spacing="2" opacity=".75">WE ARE RICH IN MEMORIES. ÉVIDEMMENT</text>`;
-    }
-  }
-
-  return `<svg viewBox="0 0 ${W} ${H}" width="${size}" height="${Math.round(size*H/W)}"
-    xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-  <defs>
-    <filter id="sh_${u}" x="-25%" y="-5%" width="150%" height="130%">
-      <feDropShadow dx="0" dy="14" stdDeviation="22" flood-color="#000" flood-opacity=".20"/>
-    </filter>
-    <linearGradient id="sg_${u}" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="rgba(0,0,0,.30)"/>
-      <stop offset="14%" stop-color="rgba(0,0,0,.10)"/>
-      <stop offset="42%" stop-color="rgba(0,0,0,0)"/>
-      <stop offset="58%" stop-color="rgba(0,0,0,0)"/>
-      <stop offset="84%" stop-color="rgba(0,0,0,.07)"/>
-      <stop offset="100%" stop-color="rgba(0,0,0,.24)"/>
-    </linearGradient>
-    <linearGradient id="tg_${u}" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="rgba(255,255,255,.20)"/>
-      <stop offset="12%" stop-color="rgba(255,255,255,.06)"/>
-      <stop offset="35%" stop-color="rgba(0,0,0,0)"/>
-      <stop offset="80%" stop-color="rgba(0,0,0,.04)"/>
-      <stop offset="100%" stop-color="rgba(0,0,0,.20)"/>
-    </linearGradient>
-    <radialGradient id="hl_${u}" cx="35%" cy="24%" r="52%">
-      <stop offset="0%" stop-color="rgba(255,255,255,.26)"/>
-      <stop offset="55%" stop-color="rgba(255,255,255,.05)"/>
-      <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
-    </radialGradient>
-    <radialGradient id="rl_${u}" cx="84%" cy="36%" r="30%">
-      <stop offset="0%" stop-color="rgba(255,255,255,.14)"/>
-      <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
-    </radialGradient>
-    <radialGradient id="cs_${u}" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="rgba(0,0,0,.26)"/>
-      <stop offset="100%" stop-color="rgba(0,0,0,0)"/>
-    </radialGradient>
-    <clipPath id="cp_${u}"><path d="${sh}"/></clipPath>
-  </defs>
-  <ellipse cx="150" cy="373" rx="84" ry="13" fill="url(#cs_${u})"/>
-  <line x1="150" y1="28" x2="150" y2="68" stroke="#c0c0c0" stroke-width="1.5" stroke-linecap="round"/>
-  <path d="M150,28 C150,18 157,12 163,14 C169,16 169,24 163,28" fill="none" stroke="#b0b0b0" stroke-width="2" stroke-linecap="round"/>
-  <path d="${sh}" fill="${p.couleur}" ${isWh?'stroke="#ccc" stroke-width="1.5"':''} filter="url(#sh_${u})"/>
-  <path d="${sh}" fill="url(#sg_${u})"/>
-  <path d="${sh}" fill="url(#tg_${u})"/>
-  <path d="${sh}" fill="url(#hl_${u})"/>
-  <path d="${sh}" fill="url(#rl_${u})"/>
-  <g clip-path="url(#cp_${u})">
-    <path d="M130,149 C128,211 132,274 130,342" fill="none" stroke="rgba(0,0,0,.045)" stroke-width="3.5"/>
-    <path d="M168,149 C170,211 166,274 168,342" fill="none" stroke="rgba(0,0,0,.038)" stroke-width="3"/>
-    <path d="M150,149 C149,211 151,268 150,342" fill="none" stroke="${isWh?'rgba(0,0,0,.028)':'rgba(0,0,0,.04)'}" stroke-width="2.5"/>
-    <path d="M113,95 C111,117 115,134 113,149" fill="none" stroke="rgba(0,0,0,.04)" stroke-width="2"/>
-    <path d="M187,95 C189,117 185,134 187,149" fill="none" stroke="rgba(0,0,0,.04)" stroke-width="2"/>
-  </g>
-  <path d="${nkP}" fill="none" stroke="${isWh?'rgba(0,0,0,.18)':'rgba(0,0,0,.26)'}" stroke-width="9" stroke-linecap="round"/>
-  <path d="${nkP}" fill="none" stroke="${isWh?'rgba(255,255,255,.38)':'rgba(255,255,255,.20)'}" stroke-width="4.5" stroke-linecap="round"/>
-  <path d="${nkP}" fill="none" stroke="rgba(0,0,0,.06)" stroke-width="1.5" stroke-dasharray="3 4" stroke-linecap="round"/>
-  <ellipse cx="150" cy="${fr?82:70}" rx="28" ry="${fr?11:8}" fill="rgba(0,0,0,.38)"/>
-  <path d="M200,68 L258,78" fill="none" stroke="rgba(0,0,0,.10)" stroke-width="1.5" stroke-dasharray="3.5 3" stroke-linecap="round"/>
-  <path d="M100,68 L42,78" fill="none" stroke="rgba(0,0,0,.10)" stroke-width="1.5" stroke-dasharray="3.5 3" stroke-linecap="round"/>
-  <path d="M276,166 L228,149" fill="none" stroke="rgba(0,0,0,.15)" stroke-width="3" stroke-linecap="round"/>
-  <path d="M24,166 L72,149" fill="none" stroke="rgba(0,0,0,.15)" stroke-width="3" stroke-linecap="round"/>
-  <path d="M72,342 C150,348 150,348 228,342" fill="none" stroke="rgba(0,0,0,.12)" stroke-width="2.5" stroke-linecap="round"/>
-  ${print}
-</svg>`;
-}
-
-
-function tshirtCSVG(p, size=180) {
-  const W=300,H=400,u=`cs${p.slug||'x'}${size|0}`;
-  const sh=`M100,68 C125,90 175,90 200,68 L258,78 C270,96 280,114 282,132 L276,166 C258,155 240,151 228,149 L228,342 L72,342 L72,149 C60,151 42,155 24,166 L18,132 C20,114 30,96 42,78 Z`;
-  return `<svg viewBox="0 0 ${W} ${H}" width="${size}" height="${Math.round(size*H/W)}" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <defs><filter id="shcs_${u}"><feDropShadow dx="0" dy="8" stdDeviation="14" flood-color="#000" flood-opacity="0.10"/></filter></defs>
-    <path d="${sh}" fill="${p.couleur}" stroke="#dcdbd5" stroke-width="1.5" opacity=".38" filter="url(#shcs_${u})"/>
-  </svg>`;
-}
-
-
-
-
-// ═══════════ CART ═══════════
-let cart = [];
-let currentProd = null, selectedSize = null;
-
-const cartTotal = () => cart.reduce((s,i)=>s+i.prixNum*i.qty,0);
-const cartCount = () => cart.reduce((s,i)=>s+i.qty,0);
-
-function updateBadge() {
-  const n = cartCount(), b = document.getElementById('cart-badge');
-  b.textContent = n; b.classList.toggle('show', n>0);
-}
-
-function renderCart() {
-  const el = document.getElementById('cd-items');
-  const tot = cartTotal();
-  const pct = Math.min(100,(tot/80)*100);
-  document.getElementById('ship-bar').style.width = pct+'%';
-  document.getElementById('ship-txt').textContent = tot>=80 ? 'Livraison offerte ✓' : `Plus que ${80-tot}€ pour la livraison offerte`;
-  document.getElementById('cd-total').textContent = tot+'€';
-  if (!cart.length) {
-    el.innerHTML = `<div class="cd-empty"><p>Ton panier est vide.<br>Le club t'attend.</p><a href="#/shop" class="btn btn-primary" data-route="/shop" onclick="closeCart()">Voir la boutique</a></div>`;
-    return;
-  }
-  el.innerHTML = cart.map((item,i)=>`
-    <div class="cd-item">
-      <div class="cd-item-img">${tshirtSVG(item,'front',58)}</div>
-      <div>
-        <div class="cd-item-name">${item.nom}</div>
-        <div class="cd-item-meta">Taille ${item.size}</div>
-        <div class="cd-item-price">${item.prix}</div>
-        <div class="qty">
-          <button class="qty-b" onclick="cQty(${i},-1)">−</button>
-          <span class="qty-n">${item.qty}</span>
-          <button class="qty-b" onclick="cQty(${i},1)">+</button>
+      <div class="hero__contenu conteneur">
+        <p class="hero__lieu">Cabriès — Calas</p>
+        <h1>La Réserve</h1>
+        <p class="hero__slogan">
+          « La cuisson de vos pizzas et vos viandes au feu de bois.
+          Une flamme toujours ravivée pour une cuisson parfaite. »
+        </p>
+        <div class="hero__boutons">
+          <a class="bouton bouton--plein" href="tel:+33442690087">
+            📞 Appeler
+          </a>
+          <a class="bouton bouton--contour"
+             href="https://www.google.com/maps/dir/?api=1&destination=43.4604038,5.3524899"
+             target="_blank" rel="noopener">
+            📍 Itinéraire
+          </a>
         </div>
       </div>
-      <button class="cd-rm" onclick="cRm(${i})" aria-label="Supprimer">✕</button>
-    </div>`).join('');
-}
+    </section>
 
-function cQty(i,d){cart[i].qty=Math.max(1,cart[i].qty+d);renderCart();updateBadge()}
-function cRm(i){cart.splice(i,1);renderCart();updateBadge()}
-function addToCart(){
-  if(!selectedSize){document.getElementById('size-hint').classList.add('show');return}
-  const p=currentProd, ex=cart.find(c=>c.slug===p.slug&&c.size===selectedSize);
-  ex?ex.qty++:cart.push({...p,size:selectedSize,qty:1});
-  renderCart();updateBadge();openCart();showToast('Ajouté au panier ✓');
-}
-function openCart(){document.getElementById('cart-drawer').classList.add('on');document.getElementById('cart-veil').classList.add('on');document.body.style.overflow='hidden';renderCart()}
-function closeCart(){document.getElementById('cart-drawer').classList.remove('on');document.getElementById('cart-veil').classList.remove('on');document.body.style.overflow=''}
-function handleCheckout(){showToast('Paiement bientôt disponible — Stay tuned !')}
+    <!-- ==============================================================
+         2. BANDEAU LIVRAISON — fort et très visible
+         ============================================================== -->
+    <aside class="livraison" aria-label="Livraison de pizzas">
+      <span class="livraison__label">Livraison gratuite</span>
+      <p class="livraison__texte">
+        <em>Vendredi, samedi &amp; dimanche soir</em><br />
+        sur Calas, Cabriès &amp; la Duranne
+      </p>
+      <p class="livraison__precision">
+        Livraison offerte dès 2 pizzas commandées.
+        Pour commander, appelez le
+        <a href="tel:+33442690087" style="color:#FBD9A8;font-weight:700;">04&nbsp;42&nbsp;69&nbsp;00&nbsp;87</a>.
+      </p>
+    </aside>
 
-// ═══════════ TOAST ═══════════
-let _tt;
-function showToast(msg){
-  const t=document.getElementById('toast');
-  t.textContent=msg;t.classList.add('show');
-  clearTimeout(_tt);_tt=setTimeout(()=>t.classList.remove('show'),2800);
-}
+    <!-- ==============================================================
+         3. LE FEU DE BOIS
+         ============================================================== -->
+    <section class="section" aria-labelledby="titre-feu">
+      <div class="conteneur feu">
+        <div class="feu__texte apparition">
+          <span class="sur-titre">Notre cuisine</span>
+          <h2 id="titre-feu">Tout passe<br />par le feu</h2>
+          <hr class="filet" />
+          <p>
+            Chez nous, la flamme ne s'éteint jamais tout à fait.
+            Les pizzas glissent sur la sole brûlante, les viandes
+            saisissent sur la braise, et le bois donne à chaque plat
+            ce parfum que rien d'autre ne remplace.
+          </p>
+          <p>
+            Une cuisson vive, surveillée, ravivée au fil du service.
+            C'est simple, c'est ancien, et c'est ce qui fait le goût
+            de La Réserve.
+          </p>
+        </div>
 
-// ═══════════ ROUTER ═══════════
-function navigate(path,push=true){
-  if(push)history.pushState({path},'','#'+path);
-  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
-  document.querySelectorAll('[data-route]').forEach(a=>a.classList.toggle('active',a.dataset.route===path));
-  const map={'/':'view-home','/shop':'view-shop','/lookbook':'view-lookbook','/about':'view-about','/contact':'view-contact'};
-  let vid = map[path];
-  if(path.startsWith('/produit/')){vid='view-product';renderProduct(path.split('/produit/')[1]);}
-  else if(path==='/shop')renderShop('all');
-  else if(path==='/lookbook')renderLookbook();
-  else if(path==='/contact')renderFAQ();
-  if(vid)document.getElementById(vid).classList.add('active');
-  window.scrollTo({top:0,behavior:'instant'});
-  setupReveal();
-}
-window.addEventListener('popstate',()=>navigate(location.hash.replace('#','')||'/',false));
-document.addEventListener('click',e=>{
-  const a=e.target.closest('[data-route]');
-  if(a){e.preventDefault();navigate(a.dataset.route);}
-});
-
-// ═══════════ SHOP ═══════════
-function renderShop(filter){
-  const grid=document.getElementById('shop-grid');
-  const fBtns=['all','charcoal','blanc','rose','kaki'];
-  document.getElementById('shop-filters').innerHTML=fBtns.map(f=>`<button class="f-btn${filter===f?' on':''}" onclick="renderShop('${f}')">${f==='all'?'Tous':f[0].toUpperCase()+f.slice(1)}</button>`).join('');
-  const vis=filter==='all'?products:products.filter(p=>p.slug===filter);
-  grid.innerHTML=vis.map(p=>`
-    <div class="pcard" onclick="navigate('/produit/${p.slug}')" tabindex="0" role="button" aria-label="${p.nom}" onkeydown="if(event.key==='Enter')navigate('/produit/${p.slug}')">
-      <div class="pcard-img"><div class="pcard-img-inner">${tshirtSVG(p,'front',130)}</div></div>
-      <div class="pcard-info">
-        <div class="pcard-name">${p.nom}</div>
-        <div class="pcard-price">${p.prix}</div>
-        <div class="pcard-dots"><span class="dot" style="background:${p.couleur}${p.couleur==='#ffffff'?';border-color:#dcdbd5':''}"></span></div>
+        <!-- PHOTO À VENIR : gros plan sur les flammes du four ou une
+             pizza qui sort du four. Format carré, au moins 800×800 px.
+             Pour l'ajouter, remplacer le bloc ci-dessous par :
+               <img src="images/feu.jpg"
+                    alt="Les flammes du four à bois de La Réserve"
+                    width="800" height="800" loading="lazy" /> -->
+        <div class="feu__media apparition">
+          <div class="placeholder">
+            <span>PHOTO À VENIR — flammes du four ou pizza au sortir du four (carré, 800×800)</span>
+          </div>
+        </div>
       </div>
-    </div>`).join('')
-  +comingSoon.map(p=>`
-    <div class="pcard" style="opacity:.5;cursor:default" aria-label="${p.nom} - bientôt">
-      <div class="pcard-img"><div class="pcard-img-inner">${tshirtCSVG(p,130)}</div></div>
-      <div class="pcard-info">
-        <div class="pcard-name">${p.nom}</div>
-        <span class="soon-tag">Bientôt</span>
+    </section>
+
+    <!-- ==============================================================
+         4. LA CARTE (menu)
+         ⚠️ Les prix ne sont pas encore renseignés : ils sont marqués
+         « prix à venir ». NE PAS inventer de prix.
+         Chaque catégorie contient des entrées d'EXEMPLE à remplacer.
+         ============================================================== -->
+    <section class="section section--creme-fonce" id="carte" aria-labelledby="titre-carte">
+      <div class="conteneur">
+
+        <div class="carte__intro apparition">
+          <span class="sur-titre">À déguster sur place ou à emporter</span>
+          <h2 id="titre-carte">La carte</h2>
+          <hr class="filet" />
+          <p style="margin:0 auto;">
+            Quelques exemples de ce que l'on prépare. La carte complète,
+            avec tous les prix, sera bientôt disponible ici.
+          </p>
+        </div>
+
+        <!-- ========== CATÉGORIE : PIZZAS ========== -->
+        <div class="categorie">
+          <div class="categorie__entete">
+            <!-- PHOTO À VENIR : pizza vue du dessus (Paysanne par ex.).
+                 Photo ronde, cadrage centré, au moins 600×600 px.
+                 Remplacer le bloc par :
+                   <img src="images/pizza.jpg"
+                        alt="Pizza Paysanne vue du dessus"
+                        width="600" height="600" loading="lazy" /> -->
+            <div class="categorie__photo apparition">
+              <div class="placeholder"><span>PHOTO PIZZA (ronde, 600×600)</span></div>
+            </div>
+            <div class="categorie__titre apparition">
+              <h3>Pizzas au feu de bois</h3>
+              <hr class="filet" />
+            </div>
+          </div>
+
+          <!-- ⚠️ À REMPLACER PAR LA VRAIE CARTE (noms, ingrédients, prix) -->
+          <div class="plats" data-cascade>
+            <div class="plat apparition">
+              <p class="plat__nom">Paysanne</p>
+              <p class="plat__prix plat__prix--a-venir">prix à venir</p>
+              <p class="plat__ingredients">Exemple à remplacer — décrire ici les ingrédients de la pizza.</p>
+            </div>
+            <div class="plat apparition">
+              <p class="plat__nom">Chèvre &amp; amandes grillées</p>
+              <p class="plat__prix plat__prix--a-venir">prix à venir</p>
+              <p class="plat__ingredients">Exemple à remplacer — décrire ici les ingrédients de la pizza.</p>
+            </div>
+            <div class="plat apparition">
+              <p class="plat__nom">Calzone</p>
+              <p class="plat__prix plat__prix--a-venir">prix à venir</p>
+              <p class="plat__ingredients">Exemple à remplacer — décrire ici les ingrédients de la pizza.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ========== CATÉGORIE : SALADES ========== -->
+        <div class="categorie">
+          <div class="categorie__entete">
+            <!-- PHOTO À VENIR : salade italienne vue du dessus (ronde, 600×600). -->
+            <div class="categorie__photo apparition">
+              <div class="placeholder"><span>PHOTO SALADE (ronde, 600×600)</span></div>
+            </div>
+            <div class="categorie__titre apparition">
+              <h3>Salades</h3>
+              <hr class="filet" />
+            </div>
+          </div>
+
+          <!-- ⚠️ À REMPLACER PAR LA VRAIE CARTE -->
+          <div class="plats" data-cascade>
+            <div class="plat apparition">
+              <p class="plat__nom">Salade italienne</p>
+              <p class="plat__prix plat__prix--a-venir">prix à venir</p>
+              <p class="plat__ingredients">Exemple à remplacer — décrire ici la composition de la salade.</p>
+            </div>
+            <div class="plat apparition">
+              <p class="plat__nom">Salade au foie gras</p>
+              <p class="plat__prix plat__prix--a-venir">prix à venir</p>
+              <p class="plat__ingredients">Exemple à remplacer — décrire ici la composition de la salade.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ========== CATÉGORIE : VIANDES ========== -->
+        <div class="categorie">
+          <div class="categorie__entete">
+            <!-- PHOTO À VENIR : entrecôte grillée au feu de bois (ronde, 600×600). -->
+            <div class="categorie__photo apparition">
+              <div class="placeholder"><span>PHOTO VIANDE (ronde, 600×600)</span></div>
+            </div>
+            <div class="categorie__titre apparition">
+              <h3>Viandes au feu de bois</h3>
+              <hr class="filet" />
+            </div>
+          </div>
+
+          <!-- ⚠️ À REMPLACER PAR LA VRAIE CARTE -->
+          <div class="plats" data-cascade>
+            <div class="plat apparition">
+              <p class="plat__nom">Entrecôte</p>
+              <p class="plat__prix plat__prix--a-venir">prix à venir</p>
+              <p class="plat__ingredients">Exemple à remplacer — grillée au feu de bois, garniture à préciser.</p>
+            </div>
+            <div class="plat apparition">
+              <p class="plat__nom">Tartare</p>
+              <p class="plat__prix plat__prix--a-venir">prix à venir</p>
+              <p class="plat__ingredients">Exemple à remplacer — préparation à préciser.</p>
+            </div>
+            <div class="plat apparition">
+              <p class="plat__nom">Escalope</p>
+              <p class="plat__prix plat__prix--a-venir">prix à venir</p>
+              <p class="plat__ingredients">Exemple à remplacer — préparation à préciser.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ========== CATÉGORIE : DESSERTS ========== -->
+        <div class="categorie">
+          <div class="categorie__entete">
+            <!-- PHOTO À VENIR : tiramisu maison (ronde, 600×600). -->
+            <div class="categorie__photo apparition">
+              <div class="placeholder"><span>PHOTO DESSERT (ronde, 600×600)</span></div>
+            </div>
+            <div class="categorie__titre apparition">
+              <h3>Desserts</h3>
+              <hr class="filet" />
+            </div>
+          </div>
+
+          <!-- ⚠️ À REMPLACER PAR LA VRAIE CARTE -->
+          <div class="plats" data-cascade>
+            <div class="plat apparition">
+              <p class="plat__nom">Tiramisu</p>
+              <p class="plat__prix plat__prix--a-venir">prix à venir</p>
+              <p class="plat__ingredients">Exemple à remplacer — préparation maison.</p>
+            </div>
+            <div class="plat apparition">
+              <p class="plat__nom">Glaces</p>
+              <p class="plat__prix plat__prix--a-venir">prix à venir</p>
+              <p class="plat__ingredients">Exemple à remplacer — parfums à préciser.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ========== LES MENUS ========== -->
+        <div class="menus apparition">
+          <div class="menu-carte">
+            <h3>Menu du midi</h3>
+            <p style="color:var(--olive);font-size:0.9rem;margin-bottom:0.5rem;">En semaine</p>
+            <p class="menu-carte__prix">15&nbsp;€</p>
+          </div>
+          <div class="menu-carte">
+            <h3>Menu</h3>
+            <p style="color:var(--olive);font-size:0.9rem;margin-bottom:0.5rem;">Le détail sera bientôt affiché</p>
+            <p class="menu-carte__prix">21&nbsp;€</p>
+          </div>
+        </div>
+
+        <p class="carte__note apparition">
+          <!-- À REMPLACER PAR LA VRAIE CARTE -->
+          Carte complète et prix définitifs à venir. Pour toute question,
+          n'hésitez pas à nous appeler.
+        </p>
+
       </div>
-    </div>`).join('');
-}
+    </section>
 
-// ═══════════ PRODUCT PAGE ═══════════
-let _curView='front';
-function renderProduct(slug){
-  const p=products.find(x=>x.slug===slug);
-  if(!p){navigate('/shop');return}
-  currentProd=p;selectedSize=null;_curView='front';
-  document.getElementById('prod-bc').textContent=p.nom;
-  document.getElementById('prod-name').textContent=p.nom;
-  document.getElementById('prod-price').textContent=p.prix;
-  document.getElementById('prod-desc').textContent=p.description;
-  setGallery(p,'front');
-  document.getElementById('prod-thumbs').innerHTML=['front','back'].map((v,i)=>`
-    <div class="thumb${i===0?' active':''}" onclick="setGallery(products.find(x=>x.slug==='${p.slug}'),'${v}',this)">${tshirtSVG(p,v,40)}</div>`).join('');
-  document.getElementById('size-row').innerHTML=p.tailles.map(s=>`<button class="sz" onclick="selectSz('${s}',this)">${s}</button>`).join('');
-  document.getElementById('size-hint').classList.remove('show');
-  document.getElementById('prod-acc').innerHTML=[
-    {t:'Description & matière',b:p.descLong+'<br><br>'+p.matiere},
-    {t:'Livraison & retours',b:p.livraison},
-    {t:'Entretien',b:p.entretien}
-  ].map((a,i)=>`
-    <div class="acc-item">
-      <button class="acc-trigger${i===0?' open':''}" onclick="toggleAcc(this)" aria-expanded="${i===0}">
-        ${a.t}<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-      </button>
-      <div class="acc-body" style="max-height:${i===0?'500px':'0'}"><div class="acc-body-inner">${a.b}</div></div>
-    </div>`).join('');
-  document.getElementById('related-grid').innerHTML=products.filter(x=>x.slug!==slug).slice(0,3).map(rp=>`
-    <div class="pcard" onclick="navigate('/produit/${rp.slug}')" tabindex="0" role="button" aria-label="${rp.nom}" onkeydown="if(event.key==='Enter')navigate('/produit/${rp.slug}')">
-      <div class="pcard-img"><div class="pcard-img-inner">${tshirtSVG(rp,'front',120)}</div></div>
-      <div class="pcard-info"><div class="pcard-name">${rp.nom}</div><div class="pcard-price">${rp.prix}</div></div>
-    </div>`).join('');
-}
-function setGallery(p,view,thumb){
-  document.getElementById('prod-main').innerHTML=tshirtSVG(p,view,220);
-  // → Remplacer par: document.querySelector('#prod-main img').src = p.images[view==='front'?0:1]
-  if(thumb){document.querySelectorAll('.thumb').forEach(t=>t.classList.remove('active'));thumb.classList.add('active')}
-}
-function selectSz(s,btn){
-  selectedSize=s;
-  document.querySelectorAll('.sz').forEach(b=>b.classList.remove('on'));
-  btn.classList.add('on');
-  document.getElementById('size-hint').classList.remove('show');
-}
-function toggleAcc(trigger){
-  const body=trigger.nextElementSibling,open=trigger.classList.contains('open');
-  document.querySelectorAll('.acc-trigger').forEach(t=>{t.classList.remove('open');t.setAttribute('aria-expanded','false');t.nextElementSibling.style.maxHeight='0'});
-  if(!open){trigger.classList.add('open');trigger.setAttribute('aria-expanded','true');body.style.maxHeight=body.scrollHeight+'px'}
-}
+    <!-- ==============================================================
+         5. HORAIRES & ACCÈS
+         ============================================================== -->
+    <section class="section" id="horaires" aria-labelledby="titre-horaires">
+      <div class="conteneur acces">
 
-// ═══════════ LOOKBOOK ═══════════
-function renderLookbook(){
-  [['lb1',products[3],'front'],['lb2',products[0],'back'],['lb3',products[2],'back'],
-   ['lbp1',products[3],'front'],['lbp2',products[0],'back'],['lbp3',products[2],'front']
-  ].forEach(([id,p,v])=>{const el=document.getElementById(id);if(el)el.innerHTML=tshirtSVG(p,v,140)});
-}
+        <!-- ----- Horaires + coordonnées ----- -->
+        <div class="apparition">
+          <span class="sur-titre">Nous rendre visite</span>
+          <h2 id="titre-horaires">Horaires &amp; accès</h2>
+          <hr class="filet" />
 
-// ═══════════ FAQ ═══════════
-function renderFAQ(){
-  const acc=document.getElementById('faq-acc');
-  if(!acc||acc.children.length)return;
-  acc.innerHTML=faqData.map(f=>`
-    <div class="acc-item">
-      <button class="acc-trigger" onclick="toggleAcc(this)" aria-expanded="false">
-        ${f.q}<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-      </button>
-      <div class="acc-body"><div class="acc-body-inner">${f.a}</div></div>
-    </div>`).join('');
-}
+          <table class="horaires">
+            <caption class="sur-titre" style="letter-spacing:0.12em;">Nos horaires</caption>
+            <tbody>
+              <tr class="est-ferme">
+                <th scope="row">Lundi</th>
+                <td><span class="badge-ferme">Fermé</span></td>
+              </tr>
+              <tr>
+                <th scope="row">Mardi</th>
+                <td>12h – 14h &nbsp;·&nbsp; 19h – 22h</td>
+              </tr>
+              <tr>
+                <th scope="row">Mercredi</th>
+                <td>12h – 14h &nbsp;·&nbsp; 19h – 22h</td>
+              </tr>
+              <tr>
+                <th scope="row">Jeudi</th>
+                <td>12h – 14h &nbsp;·&nbsp; 19h – 22h</td>
+              </tr>
+              <tr>
+                <th scope="row">Vendredi</th>
+                <td>12h – 14h &nbsp;·&nbsp; 19h – 22h</td>
+              </tr>
+              <tr>
+                <th scope="row">Samedi</th>
+                <td>12h – 14h &nbsp;·&nbsp; 19h – 22h</td>
+              </tr>
+              <tr>
+                <th scope="row">Dimanche</th>
+                <td>
+                  19h – 21h30
+                  <span class="mention">Pizzas à emporter et livraison uniquement</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
 
-// ═══════════ CATEGORIES ═══════════
-function initCategories(){
-  const vis=document.getElementById('cat-visual'),desc=document.getElementById('cat-desc');
-  if(!vis)return;
-  const data={
-    tshirts:{svg:tshirtSVG(products[0],'front',180),desc:'La pièce fondatrice du club. Quatre couleurs, une seule mémoire.'},
-    hoodies:{svg:tshirtCSVG({couleur:'#e8e4dc'},180),desc:'Le hoodie du club. Bientôt disponible.'},
-    casquettes:{svg:`<svg viewBox="0 0 180 120" xmlns="http://www.w3.org/2000/svg"><path d="M20,70 Q90,15 160,70 L160,88 Q90,96 20,88Z" fill="#2b2b2d" opacity=".35"/><ellipse cx="90" cy="88" rx="72" ry="16" fill="#2b2b2d" opacity=".2"/></svg>`,desc:'La casquette du club. Bientôt disponible.'},
-    accessoires:{svg:`<svg viewBox="0 0 180 200" xmlns="http://www.w3.org/2000/svg"><rect x="38" y="22" width="104" height="135" rx="2" fill="#ecebe6" stroke="#dcdbd5"/><line x1="38" y1="22" x2="50" y2="0" stroke="#aaa" stroke-width="1.5"/><line x1="142" y1="22" x2="130" y2="0" stroke="#aaa" stroke-width="1.5"/></svg>`,desc:'Les accessoires du club. Bientôt disponible.'}
-  };
-  vis.innerHTML=data.tshirts.svg;
-  document.querySelectorAll('.cat-item').forEach(item=>{
-    item.addEventListener('mouseenter',()=>{
-      document.querySelectorAll('.cat-item').forEach(c=>c.classList.remove('active'));
-      item.classList.add('active');
-      const cat=item.dataset.cat,d=data[cat]||data.tshirts;
-      vis.style.opacity='0';
-      setTimeout(()=>{vis.innerHTML=d.svg;desc.textContent=d.desc;vis.style.opacity='1';vis.style.transition='opacity .3s'},150);
-    });
-    if(!item.classList.contains('soon')){item.style.cursor='pointer';item.addEventListener('click',()=>navigate('/shop'))}
-  });
-}
+          <dl class="coordonnees">
+            <dt>Adresse</dt>
+            <dd>
+              <a href="https://www.google.com/maps/dir/?api=1&destination=43.4604038,5.3524899"
+                 target="_blank" rel="noopener">
+                2 rue Baséli, 13480 Cabriès (quartier Calas)
+              </a>
+            </dd>
+            <dt>Téléphone</dt>
+            <dd><a href="tel:+33442690087">04&nbsp;42&nbsp;69&nbsp;00&nbsp;87</a></dd>
+          </dl>
+        </div>
 
-// ═══════════ MARQUEES ═══════════
-function initMarquees(){
-  const t1='WE ARE RICH IN MEMORIES.&nbsp;<span class="marquee-sep">·</span>&nbsp;ÉVIDEMMENT.&nbsp;<span class="marquee-sep">·</span>&nbsp;KIFFCLUB®&nbsp;<span class="marquee-sep">·</span>&nbsp;PORTE TES SOUVENIRS&nbsp;<span class="marquee-sep">·</span>&nbsp;';
-  const m1=document.getElementById('mq1');
-  if(m1)m1.innerHTML=Array(8).fill(`<span class="marquee-item">${t1}</span>`).join('');
-  const t2='WEAR IT YOUR WAY&nbsp;·&nbsp;PORTE-LE À TA FAÇON&nbsp;·&nbsp;';
-  const m2=document.getElementById('mq2');
-  if(m2)m2.innerHTML=Array(8).fill(`<span class="lifestyle-item${Math.random()>.5?' hl':''}">${t2}</span>`).join('');
-}
+        <!-- ----- Carte Google Maps ----- -->
+        <div class="apparition">
+          <div class="carte-maps">
+            <!-- Carte centrée sur les coordonnées GPS du restaurant. -->
+            <iframe
+              title="Carte de localisation de La Réserve, 2 rue Baséli, Cabriès"
+              src="https://maps.google.com/maps?q=43.4604038,5.3524899&z=16&output=embed"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+        </div>
 
-// ═══════════ 3D CAROUSEL (OPTIMISÉ) ═══════════
-const reducedMotion = matchMedia('(prefers-reduced-motion:reduce)').matches;
-let ringAngle=0, speed=0.13, paused=false;
-let dragging=false, dragX=0, dragDelta=0, dragVel=0, dragTotalPx=0;
-let frontIdx=0, rafId=null;
+      </div>
+    </section>
 
-function initCarousel(){
-  const ring=document.getElementById('ring');
-  if(!ring)return;
-  const stage=document.getElementById('cstage');
-  const N=products.length, step=360/N;
-  const mob=innerWidth<768;
-  const cellW=mob?155:245, cellH=mob?220:340;
-  // radius: distance from center so cells don't overlap
-  const radius=Math.max(R((cellW/2)/Math.tan(Math.PI/N))+50, mob?180:260);
+    <!-- ==============================================================
+         6. AVIS CLIENTS
+         ============================================================== -->
+    <section class="section section--creme-fonce" id="avis" aria-labelledby="titre-avis">
+      <div class="conteneur">
 
-  ring.innerHTML=products.map((p,i)=>`
-    <button class="cell" data-slug="${p.slug}" data-i="${i}"
-      style="width:${cellW}px;height:${cellH}px;left:${-cellW/2}px;top:${-cellH/2}px;position:absolute"
-      aria-label="${p.nom}, ${p.prix}" role="listitem" tabindex="${i===0?0:-1}"
-      onkeydown="cellKey(event,this)">
-      ${tshirtSVG(p,'front',cellW-10)}
-    </button>`).join('');
+        <div class="avis__entete apparition">
+          <span class="sur-titre">Ils sont passés nous voir</span>
+          <h2 id="titre-avis">Les avis</h2>
+          <div class="avis__note">
+            <strong>4,3</strong>
+            <span class="avis__etoiles" aria-hidden="true">★★★★☆</span>
+            <span class="avis__nombre">sur 5 · plus de 460 avis Google</span>
+          </div>
+        </div>
 
-  function updateCells(){
-    ring.querySelectorAll('.cell').forEach((cell,i)=>{
-      const ca=i*step;
-      let eff=((ringAngle+ca)%360+360)%360;
-      const d=eff>180?360-eff:eff;
-      const prox=1-(d/180);
-      const sc=0.68+0.32*prox;
-      const op=0.2+0.8*prox;
-      cell.style.transform=`rotateY(${ca}deg) translateZ(${radius}px) scale(${sc})`;
-      cell.style.opacity=op;
-      cell.style.zIndex=R(prox*100);
-      if(prox>0.96&&i!==frontIdx){
-        frontIdx=i;
-        document.getElementById('cap-name').textContent=products[i].nom;
-        document.getElementById('cap-price').textContent=products[i].prix;
-        ring.querySelectorAll('.cell').forEach((c,j)=>c.setAttribute('tabindex',j===i?0:-1));
-      }
-    });
-    ring.style.transform=`rotateY(${ringAngle}deg)`;
-  }
+        <div class="avis__liste" data-cascade>
+          <!-- Citations courtes de clients (à ajuster librement). -->
+          <figure class="avis-carte apparition">
+            <blockquote>« Une vraie pizza au feu de bois, cuite comme il faut. On revient à chaque fois. »</blockquote>
+            <figcaption>Client Google <span>Avis 5/5</span></figcaption>
+          </figure>
+          <figure class="avis-carte apparition">
+            <blockquote>« Accueil chaleureux et viandes savoureuses. La carbonara et le tiramisu valent le détour. »</blockquote>
+            <figcaption>Client Google <span>Avis 5/5</span></figcaption>
+          </figure>
+          <figure class="avis-carte apparition">
+            <blockquote>« Livraison rapide le week-end sur Calas. Les pizzas arrivent chaudes, c'est parfait. »</blockquote>
+            <figcaption>Client Google <span>Avis 4/5</span></figcaption>
+          </figure>
+        </div>
 
-  function frame(){
-    if(!paused&&!dragging&&!reducedMotion)ringAngle+=speed;
-    if(!dragging&&Math.abs(dragVel)>0.05){ringAngle+=dragVel;dragVel*=0.9}
-    updateCells();
-    rafId=requestAnimationFrame(frame);
-  }
+      </div>
+    </section>
 
-  // init caption
-  document.getElementById('cap-name').textContent=products[0].nom;
-  document.getElementById('cap-price').textContent=products[0].prix;
+  </main>
 
-  if(reducedMotion)updateCells();else frame();
+  <!-- ================================================================
+       7. PIED DE PAGE
+       ================================================================ -->
+  <footer class="pied">
+    <div class="conteneur pied__grille">
 
-  // hover pause
-  stage.addEventListener('mouseenter',()=>paused=true,{passive:true});
-  stage.addEventListener('mouseleave',()=>paused=false,{passive:true});
+      <div>
+        <h2>La Réserve</h2>
+        <p>Pizzeria-restaurant, cuisson au feu de bois.</p>
+        <p style="margin-top:1rem;">
+          <a href="https://www.google.com/maps/dir/?api=1&destination=43.4604038,5.3524899"
+             target="_blank" rel="noopener">
+            2 rue Baséli, 13480 Cabriès (Calas)
+          </a><br />
+          <a href="tel:+33442690087">04&nbsp;42&nbsp;69&nbsp;00&nbsp;87</a>
+        </p>
+      </div>
 
-  // arrows — smooth snap to next slot
-  function snapBy(dir){
-    const target=R(ringAngle/step)*step+dir*step;
-    const dist=target-ringAngle;
-    let t=0;const dur=320;const start=ringAngle;
-    const ease=x=>x<.5?2*x*x:1-Math.pow(-2*x+2,2)/2;
-    if(rafId)cancelAnimationFrame(rafId);
-    function snap(){
-      t+=16/dur;if(t>=1)t=1;
-      ringAngle=start+dist*ease(t);
-      updateCells();
-      if(t<1)requestAnimationFrame(snap);else{rafId=reducedMotion?null:requestAnimationFrame(frame);}
-    }
-    requestAnimationFrame(snap);
-  }
-  document.getElementById('carr-prev').addEventListener('click',()=>snapBy(-1));
-  document.getElementById('carr-next').addEventListener('click',()=>snapBy(1));
+      <div>
+        <p class="pied__titre-col">Horaires</p>
+        <ul class="pied__horaires">
+          <li>Lundi : fermé</li>
+          <li>Mardi – samedi : 12h–14h · 19h–22h</li>
+          <li>Dimanche : 19h–21h30 (emporter &amp; livraison)</li>
+        </ul>
+      </div>
 
-  // drag / swipe
-  function onDown(e){
-    dragging=true;dragX=e.touches?e.touches[0].clientX:e.clientX;
-    dragDelta=0;dragTotalPx=0;dragVel=0;paused=true;
-  }
-  function onMove(e){
-    if(!dragging)return;
-    const x=e.touches?e.touches[0].clientX:e.clientX;
-    const dx=x-dragX;
-    ringAngle+=dx*0.38;dragVel=dx*0.38;
-    dragTotalPx+=Math.abs(dx);dragX=x;
-    updateCells();
-  }
-  function onUp(e){
-    if(!dragging)return;
-    dragging=false;paused=false;
-    if(dragTotalPx<6){
-      const el=e.target?.closest('.cell')||(e.changedTouches&&document.elementFromPoint(e.changedTouches[0].clientX,e.changedTouches[0].clientY)?.closest('.cell'));
-      if(el)navigate('/produit/'+el.dataset.slug);
-    }
-  }
-  stage.addEventListener('mousedown',onDown);
-  window.addEventListener('mousemove',onMove,{passive:true});
-  window.addEventListener('mouseup',onUp);
-  stage.addEventListener('touchstart',onDown,{passive:true});
-  window.addEventListener('touchmove',onMove,{passive:true});
-  window.addEventListener('touchend',onUp);
+      <div>
+        <p class="pied__titre-col">Livraison</p>
+        <p>Gratuite le vendredi, samedi et dimanche soir sur Calas,
+           Cabriès et la Duranne, dès 2 pizzas.</p>
+        <p style="margin-top:1rem;">
+          <a href="mentions-legales.html">Mentions légales</a>
+        </p>
+      </div>
 
-  ring.querySelectorAll('.cell').forEach(cell=>{
-    cell.addEventListener('click',e=>{if(dragTotalPx<6){e.stopPropagation();navigate('/produit/'+cell.dataset.slug)}});
-  });
-}
-window.cellKey=function(e,cell){
-  if(e.key==='Enter'||e.key===' '){e.preventDefault();navigate('/produit/'+cell.dataset.slug)}
-  if(e.key==='ArrowLeft')ringAngle-=360/products.length;
-  if(e.key==='ArrowRight')ringAngle+=360/products.length;
-};
+    </div>
 
-// ═══════════ HERO VISUAL ═══════════
-function initHero(){
-  // Show featured product (kaki, the "pièce manifeste") in hero
-  const el=document.getElementById('hero-tshirt');
-  if(el)el.innerHTML=tshirtSVG(products[0],'back',360); // charcoal dos — @KIFFCLUB rose, très impactful
-  // animate hero elements in
-  setTimeout(()=>{
-    document.querySelectorAll('.hero-label,.hero-title,.hero-evid,.hero-text,.hero-actions').forEach((el,i)=>{
-      setTimeout(()=>el.classList.add('in'),i*160);
-    });
-  },100);
-}
+    <div class="conteneur pied__bas">
+      <p>© <span id="annee">2026</span> La Réserve — MITOZZO SARL.
+         Tous droits réservés.</p>
+    </div>
+  </footer>
 
-// ═══════════ ABOUT VISUAL ═══════════
-function initAboutImg(){
-  const el=document.getElementById('about-img');
-  if(el)el.innerHTML=tshirtSVG(products[2],'front',200);
-}
+  <!-- ================================================================
+       BARRE FIXE MOBILE — Appeler / Itinéraire
+       Visible uniquement sur mobile (voir la feuille de style).
+       C'est l'élément le plus important : toujours à portée de pouce.
+       ================================================================ -->
+  <nav class="barre-mobile" aria-label="Actions rapides">
+    <a class="barre-mobile__appel" href="tel:+33442690087">📞 Appeler</a>
+    <a class="barre-mobile__itineraire"
+       href="https://www.google.com/maps/dir/?api=1&destination=43.4604038,5.3524899"
+       target="_blank" rel="noopener">📍 Itinéraire</a>
+  </nav>
 
-// ═══════════ HEADER SCROLL ═══════════
-window.addEventListener('scroll',()=>{
-  document.getElementById('header').classList.toggle('scrolled',scrollY>60);
-},{passive:true});
+  <!-- Petit script : met à jour l'année du pied de page automatiquement. -->
+  <script>
+    document.getElementById("annee").textContent = new Date().getFullYear();
+  </script>
 
-// ═══════════ MOBILE MENU ═══════════
-window.toggleMobile=function(){
-  const n=document.getElementById('mobile-nav');
-  const open=n.classList.toggle('open');
-  document.getElementById('burger').setAttribute('aria-expanded',open);
-  document.body.style.overflow=open?'hidden':'';
-};
+  <!-- Script principal : animations d'apparition au défilement. -->
+  <script src="js/main.js"></script>
 
-// ═══════════ SCROLL REVEAL ═══════════
-function setupReveal(){
-  const obs=new IntersectionObserver(entries=>{
-    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');obs.unobserve(e.target)}});
-  },{threshold:.1});
-  document.querySelectorAll('.reveal:not(.in)').forEach(el=>obs.observe(el));
-}
-
-// ═══════════ FORMS ═══════════
-window.handleNL=function(e){
-  e.preventDefault();
-  document.getElementById('nl-form').style.display='none';
-  document.getElementById('nl-ok').style.display='block';
-};
-window.handleContact=function(e){
-  e.preventDefault();
-  let ok=true;
-  [[document.getElementById('cn'),'ff-name',v=>v.trim().length>0],
-   [document.getElementById('ce'),'ff-email',v=>/^[^@]+@[^@]+\.[^@]+$/.test(v)],
-   [document.getElementById('cm'),'ff-msg',v=>v.trim().length>4]
-  ].forEach(([inp,id,test])=>{
-    const ff=document.getElementById(id);
-    ff.classList.toggle('err',!test(inp.value));
-    if(!test(inp.value))ok=false;
-  });
-  if(ok){document.getElementById('c-form-wrap').style.display='none';document.getElementById('c-confirm').style.display='block'}
-};
-
-// ═══════════ INIT ═══════════
-document.addEventListener('DOMContentLoaded',()=>{
-  initMarquees();
-  initCarousel();
-  initCategories();
-  initHero();
-  initAboutImg();
-  renderLookbook();
-  setupReveal();
-  const hash=location.hash.replace('#','')||'/';
-  navigate(hash,false);
-  document.addEventListener('keydown',e=>{
-    if(e.key==='Escape'){closeCart();if(document.getElementById('mobile-nav').classList.contains('open'))toggleMobile()}
-  });
-});
-</script>
 </body>
 </html>
