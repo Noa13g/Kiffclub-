@@ -1,0 +1,14 @@
+# Fichiers système (macOS / Windows / Linux)
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Fichiers temporaires des éditeurs de texte
+*~
+*.swp
+*.swo
+.vscode/
+.idea/
+
+# Journaux et fichiers divers
+*.log
