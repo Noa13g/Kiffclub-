@@ -226,162 +226,238 @@
       <div class="conteneur">
 
         <div class="carte__intro apparition">
-          <span class="sur-titre">À déguster sur place ou à emporter</span>
+          <span class="sur-titre">Pizzas à emporter — cuisson au feu de bois</span>
           <h2 id="titre-carte">La carte</h2>
           <hr class="filet" />
           <p style="margin:0 auto;">
-            Quelques exemples de ce que l'on prépare. La carte complète,
-            avec tous les prix, sera bientôt disponible ici.
+            Nos pizzas, en base tomate ou base crème.
+            Tarifs en cours d'actualisation — pour toute question,
+            appelez-nous au
+            <a href="tel:+33442690087" style="color:var(--brique);font-weight:700;">04&nbsp;42&nbsp;69&nbsp;00&nbsp;87</a>.
           </p>
         </div>
 
-        <!-- ========== CATÉGORIE : PIZZAS ========== -->
-        <div class="categorie">
-          <div class="categorie__entete">
-            <!-- PHOTO À VENIR : pizza vue du dessus (Paysanne par ex.).
-                 Photo ronde, cadrage centré, au moins 600×600 px.
-                 Remplacer le bloc par :
-                   <img src="images/pizza.jpg"
-                        alt="Pizza Paysanne vue du dessus"
-                        width="600" height="600" loading="lazy" /> -->
-            <div class="categorie__photo apparition">
-              <img src="images/pizza.jpg"
-                   alt="Pizza au feu de bois garnie de prosciutto, roquette, tomates cerises et copeaux de parmesan"
-                   width="600" height="600" loading="lazy" />
-            </div>
-            <div class="categorie__titre apparition">
-              <h3>Pizzas au feu de bois</h3>
-              <hr class="filet" />
-            </div>
-          </div>
-
-          <!-- ⚠️ À REMPLACER PAR LA VRAIE CARTE (noms, ingrédients, prix) -->
-          <div class="plats" data-cascade>
-            <div class="plat apparition">
-              <p class="plat__nom">Paysanne</p>
-              <p class="plat__prix plat__prix--a-venir">prix à venir</p>
-              <p class="plat__ingredients">Exemple à remplacer — décrire ici les ingrédients de la pizza.</p>
-            </div>
-            <div class="plat apparition">
-              <p class="plat__nom">Chèvre &amp; amandes grillées</p>
-              <p class="plat__prix plat__prix--a-venir">prix à venir</p>
-              <p class="plat__ingredients">Exemple à remplacer — décrire ici les ingrédients de la pizza.</p>
-            </div>
-            <div class="plat apparition">
-              <p class="plat__nom">Calzone</p>
-              <p class="plat__prix plat__prix--a-venir">prix à venir</p>
-              <p class="plat__ingredients">Exemple à remplacer — décrire ici les ingrédients de la pizza.</p>
-            </div>
-          </div>
+        <!-- Photo ronde décorative (pizza au feu de bois). -->
+        <div class="carte__photo apparition"
+             style="max-width:280px;margin:0 auto 3.5rem;aspect-ratio:1/1;border-radius:50%;overflow:hidden;box-shadow:0 0 0 6px var(--creme);">
+          <img src="images/pizza.jpg"
+               alt="Pizza au feu de bois garnie de prosciutto, roquette, tomates cerises et copeaux de parmesan"
+               width="600" height="600" loading="lazy"
+               style="width:100%;height:100%;object-fit:cover;" />
         </div>
 
-        <!-- ========== CATÉGORIE : SALADES ========== -->
-        <div class="categorie">
-          <div class="categorie__entete">
-            <!-- PHOTO À VENIR : salade italienne vue du dessus (ronde, 600×600). -->
-            <div class="categorie__photo apparition">
-              <div class="placeholder"><span>PHOTO SALADE (ronde, 600×600)</span></div>
-            </div>
-            <div class="categorie__titre apparition">
-              <h3>Salades</h3>
-              <hr class="filet" />
+        <!-- ==========================================================
+             LA CARTE DES PIZZAS — deux bases
+             ⚠️ PRIX : les tarifs 2019 ne sont PAS reconfirmés.
+             On affiche partout « prix à confirmer ». Le prix 2019 est
+             laissé en commentaire HTML pour référence, à remplir depuis
+             l'ardoise du restaurant (voir les lignes « 2019 : … € »
+             sous chaque pizza).
+             ========================================================== -->
+        <div class="carte-bases">
+
+          <!-- ========== BASE TOMATE ========== -->
+          <div class="base apparition">
+            <h3 class="base__titre">Base tomate</h3>
+            <hr class="filet" />
+
+            <div class="plats" data-cascade>
+
+              <div class="plat apparition">
+                <p class="plat__nom">Anchois</p>
+                <p class="plat__prix plat__prix--a-venir">prix à confirmer</p>
+                <!-- 2019 : … € -->
+                <p class="plat__ingredients">Anchois</p>
+              </div>
+
+              <div class="plat apparition">
+                <p class="plat__nom">Fromage</p>
+                <p class="plat__prix plat__prix--a-venir">prix à confirmer</p>
+                <!-- 2019 : … € -->
+                <p class="plat__ingredients">Fromage</p>
+              </div>
+
+              <div class="plat apparition">
+                <p class="plat__nom">Jambon / fromage</p>
+                <p class="plat__prix plat__prix--a-venir">prix à confirmer</p>
+                <!-- 2019 : … € -->
+              </div>
+
+              <div class="plat apparition">
+                <p class="plat__nom">Jambon / mozzarella</p>
+                <p class="plat__prix plat__prix--a-venir">prix à confirmer</p>
+                <!-- 2019 : … € -->
+              </div>
+
+              <div class="plat apparition">
+                <p class="plat__nom">Mozzarella</p>
+                <p class="plat__prix plat__prix--a-venir">prix à confirmer</p>
+                <!-- 2019 : … € -->
+              </div>
+
+              <div class="plat apparition">
+                <p class="plat__nom">Moitié-moitié</p>
+                <p class="plat__prix plat__prix--a-venir">prix à confirmer</p>
+                <!-- 2019 : … € -->
+                <p class="plat__ingredients">Anchois, emmental</p>
+              </div>
+
+              <div class="plat apparition">
+                <p class="plat__nom">Pissaladière</p>
+                <p class="plat__prix plat__prix--a-venir">prix à confirmer</p>
+                <!-- 2019 : … € -->
+                <p class="plat__ingredients">Oignons, anchois</p>
+              </div>
+
+              <div class="plat apparition">
+                <p class="plat__nom">Royale</p>
+                <p class="plat__prix plat__prix--a-venir">prix à confirmer</p>
+                <!-- 2019 : … € -->
+                <p class="plat__ingredients">Jambon, champignons, fromage</p>
+              </div>
+
+              <div class="plat apparition">
+                <p class="plat__nom">4 fromages</p>
+                <p class="plat__prix plat__prix--a-venir">prix à confirmer</p>
+                <!-- 2019 : … € -->
+                <p class="plat__ingredients">Roquefort, chèvre, mozza, emmental</p>
+              </div>
+
+              <div class="plat apparition">
+                <p class="plat__nom">Figatelli</p>
+                <p class="plat__prix plat__prix--a-venir">prix à confirmer</p>
+                <!-- 2019 : … € -->
+                <p class="plat__ingredients">Figatelli</p>
+              </div>
+
+              <div class="plat apparition">
+                <p class="plat__nom">Corse</p>
+                <p class="plat__prix plat__prix--a-venir">prix à confirmer</p>
+                <!-- 2019 : … € -->
+                <p class="plat__ingredients">Brousse, figatelli</p>
+              </div>
+
+              <div class="plat apparition">
+                <p class="plat__nom">Chorizo</p>
+                <p class="plat__prix plat__prix--a-venir">prix à confirmer</p>
+                <!-- 2019 : … € -->
+                <p class="plat__ingredients">Chorizo, emmental</p>
+              </div>
+
+              <div class="plat apparition">
+                <p class="plat__nom">Napolitaine</p>
+                <p class="plat__prix plat__prix--a-venir">prix à confirmer</p>
+                <!-- 2019 : … € -->
+                <p class="plat__ingredients">Anchois, mozza</p>
+              </div>
+
+              <div class="plat apparition">
+                <p class="plat__nom">Arménienne</p>
+                <p class="plat__prix plat__prix--a-venir">prix à confirmer</p>
+                <!-- 2019 : … € -->
+                <p class="plat__ingredients">Viande hachée, oignons, poivrons</p>
+              </div>
+
+              <div class="plat apparition">
+                <p class="plat__nom">Calabrese</p>
+                <p class="plat__prix plat__prix--a-venir">prix à confirmer</p>
+                <!-- 2019 : … € -->
+                <p class="plat__ingredients">Jambon cru, mozza, tomate fraîche</p>
+              </div>
+
+              <div class="plat apparition">
+                <p class="plat__nom">Vénitienne</p>
+                <p class="plat__prix plat__prix--a-venir">prix à confirmer</p>
+                <!-- 2019 : … € -->
+                <p class="plat__ingredients">Champignons, anchois, mozza</p>
+              </div>
+
+              <div class="plat apparition">
+                <p class="plat__nom">Thon</p>
+                <p class="plat__prix plat__prix--a-venir">prix à confirmer</p>
+                <!-- 2019 : … € -->
+                <p class="plat__ingredients">Thon, emmental</p>
+              </div>
+
+              <div class="plat apparition">
+                <p class="plat__nom">Végétarienne</p>
+                <p class="plat__prix plat__prix--a-venir">prix à confirmer</p>
+                <!-- 2019 : … € -->
+              </div>
+
             </div>
           </div>
 
-          <!-- ⚠️ À REMPLACER PAR LA VRAIE CARTE -->
-          <div class="plats" data-cascade>
-            <div class="plat apparition">
-              <p class="plat__nom">Salade italienne</p>
-              <p class="plat__prix plat__prix--a-venir">prix à venir</p>
-              <p class="plat__ingredients">Exemple à remplacer — décrire ici la composition de la salade.</p>
-            </div>
-            <div class="plat apparition">
-              <p class="plat__nom">Salade au foie gras</p>
-              <p class="plat__prix plat__prix--a-venir">prix à venir</p>
-              <p class="plat__ingredients">Exemple à remplacer — décrire ici la composition de la salade.</p>
-            </div>
-          </div>
-        </div>
+          <!-- ========== BASE CRÈME ========== -->
+          <div class="base apparition">
+            <h3 class="base__titre">Base crème</h3>
+            <hr class="filet" />
 
-        <!-- ========== CATÉGORIE : VIANDES ========== -->
-        <div class="categorie">
-          <div class="categorie__entete">
-            <!-- PHOTO À VENIR : entrecôte grillée au feu de bois (ronde, 600×600). -->
-            <div class="categorie__photo apparition">
-              <div class="placeholder"><span>PHOTO VIANDE (ronde, 600×600)</span></div>
-            </div>
-            <div class="categorie__titre apparition">
-              <h3>Viandes au feu de bois</h3>
-              <hr class="filet" />
+            <div class="plats" data-cascade>
+
+              <div class="plat apparition">
+                <p class="plat__nom">Paysanne</p>
+                <p class="plat__prix plat__prix--a-venir">prix à confirmer</p>
+                <!-- 2019 : … € -->
+                <p class="plat__ingredients">Lardons, champignons, œuf, fromage</p>
+              </div>
+
+              <div class="plat apparition">
+                <p class="plat__nom">Romaine</p>
+                <p class="plat__prix plat__prix--a-venir">prix à confirmer</p>
+                <!-- 2019 : … € -->
+                <p class="plat__ingredients">Jambon, champignons, mozza, fromage</p>
+              </div>
+
+              <div class="plat apparition">
+                <p class="plat__nom">Bergère</p>
+                <p class="plat__prix plat__prix--a-venir">prix à confirmer</p>
+                <!-- 2019 : … € -->
+                <p class="plat__ingredients">Chèvre, emmental, amandes, miel</p>
+              </div>
+
+              <div class="plat apparition">
+                <p class="plat__nom">Norvégienne</p>
+                <p class="plat__prix plat__prix--a-venir">prix à confirmer</p>
+                <!-- 2019 : … € -->
+                <p class="plat__ingredients">Saumon fumé, emmental, citron</p>
+              </div>
+
+              <div class="plat apparition">
+                <p class="plat__nom">Réserve</p>
+                <p class="plat__prix plat__prix--a-venir">prix à confirmer</p>
+                <!-- 2019 : … € -->
+                <p class="plat__ingredients">Oignons, emmental</p>
+              </div>
+
+              <div class="plat apparition">
+                <p class="plat__nom">Savoyarde</p>
+                <p class="plat__prix plat__prix--a-venir">prix à confirmer</p>
+                <!-- 2019 : … € -->
+                <p class="plat__ingredients">Pommes de terre, lardons, oignons, reblochon</p>
+              </div>
+
+              <div class="plat apparition">
+                <p class="plat__nom">4 fromages</p>
+                <p class="plat__prix plat__prix--a-venir">prix à confirmer</p>
+                <!-- 2019 : … € -->
+                <p class="plat__ingredients">Roquefort, crème, mozza, emmental</p>
+              </div>
+
+              <div class="plat apparition">
+                <p class="plat__nom">Chausson</p>
+                <p class="plat__prix plat__prix--a-venir">prix à confirmer</p>
+                <!-- 2019 : … € -->
+                <p class="plat__ingredients">Jambon, brousse, mozza, emmental</p>
+              </div>
+
             </div>
           </div>
 
-          <!-- ⚠️ À REMPLACER PAR LA VRAIE CARTE -->
-          <div class="plats" data-cascade>
-            <div class="plat apparition">
-              <p class="plat__nom">Entrecôte</p>
-              <p class="plat__prix plat__prix--a-venir">prix à venir</p>
-              <p class="plat__ingredients">Exemple à remplacer — grillée au feu de bois, garniture à préciser.</p>
-            </div>
-            <div class="plat apparition">
-              <p class="plat__nom">Tartare</p>
-              <p class="plat__prix plat__prix--a-venir">prix à venir</p>
-              <p class="plat__ingredients">Exemple à remplacer — préparation à préciser.</p>
-            </div>
-            <div class="plat apparition">
-              <p class="plat__nom">Escalope</p>
-              <p class="plat__prix plat__prix--a-venir">prix à venir</p>
-              <p class="plat__ingredients">Exemple à remplacer — préparation à préciser.</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- ========== CATÉGORIE : DESSERTS ========== -->
-        <div class="categorie">
-          <div class="categorie__entete">
-            <!-- PHOTO À VENIR : tiramisu maison (ronde, 600×600). -->
-            <div class="categorie__photo apparition">
-              <div class="placeholder"><span>PHOTO DESSERT (ronde, 600×600)</span></div>
-            </div>
-            <div class="categorie__titre apparition">
-              <h3>Desserts</h3>
-              <hr class="filet" />
-            </div>
-          </div>
-
-          <!-- ⚠️ À REMPLACER PAR LA VRAIE CARTE -->
-          <div class="plats" data-cascade>
-            <div class="plat apparition">
-              <p class="plat__nom">Tiramisu</p>
-              <p class="plat__prix plat__prix--a-venir">prix à venir</p>
-              <p class="plat__ingredients">Exemple à remplacer — préparation maison.</p>
-            </div>
-            <div class="plat apparition">
-              <p class="plat__nom">Glaces</p>
-              <p class="plat__prix plat__prix--a-venir">prix à venir</p>
-              <p class="plat__ingredients">Exemple à remplacer — parfums à préciser.</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- ========== LES MENUS ========== -->
-        <div class="menus apparition">
-          <div class="menu-carte">
-            <h3>Menu du midi</h3>
-            <p style="color:var(--olive);font-size:0.9rem;margin-bottom:0.5rem;">En semaine</p>
-            <p class="menu-carte__prix">15&nbsp;€</p>
-          </div>
-          <div class="menu-carte">
-            <h3>Menu</h3>
-            <p style="color:var(--olive);font-size:0.9rem;margin-bottom:0.5rem;">Le détail sera bientôt affiché</p>
-            <p class="menu-carte__prix">21&nbsp;€</p>
-          </div>
         </div>
 
         <p class="carte__note apparition">
-          <!-- À REMPLACER PAR LA VRAIE CARTE -->
-          Carte complète et prix définitifs à venir. Pour toute question,
-          n'hésitez pas à nous appeler.
+          Viandes, salades et desserts : demandez la carte en salle.
         </p>
 
       </div>
