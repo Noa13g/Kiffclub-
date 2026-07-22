@@ -472,6 +472,12 @@ p { max-width: 62ch; }        /* longueur de ligne lisible */
 .base .filet {
   margin: 0.7rem 0 1.5rem;
 }
+/* Sur mobile (bases empilées) : séparation nette avant la 2e base. */
+.base + .base {
+  margin-top: 1rem;
+  padding-top: 3rem;
+  border-top: 1px solid var(--filet);
+}
 
 /* Un « groupe » = une catégorie (Pizzas, Salades, Viandes, Desserts). */
 .categorie {
@@ -519,6 +525,9 @@ p { max-width: 62ch; }        /* longueur de ligne lisible */
   border-bottom: 1px solid var(--filet);   /* filet fin entre les plats */
 }
 .plat:first-child { padding-top: 0; }
+/* Pas de filet sous le dernier plat d'une liste : évite qu'il « colle »
+   au titre de la base suivante quand les colonnes sont empilées (mobile). */
+.plats .plat:last-child { border-bottom: none; }
 
 .plat__nom {
   font-family: var(--corps);
@@ -930,6 +939,8 @@ iframe:focus-visible {
 
   /* Les deux bases (tomate / crème) côte à côte. */
   .carte-bases { grid-template-columns: 1fr 1fr; gap: 3.5rem; align-items: start; }
+  /* Plus de séparateur horizontal quand elles sont côte à côte. */
+  .base + .base { margin-top: 0; padding-top: 0; border-top: none; }
 
   /* Accès : horaires à gauche, carte à droite. */
   .acces { grid-template-columns: 1fr 1fr; gap: 3.5rem; }
