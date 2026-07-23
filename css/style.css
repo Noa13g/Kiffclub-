@@ -341,8 +341,10 @@ p { max-width: 62ch; }        /* longueur de ligne lisible */
   position: relative;
   z-index: 2;
   color: var(--creme);
-  padding: 6rem 0 calc(var(--barre-mobile) + 2rem);
-  max-width: 760px;
+  /* Marges latérales de 1.25rem pour que le texte ne colle pas au bord
+     (alignées sur le reste du site). Le padding vertical reste généreux. */
+  padding: 6rem 1.25rem calc(var(--barre-mobile) + 2rem);
+  max-width: calc(760px + 2.5rem);
 }
 
 /* Petit lieu-dit au-dessus du grand titre. */
