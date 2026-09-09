@@ -1,0 +1,742 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Little Rock Nine</title>
+<meta name="description" content="Présentation interactive : neuf adolescents intègrent Central High School, Little Rock, Arkansas, septembre 1957.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@400;500;700&family=Archivo+Narrow:wght@500;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* ---------- tokens : palette claire (état par défaut, non estampillé) ---------- */
+:root{
+  --paper:#f1f2f3;
+  --surface:#ffffff;
+  --ink:#141618;
+  --ink-2:#454a4f;
+  --muted:#787f86;
+  --rule:#d2d5d9;
+  --rule-soft:#e3e5e8;
+  --stamp:#8f2f24;
+  --shadow:0 1px 2px rgba(20,22,24,.06), 0 10px 30px rgba(20,22,24,.07);
+  --focus:#1f5fa8;
+
+  --display:"Big Shoulders Display","Archivo Narrow","Arial Narrow",Helvetica,sans-serif;
+  --body:"Source Serif 4",Georgia,"Times New Roman",serif;
+  --mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+
+  --gutter:clamp(1.15rem,4.2vw,4.5rem);
+  --step:clamp(1.5rem,2.6vw,2.6rem);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#111315;
+    --surface:#191c1f;
+    --ink:#eceef0;
+    --ink-2:#b4b9be;
+    --muted:#868c93;
+    --rule:#2c3135;
+    --rule-soft:#23272a;
+    --stamp:#cd7264;
+    --shadow:0 1px 2px rgba(0,0,0,.5), 0 14px 34px rgba(0,0,0,.42);
+    --focus:#7fb2ec;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#111315;
+  --surface:#191c1f;
+  --ink:#eceef0;
+  --ink-2:#b4b9be;
+  --muted:#868c93;
+  --rule:#2c3135;
+  --rule-soft:#23272a;
+  --stamp:#cd7264;
+  --shadow:0 1px 2px rgba(0,0,0,.5), 0 14px 34px rgba(0,0,0,.42);
+  --focus:#7fb2ec;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--body);
+  font-size:clamp(1rem,.94rem + .28vw,1.16rem);
+  line-height:1.55;
+  height:100vh;
+  height:100dvh;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+}
+img{max-width:100%;display:block}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--focus);outline-offset:3px;border-radius:2px}
+
+/* ---------- chrome : bandeau, pied, progression ---------- */
+.masthead{
+  display:flex;align-items:baseline;gap:1rem;flex-wrap:wrap;
+  padding:.85rem var(--gutter) .7rem;
+}
+.masthead .wordmark{
+  font-family:var(--display);font-weight:700;letter-spacing:.055em;
+  text-transform:uppercase;font-size:.98rem;line-height:1;
+}
+.masthead .place{
+  font-family:var(--mono);font-size:.7rem;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--muted);margin-left:auto;
+}
+.progress{height:2px;background:var(--rule-soft);position:relative;overflow:hidden}
+.progress__fill{
+  position:absolute;inset:0 auto 0 0;width:20%;background:var(--stamp);
+  transition:width .45s cubic-bezier(.22,.75,.2,1);
+}
+
+.stage{flex:1;min-height:0;overflow-y:auto;overflow-x:hidden;scrollbar-gutter:stable}
+
+.footbar{
+  display:flex;align-items:center;gap:.65rem;flex-wrap:wrap;
+  border-top:1px solid var(--rule-soft);
+  padding:.6rem var(--gutter);
+  background:var(--paper);
+}
+.nav{
+  display:inline-flex;align-items:center;gap:.4rem;
+  border:1px solid var(--rule);background:var(--surface);
+  padding:.42rem .85rem;border-radius:2px;cursor:pointer;
+  font-family:var(--display);font-weight:500;letter-spacing:.06em;
+  text-transform:uppercase;font-size:.86rem;
+  transition:border-color .18s ease,color .18s ease,background .18s ease;
+}
+.nav:hover:not(:disabled){border-color:var(--ink);}
+.nav:disabled{opacity:.32;cursor:default}
+.counter{
+  font-family:var(--mono);font-size:.8rem;letter-spacing:.08em;
+  color:var(--muted);font-variant-numeric:tabular-nums;
+}
+.counter b{color:var(--ink);font-weight:500}
+.dots{display:flex;gap:.4rem;margin-left:auto;align-items:center}
+.dot{
+  width:9px;height:9px;padding:0;border-radius:50%;cursor:pointer;
+  border:1px solid var(--rule);background:transparent;
+  transition:background .2s ease,border-color .2s ease,transform .2s ease;
+}
+.dot[aria-current="true"]{background:var(--stamp);border-color:var(--stamp);transform:scale(1.15)}
+.linky{
+  background:none;border:0;padding:.2rem 0;cursor:pointer;
+  font-family:var(--mono);font-size:.74rem;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);
+  border-bottom:1px solid var(--rule);
+}
+.linky:hover{color:var(--ink);border-color:var(--ink)}
+
+/* ---------- diapositives ---------- */
+.slide{padding:clamp(1.4rem,3vw,2.6rem) var(--gutter) clamp(2.2rem,4vw,3.4rem)}
+.slide[hidden]{display:none}
+.split{
+  display:grid;gap:var(--step) clamp(1.6rem,3.6vw,4rem);
+  grid-template-columns:minmax(0,1fr);
+  align-items:start;
+}
+@media (min-width:900px){
+  .split{grid-template-columns:minmax(0,1fr) minmax(0,1.08fr)}
+  .split--wide-left{grid-template-columns:minmax(0,1.12fr) minmax(0,1fr)}
+}
+
+.eyebrow{
+  font-family:var(--mono);font-size:.72rem;letter-spacing:.19em;
+  text-transform:uppercase;color:var(--stamp);margin:0 0 1.1rem;
+}
+.eyebrow--quiet{color:var(--muted)}
+
+h1{
+  font-family:var(--display);font-weight:700;
+  font-size:clamp(3rem,10.5vw,7rem);line-height:.88;letter-spacing:-.012em;
+  margin:0;text-wrap:balance;text-transform:uppercase;
+}
+.dateline{
+  font-family:var(--display);font-weight:400;
+  font-size:clamp(1.35rem,3.4vw,2.1rem);line-height:1.05;
+  letter-spacing:.02em;color:var(--ink-2);margin:.55rem 0 0;
+  text-transform:uppercase;
+}
+h2{
+  font-family:var(--display);font-weight:700;text-transform:uppercase;
+  font-size:clamp(2rem,4.6vw,3.2rem);line-height:.95;letter-spacing:-.005em;
+  margin:0 0 1.4rem;text-wrap:balance;
+}
+h3{
+  font-family:var(--display);font-weight:500;text-transform:uppercase;
+  letter-spacing:.09em;font-size:.92rem;line-height:1.2;
+  margin:0 0 .55rem;color:var(--ink-2);
+}
+p{margin:0 0 1rem;max-width:38em}
+.lede{font-size:1.1em;color:var(--ink-2)}
+
+/* liste de points : trait court plutôt que puce */
+.points{list-style:none;margin:0;padding:0;display:grid;gap:1.15rem;max-width:34em}
+.points li{position:relative;padding-left:2.1rem}
+.points li::before{
+  content:"";position:absolute;left:0;top:.72em;
+  width:1.3rem;height:1px;background:var(--stamp);
+}
+.points strong{font-weight:600}
+.points .k{
+  display:block;font-family:var(--mono);font-size:.7rem;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--muted);margin-bottom:.15rem;
+}
+
+/* ---------- figures + crédits au survol ---------- */
+figure{
+  margin:0;position:relative;background:var(--surface);
+  border:1px solid var(--rule-soft);box-shadow:var(--shadow);
+}
+figure img{width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .75s ease}
+figure img.is-loaded{opacity:1}
+.fig-ratio img{aspect-ratio:4/3}
+.fig-tall img{aspect-ratio:3/4}
+.fig-wide img{aspect-ratio:16/10}
+figcaption{
+  position:absolute;left:0;right:0;bottom:0;
+  padding:.7rem .85rem;
+  background:rgba(20,22,24,.86);color:#f3f4f5;
+  font-family:var(--mono);font-size:.68rem;line-height:1.45;letter-spacing:.01em;
+  opacity:0;transform:translateY(6px);transition:opacity .22s ease,transform .22s ease;
+  pointer-events:none;
+}
+figure:hover figcaption,figure:focus-within figcaption,figure.show-credit figcaption{opacity:1;transform:none}
+figcaption b{font-weight:500;color:#fff}
+figcaption span{color:#b9bdc1}
+.credit-hint{
+  position:absolute;top:.5rem;right:.5rem;
+  width:1.35rem;height:1.35rem;border-radius:50%;
+  background:rgba(20,22,24,.6);color:#fff;
+  font-family:var(--body);font-size:.8rem;line-height:1.3rem;text-align:center;
+  opacity:.55;transition:opacity .2s ease;
+}
+figure:hover .credit-hint,figure:focus-within .credit-hint,figure.show-credit .credit-hint{opacity:0}
+.caption{
+  font-family:var(--mono);font-size:.7rem;line-height:1.5;letter-spacing:.02em;
+  color:var(--muted);margin:.5rem 0 0;max-width:34em;
+}
+.stack{display:grid;gap:.9rem}
+.duo{display:grid;gap:clamp(.9rem,2vw,1.5rem);grid-template-columns:minmax(0,1fr)}
+@media (min-width:620px){.duo{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.trio{display:grid;gap:clamp(.9rem,2vw,1.4rem);grid-template-columns:minmax(0,1fr)}
+@media (min-width:760px){.trio{grid-template-columns:repeat(3,minmax(0,1fr))}}
+
+/* ---------- chronologie ---------- */
+.timeline{margin:0 0 var(--step);padding:0;list-style:none;position:relative}
+.timeline::before{
+  content:"";position:absolute;background:var(--rule);
+  left:5px;top:.5rem;bottom:.5rem;width:1px;
+  transform:scaleY(0);transform-origin:top;
+  animation:axisY .7s .12s cubic-bezier(.3,.7,.2,1) forwards;
+}
+.timeline li{position:relative;padding:0 0 1.3rem 1.9rem}
+.timeline li:last-child{padding-bottom:0}
+.timeline li::before{
+  content:"";position:absolute;left:0;top:.42em;
+  width:11px;height:11px;border-radius:50%;
+  background:var(--paper);border:1px solid var(--muted);
+}
+.timeline li.is-key::before{background:var(--stamp);border-color:var(--stamp)}
+.timeline .day{
+  display:block;font-family:var(--mono);font-size:.72rem;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--stamp);margin-bottom:.1rem;
+  font-variant-numeric:tabular-nums;
+}
+.timeline .txt{display:block;max-width:30em;color:var(--ink-2)}
+.timeline .txt strong{color:var(--ink);font-weight:600}
+@media (min-width:1100px){
+  .timeline{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:0 1.1rem}
+  .timeline::before{left:0;right:0;top:5px;bottom:auto;width:auto;height:1px;
+    transform:scaleX(0);transform-origin:left;animation-name:axisX}
+  .timeline li{padding:1.5rem .6rem 0 0}
+  .timeline li::before{top:0;left:0}
+  .timeline .txt{font-size:.95rem}
+}
+@keyframes axisX{to{transform:scaleX(1)}}
+@keyframes axisY{to{transform:scaleY(1)}}
+
+/* ---------- citation ---------- */
+.quote{
+  display:grid;gap:1.1rem clamp(1.1rem,2.4vw,1.8rem);
+  grid-template-columns:auto minmax(0,1fr);align-items:start;
+  border-top:1px solid var(--rule);padding-top:1.3rem;margin-top:var(--step);
+}
+.quote figure{width:88px;flex:none;border:0;box-shadow:none;background:none}
+.quote figure img{aspect-ratio:1;border-radius:50%;filter:grayscale(1)}
+.quote blockquote{margin:0;max-width:32em}
+.quote q{
+  font-family:var(--display);font-weight:400;quotes:"«\00a0" "\00a0»";
+  font-size:clamp(1.35rem,2.6vw,1.95rem);line-height:1.16;
+  display:block;text-wrap:balance;
+}
+.quote cite{
+  display:block;margin-top:.7rem;font-style:normal;
+  font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);
+}
+
+/* ---------- portraits acteurs ---------- */
+.actors{display:flex;flex-wrap:wrap;gap:clamp(1rem,2.4vw,1.8rem);margin-top:var(--step)}
+.actor{display:flex;gap:.85rem;align-items:center;max-width:23em}
+.actor figure{width:74px;flex:none;border:0;box-shadow:none;background:none}
+.actor figure img{aspect-ratio:1;border-radius:50%;filter:grayscale(1)}
+.actor .who{font-family:var(--display);font-weight:700;text-transform:uppercase;
+  letter-spacing:.03em;font-size:1.05rem;line-height:1.1}
+.actor .role{font-size:.88rem;color:var(--muted);line-height:1.35}
+.monogram{
+  width:74px;height:74px;flex:none;border-radius:50%;
+  border:1px solid var(--rule);display:grid;place-items:center;
+  font-family:var(--display);font-weight:700;font-size:1.5rem;
+  letter-spacing:.04em;color:var(--muted);
+}
+
+/* ---------- les neuf ---------- */
+.roster{list-style:none;margin:0 0 var(--step);padding:0;
+  display:grid;gap:1px;background:var(--rule-soft);
+  border:1px solid var(--rule-soft);
+  grid-template-columns:repeat(2,minmax(0,1fr));max-width:46rem}
+@media (min-width:620px){.roster{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.roster li{background:var(--surface);padding:.75rem .85rem}
+.roster .n{
+  font-family:var(--mono);font-size:.66rem;color:var(--muted);
+  letter-spacing:.1em;display:block;margin-bottom:.2rem;
+}
+.roster .name{
+  font-family:var(--display);font-weight:700;text-transform:uppercase;
+  font-size:1.02rem;line-height:1.05;letter-spacing:.02em;display:block;
+}
+.roster .after{font-size:.8rem;color:var(--muted);line-height:1.3;display:block;margin-top:.2rem}
+.roster li.is-noted .after{color:var(--stamp)}
+
+/* ---------- jalons ---------- */
+.milestones{list-style:none;margin:0;padding:0;display:grid;gap:1.25rem;max-width:34em}
+.milestones li{display:grid;grid-template-columns:5.2rem minmax(0,1fr);gap:1rem;align-items:baseline}
+.milestones .yr{
+  font-family:var(--mono);font-size:.85rem;letter-spacing:.06em;color:var(--stamp);
+  font-variant-numeric:tabular-nums;
+}
+.milestones .what{color:var(--ink-2)}
+.milestones .what strong{color:var(--ink);font-weight:600}
+
+.closing{
+  margin-top:var(--step);border-top:1px solid var(--rule);padding-top:1.4rem;
+  font-family:var(--display);font-weight:400;
+  font-size:clamp(1.5rem,3.4vw,2.5rem);line-height:1.08;
+  text-transform:uppercase;letter-spacing:.01em;text-wrap:balance;max-width:18em;
+}
+
+/* ---------- panneau crédits ---------- */
+dialog.credits{
+  border:1px solid var(--rule);background:var(--surface);color:var(--ink);
+  max-width:46rem;width:calc(100% - 2rem);padding:0;box-shadow:var(--shadow);
+}
+dialog.credits::backdrop{background:rgba(10,12,14,.55)}
+.credits__inner{padding:clamp(1.2rem,3vw,2rem)}
+.credits h3{margin-bottom:1rem}
+.credits ol{margin:0;padding:0 0 0 1.3rem;display:grid;gap:.85rem;
+  font-family:var(--mono);font-size:.76rem;line-height:1.5}
+.credits a{color:var(--ink)}
+.credits__close{margin-top:1.4rem}
+.credits p{font-size:.85rem;color:var(--muted);max-width:44em}
+
+/* ---------- apparition du contenu ---------- */
+.rv{animation:rv .55s cubic-bezier(.2,.72,.2,1) both;animation-delay:calc(var(--i,0) * 75ms)}
+@keyframes rv{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:.001ms !important;animation-delay:0ms !important;
+    transition-duration:.001ms !important}
+  .timeline::before{transform:none}
+}
+</style>
+<noscript><style>figure img{opacity:1}.slide[hidden]{display:block}</style></noscript>
+</head>
+<body>
+
+<header class="masthead">
+  <span class="wordmark">Little&nbsp;Rock&nbsp;Nine</span>
+  <span class="place">Central High School &middot; Arkansas</span>
+</header>
+<div class="progress"><div class="progress__fill" id="progress"></div></div>
+
+<main class="stage" id="stage">
+
+  <!-- 1 ------------------------------------------------------------------ -->
+  <section class="slide" id="slide-1" aria-label="Titre et contexte">
+    <div class="split split--wide-left">
+      <div>
+        <p class="eyebrow rv" style="--i:0">Little Rock, Arkansas</p>
+        <h1 class="rv" style="--i:1">Little<br>Rock<br>Nine</h1>
+        <p class="dateline rv" style="--i:2">Septembre 1957</p>
+        <ul class="points rv" style="--i:3" role="list">
+          <li><span class="k">17 mai 1954</span><strong>Brown v. Board of Education.</strong> La Cour suprême juge la ségrégation scolaire inconstitutionnelle.</li>
+          <li><span class="k">Trois ans plus tard</span>Dans le Sud, presque rien n'a bougé. Les États retardent, contournent, refusent.</li>
+          <li><span class="k">Rentrée 1957</span>Neuf adolescents noirs s'inscrivent à Central High School, lycée blanc de près de 2 000 élèves.</li>
+        </ul>
+      </div>
+      <div class="stack rv" style="--i:2">
+        <figure class="fig-wide" tabindex="0"
+          data-title="Little Rock Central High School (2024)"
+          data-author="Xiquinho Silva" data-license="CC BY 2.0"
+          data-source="https://commons.wikimedia.org/wiki/File:Little_Rock_Central_High_School_(2024).jpg">
+          <img src="images/central2024.jpg" alt="Façade de Little Rock Central High School vue depuis le bassin, par temps clair.">
+          <span class="credit-hint" aria-hidden="true">©</span>
+        </figure>
+        <p class="caption">Central High School aujourd'hui. Le lycée fonctionne toujours&nbsp;: c'est le seul établissement scolaire des États-Unis en activité à l'intérieur d'un site historique national.</p>
+        <figure class="fig-wide" tabindex="0"
+          data-title="Little Rock, 1959. Rally at state capitol"
+          data-author="John T. Bledsoe — Library of Congress, ppmsca.03090" data-license="Domaine public"
+          data-source="https://commons.wikimedia.org/wiki/File:Little_Rock_integration_protest.jpg">
+          <img src="images/protest1959.jpg" alt="Manifestation devant le Capitole de l'Arkansas contre l'intégration, drapeaux et pancartes ségrégationnistes.">
+          <span class="credit-hint" aria-hidden="true">©</span>
+        </figure>
+        <p class="caption">Le climat&nbsp;: rassemblement ségrégationniste devant le Capitole de l'Arkansas.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 ------------------------------------------------------------------ -->
+  <section class="slide" id="slide-2" aria-label="Les acteurs et les événements" hidden>
+    <p class="eyebrow rv" style="--i:0">2 &rarr; 25 septembre 1957</p>
+    <h2 class="rv" style="--i:1">Vingt-trois jours<br>devant une porte</h2>
+
+    <ol class="timeline rv" style="--i:2">
+      <li>
+        <span class="day">2 sept.</span>
+        <span class="txt">Le gouverneur <strong>Orval Faubus</strong> déploie la Garde nationale d'Arkansas « pour maintenir l'ordre ». Elle bloque l'entrée.</span>
+      </li>
+      <li class="is-key">
+        <span class="day">4 sept.</span>
+        <span class="txt"><strong>Elizabeth Eckford</strong>, 15 ans, n'a pas reçu le message&nbsp;: sa famille n'a pas le téléphone. Elle arrive seule, face à la foule.</span>
+      </li>
+      <li>
+        <span class="day">23 sept.</span>
+        <span class="txt">Les neuf entrent par une porte latérale. Plus de mille personnes se massent dehors&nbsp;; la police les fait ressortir.</span>
+      </li>
+      <li>
+        <span class="day">24 sept.</span>
+        <span class="txt"><strong>Eisenhower</strong> fédéralise la Garde et envoie la <strong>101<sup>e</sup> Division aéroportée</strong>.</span>
+      </li>
+      <li class="is-key">
+        <span class="day">25 sept.</span>
+        <span class="txt">Escortés par les parachutistes, les neuf entrent en cours. Première journée complète.</span>
+      </li>
+    </ol>
+
+    <div class="duo rv" style="--i:3">
+      <div>
+        <figure class="fig-ratio" tabindex="0"
+          data-title="Elizabeth Eckford devant Central High School, 4 septembre 1957"
+          data-author="Will Counts — publié par l'Associated Press sans mention de copyright" data-license="Domaine public"
+          data-source="https://commons.wikimedia.org/wiki/File:Elizabeth_Eckford.jpg">
+          <img src="images/eckford.jpg" alt="Elizabeth Eckford marche seule, livres serrés contre elle, poursuivie par une foule d'élèves blancs dont une jeune fille qui crie.">
+          <span class="credit-hint" aria-hidden="true">©</span>
+        </figure>
+        <p class="caption">La photographie qui fait le tour du monde&nbsp;: une adolescente, ses cahiers, et une foule derrière elle.</p>
+      </div>
+      <div>
+        <figure class="fig-ratio" tabindex="0"
+          data-title="Operation Arkansas — la 101e Division aéroportée escorte les élèves"
+          data-author="U.S. Army" data-license="Domaine public"
+          data-source="https://commons.wikimedia.org/wiki/File:Operation_Arkansas,_Little_Rock_Nine.jpg">
+          <img src="images/airborne.jpg" alt="Une élève descend d'une voiture de l'armée devant Central High School, entourée de soldats casqués et d'une jeep de la 101e aéroportée.">
+          <span class="credit-hint" aria-hidden="true">©</span>
+        </figure>
+        <p class="caption">1 200 parachutistes déployés. Chaque élève reçoit un garde personnel.</p>
+      </div>
+    </div>
+
+    <div class="quote rv" style="--i:4">
+      <figure class="no-cap" tabindex="0"
+        data-title="Dwight D. Eisenhower, portrait officiel, 29 mai 1959"
+        data-author="Maison-Blanche" data-license="Domaine public"
+        data-source="https://commons.wikimedia.org/wiki/File:Dwight_D._Eisenhower,_official_photo_portrait,_May_29,_1959.jpg">
+        <img src="images/eisenhower.jpg" alt="Portrait officiel du président Dwight D. Eisenhower.">
+      </figure>
+      <blockquote>
+        <q>La loi de la foule ne peut pas l'emporter sur les décisions des tribunaux.</q>
+        <cite>Dwight D. Eisenhower &middot; allocution radiotélévisée du 24 septembre 1957<br>« Mob rule cannot be allowed to override the decisions of our courts. »</cite>
+      </blockquote>
+    </div>
+
+    <div class="actors rv" style="--i:5">
+      <div class="actor">
+        <figure class="no-cap" tabindex="0"
+          data-title="Gouverneur Orval Faubus"
+          data-author="University of Arkansas, annuaire Razorback 1959" data-license="Domaine public"
+          data-source="https://commons.wikimedia.org/wiki/File:Orval_Faubus.jpg">
+          <img src="images/faubus.jpg" alt="Portrait du gouverneur Orval Faubus.">
+        </figure>
+        <div>
+          <span class="who">Orval Faubus</span>
+          <span class="role">Gouverneur de l'Arkansas. Il envoie la Garde nationale bloquer l'entrée du lycée.</span>
+        </div>
+      </div>
+      <div class="actor">
+        <span class="monogram" aria-hidden="true">DB</span>
+        <div>
+          <span class="who">Daisy Bates</span>
+          <span class="role">Présidente de la NAACP en Arkansas. Elle organise chaque trajet et accompagne les familles.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 ------------------------------------------------------------------ -->
+  <section class="slide" id="slide-3" aria-label="La réalité à l'école" hidden>
+    <p class="eyebrow rv" style="--i:0">Année scolaire 1957-1958</p>
+    <h2 class="rv" style="--i:1">Entrer était le<br>plus facile</h2>
+
+    <ol class="roster rv" style="--i:2">
+      <li class="is-noted"><span class="n">01</span><span class="name">Ernest Green</span><span class="after">Premier diplômé noir de Central High, mai 1958</span></li>
+      <li class="is-noted"><span class="n">02</span><span class="name">Elizabeth Eckford</span><span class="after">Seule face à la foule, 4 septembre</span></li>
+      <li><span class="n">03</span><span class="name">Jefferson Thomas</span></li>
+      <li><span class="n">04</span><span class="name">Terrence Roberts</span></li>
+      <li><span class="n">05</span><span class="name">Carlotta Walls</span><span class="after">La plus jeune des neuf</span></li>
+      <li class="is-noted"><span class="n">06</span><span class="name">Minnijean Brown</span><span class="after">Expulsée en février 1958</span></li>
+      <li><span class="n">07</span><span class="name">Gloria Ray</span></li>
+      <li><span class="n">08</span><span class="name">Thelma Mothershed</span></li>
+      <li><span class="n">09</span><span class="name">Melba Pattillo</span></li>
+    </ol>
+
+    <div class="split">
+      <div>
+        <ul class="points rv" style="--i:3" role="list">
+          <li><span class="k">Tous les jours</span>Insultes et crachats dans les couloirs. Bousculades dans les escaliers. De l'eau brûlante dans les douches.</li>
+          <li><span class="k">Les gardes</span>Ils ne pouvaient pas entrer partout&nbsp;: ni dans les vestiaires, ni dans les toilettes. C'est là que ça se passait.</li>
+          <li><span class="k">Février 1958</span><strong>Minnijean Brown est expulsée</strong> après avoir répondu à ses harceleuses. Aucun élève blanc ne l'a été.</li>
+        </ul>
+        <p class="caption rv" style="--i:4">Des cartons « One down… eight to go » circulent dans le lycée après son renvoi.</p>
+      </div>
+      <div class="stack rv" style="--i:4">
+        <figure class="fig-wide" tabindex="0"
+          data-title="Les neuf élèves de Little Rock reçus par le maire de New York Robert Wagner"
+          data-author="Walter Albertin — Library of Congress, cph.3c25125" data-license="Domaine public"
+          data-source="https://commons.wikimedia.org/wiki/File:New_York_City_Mayor_Robert_Wagner_greeting_the_teenagers_who_integrated_Central_High_School,_Little_Rock,_Arkansas.jpg">
+          <img src="images/nine-group.jpg" alt="Les neuf adolescents en tenue de sortie entourent le maire de New York qui serre la main de l'une d'entre elles.">
+          <span class="credit-hint" aria-hidden="true">©</span>
+        </figure>
+        <p class="caption">Les neuf réunis, reçus à New York par le maire Robert Wagner. Entre 14 et 16 ans.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 ------------------------------------------------------------------ -->
+  <section class="slide" id="slide-4" aria-label="Impact et héritage" hidden>
+    <p class="eyebrow rv" style="--i:0">Ce que ça a changé</p>
+    <h2 class="rv" style="--i:1">Un précédent<br>fédéral</h2>
+
+    <div class="split split--wide-left">
+      <div>
+        <p class="lede rv" style="--i:2">Pour la première fois depuis la Reconstruction, un président envoie l'armée fédérale dans le Sud pour faire appliquer les droits civiques. Le message est clair&nbsp;: un État ne peut pas désobéir aux tribunaux.</p>
+        <ul class="milestones rv" style="--i:3" role="list">
+          <li><span class="yr">Mai 1958</span><span class="what"><strong>Ernest Green</strong> est diplômé de Central High. Martin Luther King est dans la salle.</span></li>
+          <li><span class="yr">1958-59</span><span class="what">« The Lost Year »&nbsp;: Faubus <strong>ferme tous les lycées</strong> de Little Rock plutôt que de les intégrer.</span></li>
+          <li><span class="yr">1998</span><span class="what">Central High devient <strong>site historique national</strong>.</span></li>
+          <li><span class="yr">1999</span><span class="what">Les neuf reçoivent la <strong>Médaille d'or du Congrès</strong>, remise par Bill Clinton.</span></li>
+        </ul>
+        <p class="closing rv" style="--i:4">Le changement n'est jamais facile. Il reste possible.</p>
+      </div>
+      <div class="stack rv" style="--i:3">
+        <figure class="fig-wide" tabindex="0"
+          data-title="Médaille d'or du Congrès des Little Rock Nine (avers)"
+          data-author="United States Mint" data-license="Domaine public"
+          data-source="https://commons.wikimedia.org/wiki/File:Little_Rock_Nine_Congressional_Gold_Medal_(front).jpg">
+          <img src="images/goldmedal.jpg" alt="Médaille d'or du Congrès représentant les neuf élèves montant les marches du lycée.">
+          <span class="credit-hint" aria-hidden="true">©</span>
+        </figure>
+        <p class="caption">La plus haute distinction civile décernée par le Congrès des États-Unis, 1999.</p>
+        <figure class="fig-wide" tabindex="0"
+          data-title="Ernest Green, Carlotta Walls LaNier et Terrence Roberts à la LBJ Presidential Library"
+          data-author="Lauren Gerson — LBJ Library" data-license="Domaine public"
+          data-source="https://commons.wikimedia.org/wiki/File:Ernest_Green,_Carlotta_Walls_LaNier,_Terrence_Roberts_(DIG13683-010).jpg">
+          <img src="images/lbj3.jpg" alt="Trois membres des Little Rock Nine posent ensemble sur les marches de la LBJ Presidential Library.">
+          <span class="credit-hint" aria-hidden="true">©</span>
+        </figure>
+        <p class="caption">Ernest Green, Carlotta Walls LaNier et Terrence Roberts, des décennies plus tard.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 ------------------------------------------------------------------ -->
+  <section class="slide" id="slide-5" aria-label="Aujourd'hui" hidden>
+    <p class="eyebrow rv" style="--i:0">Aujourd'hui</p>
+    <h2 class="rv" style="--i:1">Le lieu se visite,<br>le lycée fonctionne</h2>
+    <p class="lede rv" style="--i:2">Sur le trottoir du 16<sup>e</sup> et Park Street, un banc rappelle celui où Elizabeth Eckford s'est assise le 4 septembre 1957, en attendant un bus, entourée par la foule.</p>
+
+    <div class="trio rv" style="--i:3">
+      <div>
+        <figure class="fig-ratio" tabindex="0"
+          data-title="Banc de bus commémoratif, Little Rock Central High School National Historic Site"
+          data-author="Ser Amantio di Nicolao" data-license="CC BY-SA 4.0"
+          data-source="https://commons.wikimedia.org/wiki/File:Little_Rock_Central_High_School_NHS_-_Elizabeth_Eckford_bus_bench.jpg">
+          <img src="images/bench.jpg" alt="Banc de bus commémoratif installé à l'angle de la 16e rue et de Park Street, près du lycée.">
+          <span class="credit-hint" aria-hidden="true">©</span>
+        </figure>
+        <p class="caption">Le banc d'Elizabeth Eckford.</p>
+      </div>
+      <div>
+        <figure class="fig-ratio" tabindex="0"
+          data-title="Un soldat de la 101e aéroportée escorte Melba Pattillo Beals lors d'une commémoration"
+          data-author="U.S. Army" data-license="CC BY 2.0"
+          data-source="https://commons.wikimedia.org/wiki/File:Melba_Arkansas.jpg">
+          <img src="images/melba.jpg" alt="Un soldat de la 101e aéroportée en uniforme escorte Melba Pattillo Beals lors d'une cérémonie.">
+          <span class="credit-hint" aria-hidden="true">©</span>
+        </figure>
+        <p class="caption">La 101<sup>e</sup> escorte de nouveau Melba Pattillo Beals — cette fois pour une commémoration.</p>
+      </div>
+      <div>
+        <figure class="fig-ratio" tabindex="0"
+          data-title="Des élèves devant les portraits des Little Rock Nine, « hier et aujourd'hui »"
+          data-author="Adam Jones, Ph.D." data-license="CC BY-SA 3.0"
+          data-source="https://commons.wikimedia.org/wiki/File:Students_View_Portraits_of_Little_Rock_Nine_Then_and_Now_-_Little_Rock_-_Arkansas_-_USA.jpg">
+          <img src="images/thennow.jpg" alt="Des élèves photographient un mur de portraits des Little Rock Nine, jeunes en 1957 et âgés aujourd'hui.">
+          <span class="credit-hint" aria-hidden="true">©</span>
+        </figure>
+        <p class="caption">Dans le lycée&nbsp;: chaque visage à 15 ans, et le même des décennies plus tard.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footbar">
+  <button class="nav" id="prev" type="button">&larr;&nbsp;Précédent</button>
+  <button class="nav" id="next" type="button">Suivant&nbsp;&rarr;</button>
+  <span class="counter"><b id="cur">01</b> / <span id="tot">05</span></span>
+  <button class="linky" id="creditsBtn" type="button">Crédits</button>
+  <div class="dots" id="dots" aria-label="Aller à une diapositive"></div>
+</footer>
+
+<dialog class="credits" id="creditsBox" aria-labelledby="creditsTitle">
+  <div class="credits__inner">
+    <h3 id="creditsTitle">Crédits photographiques</h3>
+    <ol id="creditsList"></ol>
+    <p style="margin-top:1.2rem">Toutes les images proviennent de Wikimedia Commons (Library of Congress, U.S. Army, U.S. Mint, contributeurs). Elles sont dans le domaine public ou sous licence Creative Commons&nbsp;; les licences CC BY et CC BY-SA imposent de citer l'auteur, ce que fait cette page.</p>
+    <button class="nav credits__close" id="creditsClose" type="button">Fermer</button>
+  </div>
+</dialog>
+
+<script>
+(function(){
+  "use strict";
+  var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+  var total  = slides.length;
+  var idx    = 0;
+
+  var prevBtn = document.getElementById('prev');
+  var nextBtn = document.getElementById('next');
+  var curEl   = document.getElementById('cur');
+  var totEl   = document.getElementById('tot');
+  var fill    = document.getElementById('progress');
+  var dotsWrap= document.getElementById('dots');
+  var stage   = document.getElementById('stage');
+
+  var pad = function(n){ return (n < 10 ? '0' : '') + n; };
+  totEl.textContent = pad(total);
+
+  /* pastilles de navigation */
+  var dots = slides.map(function(s, i){
+    var b = document.createElement('button');
+    b.className = 'dot';
+    b.type = 'button';
+    b.setAttribute('aria-label', 'Diapositive ' + (i + 1));
+    b.addEventListener('click', function(){ go(i); });
+    dotsWrap.appendChild(b);
+    return b;
+  });
+
+  /* les images apparaissent en fondu une fois chargées */
+  Array.prototype.forEach.call(document.querySelectorAll('figure img'), function(img){
+    if (img.complete && img.naturalWidth) { img.classList.add('is-loaded'); }
+    else {
+      img.addEventListener('load',  function(){ img.classList.add('is-loaded'); });
+      img.addEventListener('error', function(){ img.classList.add('is-loaded'); });
+    }
+  });
+
+  /* au toucher, un appui affiche le crédit (pas de survol) */
+  Array.prototype.forEach.call(document.querySelectorAll('figure[data-title]'), function(fig){
+    fig.addEventListener('click', function(){ fig.classList.toggle('show-credit'); });
+  });
+
+  function go(n, skipHash){
+    idx = Math.max(0, Math.min(total - 1, n));
+    slides.forEach(function(s, i){ s.hidden = (i !== idx); });
+    dots.forEach(function(d, i){ d.setAttribute('aria-current', i === idx ? 'true' : 'false'); });
+    curEl.textContent = pad(idx + 1);
+    fill.style.width = ((idx + 1) / total * 100) + '%';
+    prevBtn.disabled = (idx === 0);
+    nextBtn.disabled = (idx === total - 1);
+    stage.scrollTop = 0;
+    if (!skipHash) {
+      try { history.replaceState(null, '', '#' + (idx + 1)); } catch (e) { /* file:// */ }
+    }
+  }
+
+  prevBtn.addEventListener('click', function(){ go(idx - 1); });
+  nextBtn.addEventListener('click', function(){ go(idx + 1); });
+
+  document.addEventListener('keydown', function(e){
+    if (e.target.closest('dialog')) { return; }
+    if (e.key === 'ArrowRight' || e.key === 'PageDown') { go(idx + 1); }
+    else if (e.key === 'ArrowLeft' || e.key === 'PageUp') { go(idx - 1); }
+    else if (e.key === 'Home') { go(0); }
+    else if (e.key === 'End') { go(total - 1); }
+  });
+
+  /* balayage horizontal */
+  var x0 = null, y0 = null;
+  stage.addEventListener('touchstart', function(e){
+    x0 = e.changedTouches[0].clientX; y0 = e.changedTouches[0].clientY;
+  }, {passive:true});
+  stage.addEventListener('touchend', function(e){
+    if (x0 === null) { return; }
+    var dx = e.changedTouches[0].clientX - x0;
+    var dy = e.changedTouches[0].clientY - y0;
+    if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy) * 1.6) { go(idx + (dx < 0 ? 1 : -1)); }
+    x0 = null;
+  }, {passive:true});
+
+  /* panneau des crédits, construit à partir des figures */
+  var box   = document.getElementById('creditsBox');
+  var list  = document.getElementById('creditsList');
+  Array.prototype.forEach.call(document.querySelectorAll('figure[data-title]'), function(fig){
+    var li = document.createElement('li');
+    var a  = document.createElement('a');
+    a.href = fig.dataset.source; a.textContent = fig.dataset.title;
+    a.target = '_blank'; a.rel = 'noopener';
+    li.appendChild(a);
+    li.appendChild(document.createTextNode(' — ' + fig.dataset.author + ' — ' + fig.dataset.license));
+    list.appendChild(li);
+
+    if (fig.classList.contains('no-cap')) {
+      fig.title = fig.dataset.title + ' — ' + fig.dataset.author + ' — ' + fig.dataset.license;
+      return;
+    }
+    var cap = document.createElement('figcaption');
+    cap.innerHTML = '<b></b><br><span></span>';
+    cap.querySelector('b').textContent = fig.dataset.title;
+    cap.querySelector('span').textContent = fig.dataset.author + ' · ' + fig.dataset.license;
+    fig.appendChild(cap);
+  });
+
+  function openBox(){ if (box.showModal) { box.showModal(); } else { box.setAttribute('open',''); } }
+  function closeBox(){ if (box.close) { box.close(); } else { box.removeAttribute('open'); } }
+  document.getElementById('creditsBtn').addEventListener('click', openBox);
+  document.getElementById('creditsClose').addEventListener('click', closeBox);
+
+  /* état initial : #3 ouvre la diapositive 3 */
+  var start = parseInt((location.hash || '').replace('#',''), 10);
+  go(isNaN(start) ? 0 : start - 1, true);
+})();
+</script>
+
+</body>
+</html>

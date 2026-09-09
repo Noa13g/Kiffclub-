@@ -12,3 +12,7 @@ desktop.ini
 
 # Journaux et fichiers divers
 *.log
+
+# Versions générées de la présentation (voir little-rock-nine/build-standalone.py)
+little-rock-nine/little-rock-nine-standalone.html
+little-rock-nine/little-rock-nine-fragment.html
