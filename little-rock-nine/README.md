@@ -34,6 +34,20 @@ Le script écrit `little-rock-nine-standalone.html`, qui contient les photos
 encodées à l'intérieur du fichier. L'option `--body-only` produit un fragment
 sans `<head>`/`<body>`, pour les plateformes qui les ajoutent elles-mêmes.
 
+## Version PowerPoint
+
+`little-rock-nine.pptx` reprend les mêmes cinq diapositives et les mêmes photos,
+au format 16/9 (33,87 × 19,05 cm). Les crédits figurent sous chaque image et la
+liste complète des sources est dans les commentaires du présentateur de la
+dernière diapositive.
+
+Pour la régénérer après une modification :
+
+```
+npm install pptxgenjs   # une seule fois
+node build-pptx.js
+```
+
 ## Sources des images
 
 Toutes les photos viennent de Wikimedia Commons. Elles sont dans le domaine
@@ -50,7 +64,7 @@ imposent de citer l'auteur, ce que fait le panneau **Crédits** de la page.
 | `faubus.jpg` | Gouverneur Orval Faubus | University of Arkansas, annuaire *Razorback* 1959 | domaine public |
 | `nine-group.jpg` | Les neuf reçus par le maire de New York | Walter Albertin — Library of Congress `cph.3c25125` | domaine public |
 | `goldmedal.jpg` | Médaille d'or du Congrès, 1999 | United States Mint | domaine public |
-| `lbj3.jpg` | Ernest Green, Carlotta Walls LaNier, Terrence Roberts | Lauren Gerson — LBJ Library | domaine public |
+| `lbj3.jpg` | Ernest Green, Carlotta Walls LaNier, Terrence Roberts (recadrée) | Lauren Gerson — LBJ Library | domaine public |
 | `bench.jpg` | Banc commémoratif d'Elizabeth Eckford | Ser Amantio di Nicolao | CC BY-SA 4.0 |
 | `melba.jpg` | Melba Pattillo Beals escortée lors d'une commémoration | U.S. Army | CC BY 2.0 |
 | `thennow.jpg` | Portraits « hier et aujourd'hui » dans le lycée | Adam Jones, Ph.D. | CC BY-SA 3.0 |
